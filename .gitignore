@@ -78,4 +78,7 @@ fabric.properties
 /vendors/*
 .gitignore
 .idea/
-vendor/
+/vendor/
+/logs/
+*.yml
+phpunit.xml
