@@ -4,7 +4,6 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
 
@@ -53,7 +52,6 @@ fabric.properties
 ### CakePHP template
 # CakePHP 3
 
-/vendor/*
 /config/app.php
 
 /tmp/cache/models/*
@@ -80,5 +78,3 @@ fabric.properties
 .idea/
 /vendor/
 /logs/
-*.yml
-phpunit.xml
