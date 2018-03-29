@@ -1,153 +1,130 @@
--- MySQL Workbench Forward Engineering
+-- --------------------------------------------------------
+-- Host:                         192.168.56.101
+-- Server version:               5.7.21 - MySQL Community Server (GPL)
+-- Server OS:                    linux-glibc2.12
+-- HeidiSQL Version:             9.5.0.5264
+-- --------------------------------------------------------
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema open_fixture
--- -----------------------------------------------------
--- Modelo de BD del proyecto Open-Fixture
-
--- -----------------------------------------------------
--- Schema open_fixture
---
--- Modelo de BD del proyecto Open-Fixture
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `open_fixture` DEFAULT CHARACTER SET utf8 ;
-USE `open_fixture` ;
-
--- -----------------------------------------------------
--- Table `open_fixture`.`Persona`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `open_fixture`.`Persona` ;
-
-CREATE TABLE IF NOT EXISTS `open_fixture`.`Persona` (
-  `idPersona` INT NOT NULL,
-  `Nombre` VARCHAR(45) NULL,
-  `Apellido` VARCHAR(45) NULL,
-  `Sexo` CHAR NULL,
-  `FechaNac` DATE NULL,
-  PRIMARY KEY (`idPersona`))
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- -----------------------------------------------------
--- Table `open_fixture`.`Perfil`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `open_fixture`.`Perfil` ;
+-- Dumping database structure for open_fixtures
+CREATE DATABASE IF NOT EXISTS `open_fixtures` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `open_fixtures`;
 
-CREATE TABLE IF NOT EXISTS `open_fixture`.`Perfil` (
-  `idPerfil` INT NOT NULL,
-  `Correo` VARCHAR(45) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
-  `Fecha` DATE NULL,
-  `idPersona` INT NULL,
-  PRIMARY KEY (`idPerfil`),
-  INDEX `fk_Perfil_1_idx` (`idPersona` ASC),
-  UNIQUE INDEX `idPersona_UNIQUE` (`idPersona` ASC),
-  CONSTRAINT `fk_Perfil_1`
-    FOREIGN KEY (`idPersona`)
-    REFERENCES `open_fixture`.`Persona` (`idPersona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- Dumping structure for table open_fixtures.betting_gratifications
+CREATE TABLE IF NOT EXISTS `betting_gratifications` (
+  `betting_id` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL,
+  `mount` int(11) NOT NULL,
+  PRIMARY KEY (`betting_id`),
+  KEY `fk_betting_profile` (`profile_id`),
+  CONSTRAINT `fk_betting_profile` FOREIGN KEY (`profile_id`) REFERENCES `profiles` (`profile_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- Data exporting was unselected.
+-- Dumping structure for table open_fixtures.games
+CREATE TABLE IF NOT EXISTS `games` (
+  `game_id` int(11) NOT NULL,
+  `phase_id` int(11) DEFAULT NULL,
+  `team_a_id` int(11) NOT NULL,
+  `team_b_id` int(11) NOT NULL,
+  `date_up` datetime DEFAULT NULL,
+  `goal_team_a` int(11) DEFAULT '-1',
+  `goal_team_b` int(11) DEFAULT '-1',
+  PRIMARY KEY (`game_id`),
+  KEY `fk_Partido_2_idx` (`phase_id`),
+  KEY `fk_Partido_4_idx` (`team_b_id`),
+  KEY `fk_Partido_2` (`team_a_id`),
+  CONSTRAINT `fk_team_id_1` FOREIGN KEY (`team_a_id`) REFERENCES `teams` (`team_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_team_id_2` FOREIGN KEY (`team_b_id`) REFERENCES `teams` (`team_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `phase_id` FOREIGN KEY (`phase_id`) REFERENCES `phases` (`phase_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Información de los partidos con equipos y resultados';
 
--- -----------------------------------------------------
--- Table `open_fixture`.`Equipo`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `open_fixture`.`Equipo` ;
+-- Data exporting was unselected.
+-- Dumping structure for table open_fixtures.peoples
+CREATE TABLE IF NOT EXISTS `peoples` (
+  `people_id` int(11) NOT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  PRIMARY KEY (`people_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 MAX_ROWS=99999 ROW_FORMAT=DYNAMIC;
 
-CREATE TABLE IF NOT EXISTS `open_fixture`.`Equipo` (
-  `idEquipo` INT NOT NULL,
-  `Nombre` VARCHAR(45) NULL,
-  `Abbr` VARCHAR(45) NULL,
-  `Grupo` CHAR(1) NULL,
-  PRIMARY KEY (`idEquipo`))
-ENGINE = InnoDB
-COMMENT = 'Informacion de los equipos que participan';
+-- Data exporting was unselected.
+-- Dumping structure for table open_fixtures.phases
+CREATE TABLE IF NOT EXISTS `phases` (
+  `phase_id` int(11) NOT NULL,
+  `name_phase` varchar(45) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`phase_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 MAX_ROWS=4294967295 ROW_FORMAT=DYNAMIC COMMENT='Fase de Partidos entre los equipos. Se dividen en: Fase de Grupos, Fase Octavos, Fase Cuartos, Fase Semifinal, Fase 3ro, Fase final';
 
+-- Data exporting was unselected.
+-- Dumping structure for table open_fixtures.pools
+CREATE TABLE IF NOT EXISTS `pools` (
+  `pool_id` int(11) NOT NULL,
+  `people_id` int(11) NOT NULL,
+  `phase_id` int(11) NOT NULL,
+  `team_win` int(11) NOT NULL,
+  `team_loss` int(11) NOT NULL,
+  `goal_win` int(2) NOT NULL,
+  `goal_loss` int(2) NOT NULL,
+  PRIMARY KEY (`pool_id`),
+  KEY `idx_pool_id` (`people_id`,`phase_id`),
+  KEY `fk_pool_phase` (`phase_id`),
+  CONSTRAINT `fk_pool_people` FOREIGN KEY (`people_id`) REFERENCES `peoples` (`people_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pool_phase` FOREIGN KEY (`phase_id`) REFERENCES `phases` (`phase_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Table `open_fixture`.`Fase`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `open_fixture`.`Fase` ;
+-- Data exporting was unselected.
+-- Dumping structure for table open_fixtures.profiles
+CREATE TABLE IF NOT EXISTS `profiles` (
+  `profile_id` int(11) NOT NULL,
+  `mail` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `date_up` date DEFAULT NULL,
+  `people_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`profile_id`),
+  UNIQUE KEY `persona_UNIQUE` (`people_id`),
+  KEY `fk_Perfil_1_idx` (`people_id`),
+  CONSTRAINT `people_id` FOREIGN KEY (`people_id`) REFERENCES `peoples` (`people_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `open_fixture`.`Fase` (
-  `idFase` INT NOT NULL,
-  `Nombre` VARCHAR(45) NULL,
-  `FechaInicio` DATETIME NULL,
-  `FechaFin` DATETIME NULL,
-  PRIMARY KEY (`idFase`))
-ENGINE = InnoDB
-COMMENT = 'Fase de Partidos entre los equipos. Se dividen en: Fase de Grupos, Fase Octavos, Fase Cuartos, Fase Semifinal, Fase 3ro, Fase final';
+-- Data exporting was unselected.
+-- Dumping structure for table open_fixtures.scores
+CREATE TABLE IF NOT EXISTS `scores` (
+  `score_id` int(11) NOT NULL,
+  `profile_id` int(11) DEFAULT NULL,
+  `game_id` int(11) DEFAULT NULL,
+  `team_winner` int(11) DEFAULT NULL,
+  `GF` int(11) DEFAULT NULL,
+  `GC` int(11) DEFAULT NULL,
+  PRIMARY KEY (`score_id`),
+  KEY `fk_Score_1_idx` (`profile_id`),
+  KEY `fk_Score_2_idx` (`game_id`),
+  CONSTRAINT `fk_game_id_1` FOREIGN KEY (`profile_id`) REFERENCES `profiles` (`profile_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_game_id_2` FOREIGN KEY (`game_id`) REFERENCES `profiles` (`profile_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Información de los puntos obtenidos en cada partido';
 
+-- Data exporting was unselected.
+-- Dumping structure for table open_fixtures.teams
+CREATE TABLE IF NOT EXISTS `teams` (
+  `team_id` int(11) NOT NULL,
+  `name_team` varchar(45) DEFAULT NULL,
+  `short_name` varchar(45) DEFAULT NULL,
+  `group` char(1) DEFAULT NULL,
+  PRIMARY KEY (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Informacion de los equipos que participan';
 
--- -----------------------------------------------------
--- Table `open_fixture`.`Partido`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `open_fixture`.`Partido` ;
+-- Data exporting was unselected.
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
-CREATE TABLE IF NOT EXISTS `open_fixture`.`Partido` (
-  `idPartido` INT NOT NULL,
-  `idFase` INT NULL,
-  `idEquipoA` INT NOT NULL,
-  `idEquipoB` INT NOT NULL,
-  `Fecha` DATETIME NULL,
-  `GolesEqupoA` INT NULL DEFAULT -1,
-  `GolesEquipoB` INT NULL DEFAULT -1,
-  PRIMARY KEY (`idPartido`),
-  INDEX `fk_Partido_2_idx` (`idFase` ASC),
-  INDEX `fk_Partido_4_idx` (`idEquipoB` ASC),
-  CONSTRAINT `fk_Partido_1`
-    FOREIGN KEY (`idFase`)
-    REFERENCES `open_fixture`.`Fase` (`idFase`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Partido_2`
-    FOREIGN KEY (`idEquipoA`)
-    REFERENCES `open_fixture`.`Equipo` (`idEquipo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Partido_3`
-    FOREIGN KEY (`idEquipoB`)
-    REFERENCES `open_fixture`.`Equipo` (`idEquipo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'Información de los partidos con equipos y resultados';
-
-
--- -----------------------------------------------------
--- Table `open_fixture`.`Score`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `open_fixture`.`Score` ;
-
-CREATE TABLE IF NOT EXISTS `open_fixture`.`Score` (
-  `idScore` INT NOT NULL,
-  `idPerfil` INT NULL,
-  `idPartido` INT NULL,
-  `EquipoGanador` INT NULL,
-  `GF` INT NULL,
-  `GC` INT NULL,
-  PRIMARY KEY (`idScore`),
-  INDEX `fk_Score_1_idx` (`idPerfil` ASC),
-  INDEX `fk_Score_2_idx` (`idPartido` ASC),
-  CONSTRAINT `fk_Score_1`
-    FOREIGN KEY (`idPerfil`)
-    REFERENCES `open_fixture`.`Perfil` (`idPerfil`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Score_2`
-    FOREIGN KEY (`idPartido`)
-    REFERENCES `open_fixture`.`Partido` (`idPartido`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'Información de los puntos obtenidos en cada partido';
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
