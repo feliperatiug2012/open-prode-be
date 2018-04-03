@@ -87,7 +87,7 @@ $app->get('/user/{id}', function (Request $request, Response $response, $args) {
     //$response = $this->view->render($response, "ticketdetail.phtml", ["ticket" => $ticket]);
     $response->getBody()->write(var_export($user, true));
     return $response;
-})->setName('ticket-detail');
+})->setName('user-detail');
 /*************************************************************/
 
 $app->run();

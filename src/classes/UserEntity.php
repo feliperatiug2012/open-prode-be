@@ -25,7 +25,7 @@ class UserEntity
             $this->title = $data['title'];
             $this->alias = $data['alias'];
             $this->username = $data['username'];
-            $this->password = $data['username'] . "123";
+            $this->password = $data['password'];
             $this->approved = $data['approved'];
             $this->created = $data['created'];
             $this->modified = $data['modified'];
