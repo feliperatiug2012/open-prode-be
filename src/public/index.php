@@ -50,9 +50,8 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
 $app->get('/users', function (Request $request, Response $response) {
     $mapper = new UserMapper($this->db);
     $users = $mapper->getUsers();
-
-    $response->getBody()->write(var_export($users, true));
-    return $response;
+    $jsonResponse = $response->withJson($users);
+    return $jsonResponse;
 });
 /*************************************************************/
 
@@ -67,7 +66,7 @@ $app->post('/user/new', function (Request $request, Response $response) {
     $user_data['username'] = filter_var($data['username'], FILTER_SANITIZE_STRING);
     $user_data['password'] = filter_var($data['password'], FILTER_SANITIZE_STRING);
 
-    $user = new TicketEntity($user_data);
+    $user = new UserEntity($user_data);
     $user_mapper = new UserMapper($this->db);
     $user_mapper->save($user);
 
@@ -84,9 +83,8 @@ $app->get('/user/{id}', function (Request $request, Response $response, $args) {
     $mapper = new UserMapper($this->db);
     $user = $mapper->getUserById($user_id);
 
-    //$response = $this->view->render($response, "ticketdetail.phtml", ["ticket" => $ticket]);
-    $response->getBody()->write(var_export($user, true));
-    return $response;
+    $jsonResponse = $response->withJson($user);
+    return $jsonResponse;
 })->setName('user-detail');
 /*************************************************************/
 

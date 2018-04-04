@@ -8,8 +8,6 @@ class UserEntity
     protected $username;
     protected $password;
     protected $approved;
-    protected $created;
-    protected $modified;
     protected $deleted;
 
     /**
@@ -22,16 +20,14 @@ class UserEntity
         // no id if we're creating
         if(isset($data['id'])) {
             $this->id = $data['id'];
-            $this->title = $data['title'];
-            $this->alias = $data['alias'];
-            $this->username = $data['username'];
-            $this->password = $data['password'];
-            $this->approved = $data['approved'];
-            $this->created = $data['created'];
-            $this->modified = $data['modified'];
-            $this->deleted = $data['deleted'];
-        }
 
+        }
+        $this->title = $data['title'];
+        $this->alias = $data['alias'];
+        $this->username = $data['username'];
+        $this->password = $data['password'];
+        $this->approved = 0;
+        $this->deleted = 0;
     }
 
     public function getId() {
@@ -57,15 +53,6 @@ class UserEntity
     public function getApproved() {
         return $this->approved;
     }
-
-    public function getCreated() {
-        return $this->created;
-    }
-
-    public function getModified() {
-        return $this->modified;
-    }
-
     public function getDeleted() {
         return $this->deleted;
     }

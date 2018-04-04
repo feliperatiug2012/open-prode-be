@@ -4,14 +4,18 @@ class UserMapper extends Mapper
 {
     public function getUsers()
     {
-        $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.created, t.modified, t.deleted
+        $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.deleted
             from users t";
         $stmt = $this->db->query($sql);
 
         $results = [];
         while ($row = $stmt->fetch()) {
-            $results[] = new UserEntity($row);
+            $results [] = $row;
+            /*echo "<pre>";
+                var_dump($row);
+            echo "</pre>";*/
         }
+        //exit();
         return $results;
     }
 
@@ -30,7 +34,8 @@ class UserMapper extends Mapper
         $result = $stmt->execute(["user_id" => $user_id]);
 
         if ($result) {
-            return new UserEntity($stmt->fetch());
+            //return new UserEntity($stmt->fetch());
+            return $stmt->fetch();
         }
 
     }
