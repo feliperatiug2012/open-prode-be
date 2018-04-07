@@ -7,7 +7,7 @@
 
 #/vendors
 /.idea
-#/vendor
+/vendor
 /logs
 
 #Visual Studio Code
