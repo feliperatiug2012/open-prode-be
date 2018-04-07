@@ -86,6 +86,56 @@ INSERT INTO `groups` (`title`, `created`, `modified`, `deleted`) VALUES ('Grupo 
 INSERT INTO `groups` (`title`, `created`, `modified`, `deleted`) VALUES ('Grupo H', '2018-03-29 19:16:13', '2018-03-29 19:16:13', 0);
 
 
+#############################  INSERT DE LOS PARTIDOS ######################
+
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 1, 2, '2018-06-14 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 6, 8, '2018-06-15 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 3, 4, '2018-06-15 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 5, 7, '2018-06-15 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 9, 10, '2018-06-16 07:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 13, 14, '2018-06-16 10:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 11, 12, '2018-06-16 13:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 15, 16, '2018-06-16 16:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 19, 20, '2018-06-17 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 21, 22, '2018-06-17 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 17, 18, '2018-06-17 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 23, 24, '2018-06-18 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 25, 26, '2018-06-18 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 27, 28, '2018-06-18 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 31, 32, '2018-06-19 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 29, 30, '2018-06-19 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 1, 3, '2018-06-19 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 5, 6, '2018-06-20 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 2, 4, '2018-06-20 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 8, 7, '2018-06-20 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 12, 10, '2018-06-21 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 9, 11, '2018-06-21 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 13, 15, '2018-06-21 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 17, 19, '2018-06-22 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 16, 14, '2018-06-22 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 20, 18, '2018-06-22 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 25, 27, '2018-06-23 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 24, 22, '2018-06-23 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 21, 23, '2018-06-23 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 28, 26, '2018-06-24 09:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 32, 30, '2018-06-24 12:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 29, 31, '2018-06-24 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 2, 3, '2018-06-25 11:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 4, 1, '2018-06-25 11:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 8, 5, '2018-06-25 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 7, 6, '2018-06-25 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 10, 11, '2018-06-26 11:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 16, 13, '2018-06-26 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 12, 9, '2018-06-26 11:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 15, 14, '2018-06-26 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 24, 21, '2018-06-27 11:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 22, 23, '2018-06-27 11:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 18, 19, '2018-06-27 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 20, 17, '2018-06-27 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 30, 31, '2018-06-28 11:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 32, 29, '2018-06-28 11:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 28, 25, '2018-06-28 15:00', 0, 0, now(), now());
+INSERT INTO `games` (`phase_id`, `team_a_id`, `team_b_id`, `date_up`, `goals_team_a`, `goals_team_b`, `created`, `modified`) VALUES (1, 26, 27, '2018-06-28 15:00', 0, 0, now(), now());
 
 
 
