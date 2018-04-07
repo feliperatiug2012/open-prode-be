@@ -99,4 +99,17 @@ $app->get('/groups', function (Request $request, Response $response, $args) {
     return $jsonResponse;
 });
 /*************************************************************/
+/*************************************************************
+ * GET group by id
+ *************************************************************/
+$app->get('/group/{id}', function (Request $request, Response $response, $args) {
+    $group_id = (int)$args['id'];
+    $mapper = new GroupMapper($this->db);
+    $group = $mapper->getGroupById($group_id);
+
+    $jsonResponse = $response->withJson($group);
+    return $jsonResponse;
+})->setName('group-detail');
+/*************************************************************/
+
 $app->run();
