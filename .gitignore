@@ -5,9 +5,9 @@
  
 # User-specific stuff: 
 
-/vendors
+#/vendors
 /.idea
-/vendor
+#/vendor
 /logs
 
 #Visual Studio Code
