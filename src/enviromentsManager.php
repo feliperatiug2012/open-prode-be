@@ -1,5 +1,5 @@
 <?php
-
+	require_once 'settings.php';
 	function getEnviromentDataBase(){
 		global $env, $enviroments;
 
