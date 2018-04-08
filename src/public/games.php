@@ -9,18 +9,18 @@ require '../enviromentsManager.php';
 $app = new SuperAppEntity();
 
 
-$app->get('/list', function ($request, $response, $args) use ($app)  {
+$app->get('/list', function (Request $request, Response $response, $args) use ($app)  {
 
 		$query='SELECT * FROM V_GAMES_CALENDAR';
         $result = $app->getConn()->query($query);
         while ($user = $result->fetch()) {
-            var_dump($user);
+            $records[]=$user;
         }
-        return $response->write("games.api=> list 5555");
+
+		$jsonResponse = $response->withJson($records);
+
+        return $jsonResponse;
 });
-
-
-
 
 
 // Run app
