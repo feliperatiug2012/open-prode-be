@@ -12,7 +12,7 @@ $config['addContentLengthHeader'] = false;
 
 $config['db']['host']   = '192.168.56.101';
 $config['db']['user']   = 'batman';
-$config['db']['pass']   = 'batman';
+$config['db']['p$json = json_encode( (array)$object );ass']   = 'batman';
 $config['db']['dbname'] = 'rusia2018';
 /*************************************************************/
 
@@ -38,7 +38,7 @@ $container['db'] = function ($c) {
  *************************************************************/
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
     $name = $args['name'];
-    $response->getBody()->write("Hello my friends, $name");
+    $response->getBody()->write("Hello, $name");
 
     return $response;
 });
