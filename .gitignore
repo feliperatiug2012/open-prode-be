@@ -9,7 +9,7 @@
 /.idea
 */vendor
 /logs
-
+/vendor
 
 #Visual Studio Code
 /*.code-workspace
