@@ -4,8 +4,8 @@ class SuperAppEntity extends \Slim\App {
 
     public $dbConn;
 
-    public function __construct($cfg){
-        parent::__construct($cfg);
+    public function __construct(){
+        parent::__construct();
         $this->dbConn = getEnviromentDataBase();
         
     }

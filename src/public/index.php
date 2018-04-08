@@ -12,7 +12,7 @@ $config['addContentLengthHeader'] = false;
 
 $config['db']['host']   = 'localhost';
 $config['db']['user']   = 'batman';
-$config['db']['pass']   = 'batman';
+$config['db']['p$json = json_encode( (array)$object );ass']   = 'batman';
 $config['db']['dbname'] = 'rusia2018';
 /*************************************************************/
 
