@@ -11,11 +11,11 @@ class UserMapper extends Mapper
         $results = [];
         while ($row = $stmt->fetch()) {
             $results [] = $row;
-            /*echo "<pre>";
+            echo "<pre>";
                 var_dump($row);
-            echo "</pre>";*/
+            echo "</pre>";
         }
-        //exit();
+        exit();
         return $results;
     }
 
