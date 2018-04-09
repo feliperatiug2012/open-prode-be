@@ -12,8 +12,8 @@ $config['addContentLengthHeader'] = false;
 
 $config['db']['host']   = '192.168.56.101';
 $config['db']['user']   = 'batman';
-$config['db']['p$json = json_encode( (array)$object );ass']   = 'batman';
-$config['db']['dbname'] = 'rusia2018';
+$config['db']['pass']   = 'batman';
+$config['db']['dbname'] = 'open_fixture';
 /*************************************************************/
 
 $app = new \Slim\App(['settings' => $config]);
@@ -42,50 +42,6 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
 
     return $response;
 });
-/*************************************************************/
-
-/*************************************************************
- * GET all users
- *************************************************************/
-$app->get('/users', function (Request $request, Response $response) {
-    $mapper = new UserMapper($this->db);
-    $users = $mapper->getUsers();
-    $jsonResponse = $response->withJson($users);
-    return $jsonResponse;
-});
-/*************************************************************/
-
-/*************************************************************
- * POST user
- *************************************************************/
-$app->post('/user/new', function (Request $request, Response $response) {
-    $data = $request->getParsedBody();
-    $user_data = [];
-    $user_data['title'] = filter_var($data['title'], FILTER_SANITIZE_STRING);
-    $user_data['alias'] = filter_var($data['alias'], FILTER_SANITIZE_STRING);
-    $user_data['username'] = filter_var($data['username'], FILTER_SANITIZE_STRING);
-    $user_data['password'] = filter_var($data['password'], FILTER_SANITIZE_STRING);
-
-    $user = new UserEntity($user_data);
-    $user_mapper = new UserMapper($this->db);
-    $user_mapper->save($user);
-
-    $response = $response->withRedirect("/users");
-    return $response;
-});
-/*************************************************************/
-
-/*************************************************************
- * GET user by id
- *************************************************************/
-$app->get('/user/{id}', function (Request $request, Response $response, $args) {
-    $user_id = (int)$args['id'];
-    $mapper = new UserMapper($this->db);
-    $user = $mapper->getUserById($user_id);
-
-    $jsonResponse = $response->withJson($user);
-    return $jsonResponse;
-})->setName('user-detail');
 /*************************************************************/
 
 /*************************************************************
