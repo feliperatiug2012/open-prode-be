@@ -7,7 +7,7 @@ class SuperAppEntity extends \Slim\App {
     public function __construct(){
         parent::__construct();
         $this->dbConn = getEnviromentDataBase();
-        
+        $this->add(New CorsMiddleware());
     }
 
     /************* GETTERS ***********/

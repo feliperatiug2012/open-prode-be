@@ -8,7 +8,7 @@ create table configurations
 (
 	id int primary key auto_increment NOT NULL ,
 	title varchar(45) NOT NULL,
-  short_name varchar(5) not null ,
+  short_name varchar(15) not null ,
   url varchar(1000) not null,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL,

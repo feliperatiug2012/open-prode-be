@@ -10,10 +10,10 @@ require '../vendor/autoload.php';
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
-$config['db']['host']   = 'localhost';
-$config['db']['user']   = 'batman';
-$config['db']['p$json = json_encode( (array)$object );ass']   = 'batman';
-$config['db']['dbname'] = 'rusia2018';
+	$config['db']['host']   = '127.0.0.1';
+	$config['db']['user']   = 'batman';
+	$config['db']['pass']   = 'batman';
+	$config['db']['dbname'] = 'open_fixture';
 /*************************************************************/
 
 $app = new \Slim\App(['settings' => $config]);
@@ -97,7 +97,10 @@ $app->get('/groups', function (Request $request, Response $response, $args) {
     $groups = $mapper->getGroups();
 
     $jsonResponse = $response->withJson($groups);
-    return $jsonResponse;
+    return $jsonResponse
+	    ->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
+	    ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+	    ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
 /*************************************************************/
 /*************************************************************
