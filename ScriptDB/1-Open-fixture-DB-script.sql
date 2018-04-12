@@ -1,8 +1,18 @@
 
-DROP DATABASE IF EXISTS `open_fixture`;
--- Dumping database structure for open_fixture
-CREATE DATABASE IF NOT EXISTS `open_fixture` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `open_fixture`;
+# DROP DATABASE IF EXISTS `open_fixture`;
+# -- Dumping database structure for open_fixture
+# CREATE DATABASE IF NOT EXISTS `open_fixture` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `nullpoin_open-fixture`;
+
+DROP TABLE IF EXISTS configurations;
+DROP TABLE IF EXISTS bets;
+DROP TABLE IF EXISTS games;
+DROP TABLE IF EXISTS stadiums;
+DROP TABLE IF EXISTS teams;
+DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS phases;
+DROP TABLE IF EXISTS users;
 
 create table configurations
 (
@@ -14,7 +24,7 @@ create table configurations
 	modified datetime default CURRENT_TIMESTAMP NOT NULL,
 	deleted int(1) default '0' NOT NULL
 );
-CREATE UNIQUE INDEX configurations__index_SHORT_NAME ON configurations (short_name);
+
 
 create table stadiums
 (
@@ -23,7 +33,7 @@ create table stadiums
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL,
 	deleted int(1) default '0' NOT NULL
-);
+)engine=InnoDB charset=utf8;
 
 create table groups
 (
@@ -32,7 +42,7 @@ create table groups
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL,
 	deleted int(1) default '0' NOT NULL
-)
+)engine=InnoDB charset=utf8
 comment 'Organizacion por grupos de los equipos' engine=InnoDB charset=utf8;
 
 create table phases
@@ -44,7 +54,7 @@ create table phases
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL,
 	deleted int(1) default '0' NOT NULL
-)
+)engine=InnoDB charset=utf8
 comment 'Fase de Partidos entre los equipos. Se dividen en: Fase de Grupos, Fase Octavos, Fase Cuartos, Fase Semifinal, Fase 3ro, Fase final' engine=InnoDB charset=utf8;
 
 create table teams
@@ -58,13 +68,14 @@ create table teams
 	deleted int(1) default '0' NOT NULL,
 	constraint teams_ibfk_1
 		foreign key (group_id) references groups (id)
-)
+)engine=InnoDB charset=utf8
 comment 'Informacion de los equipos que participan' engine=InnoDB charset=utf8;
 
+DROP TABLE IF EXISTS games;
 create table games
 (
 	id int primary key auto_increment NOT NULL,
-	phase_id int NOT NULL NOT NULL,
+	phase_id int NOT NULL,
 	team_a_id int NOT NULL,
 	team_b_id int NOT NULL,
 	date_up datetime NOT NULL,
@@ -74,28 +85,16 @@ create table games
 	created datetime default CURRENT_TIMESTAMP NOT NULL ,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL,
 	deleted int(1) default '0' NOT NULL,
-	constraint games_ibfk_3
-		foreign key (phase_id) references phases (id),
-	constraint games_ibfk_1
-		foreign key (team_a_id) references teams (id),
-	constraint games_ibfk_2
-		foreign key (team_b_id) references teams (id),
-  	constraint games_stadium
-		foreign key (stadium_id) references stadiums (id)
-)
-comment 'Información de los partidos con equipos y resultados' engine=InnoDB charset=utf8;
 
-create index phase_id
-	on games (phase_id);
+	constraint games_ibfk_3	foreign key (phase_id) references phases (id),
+ 	constraint games_ibfk_1 foreign key (team_a_id) references teams (id),
+  constraint games_ibfk_2 foreign key (team_b_id) references teams (id),
+  constraint games_ibfk_4 foreign key (stadium_id) references stadiums (id)
 
-create index team_a_id
-	on games (team_a_id);
 
-create index team_b_id
-	on games (team_b_id);
 
-create index group_id
-	on teams (group_id);
+)engine=InnoDB charset=utf8;
+
 
 create table users
 (
@@ -110,6 +109,22 @@ create table users
 	deleted int(1) default '0' NOT NULL
 )
 engine=InnoDB charset=utf8;
+
+CREATE UNIQUE INDEX
+	configurations__index_SHORT_NAME ON configurations (short_name);
+
+
+create index phase_id
+	on games (phase_id);
+
+create index team_a_id
+	on games (team_a_id);
+
+create index team_b_id
+	on games (team_b_id);
+
+create index group_id
+	on teams (group_id);
 
 create table bets
 (

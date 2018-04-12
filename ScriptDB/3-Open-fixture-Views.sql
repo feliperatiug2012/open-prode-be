@@ -1,4 +1,4 @@
-
+USE `nullpoin_open-fixture`;
 
 CREATE OR REPLACE VIEW V_GAMES_CALENDAR AS
 SELECT
