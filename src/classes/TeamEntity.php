@@ -81,7 +81,7 @@ class TeamEntity
     public function getStats()
     {
         $teamstats = [];
-        $teamstats['flag_url'] = "/public/assets/images/team-flags/".$this->short_name.".png";
+        $teamstats['flag_url'] = "http://open-fixture-be.com/public/assets/images/team-flags/".$this->short_name.".png";
         $teamstats['name'] = $this->title;
         $teamstats['pj'] = $this->pj;
         $teamstats['pg'] = $this->pg;

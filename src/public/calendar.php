@@ -4,29 +4,14 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 require '../enviromentsManager.php';
-
-
 $app = new SuperAppEntity();
-
-
 $app->get('/list', function (Request $request, Response $response, $args) use ($app)  {
-
-		$query='SELECT * FROM V_GAMES_CALENDAR';
-        $result = $app->getConn()->query($query);
-        while ($user = $result->fetch()) {
-            $records[]=$user;
-        }
-
-		$jsonResponse = $response->withJson($records);
-
-        return $jsonResponse;
+	$mapper=new CalendarMapper($app->getConn());
+	$calendar = $mapper->list();
+	$jsonResponse = $response->withJson($calendar);
+    return $jsonResponse;
 });
-
-
 // Run app
+//todo: MANAGE EXCEPTIONS
 $app->run();
-
-
-
-
 ?>
