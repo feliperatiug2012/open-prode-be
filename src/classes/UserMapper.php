@@ -2,7 +2,7 @@
 
 class UserMapper extends Mapper
 {
-    public function getUsers()
+    public function list()
     {
         $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.deleted
             from users t";
@@ -25,7 +25,7 @@ class UserMapper extends Mapper
      * @param int $user_id The ID of the user
      * @return UserEntity  The user
      */
-    public function getUserById($user_id)
+    public function view($user_id)
     {
         $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.created, t.modified, t.deleted
             from users t
@@ -40,7 +40,7 @@ class UserMapper extends Mapper
 
     }
 
-    public function save(UserEntity $user)
+    public function add(UserEntity $user)
     {
         $sql = "insert into users
             (title, alias, username, password, created, modified) values
