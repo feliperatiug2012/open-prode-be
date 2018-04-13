@@ -1,5 +1,7 @@
 <?php
 	require_once 'settings.php';
+	require_once 'interfaces/Imapper.php';
+	require_once 'middlewares/CorsMiddleware.php';
 	function getEnviromentDataBase(){
 		global $env, $enviroments;
 

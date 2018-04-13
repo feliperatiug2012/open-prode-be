@@ -1,11 +1,9 @@
 <?php
-
 class GroupEntity
 {
     protected $id;
     protected $title;
     protected $team_name;
-
     /**
      * TeamEntity constructor.
      * @param array $data of the team
