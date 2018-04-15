@@ -60,7 +60,7 @@
 
 		class Team
 		{
-			public $teamFlag;
+			public $team_flag;
 			public $name;
 			public $goals;
 
@@ -68,7 +68,7 @@
 			{
 				$this->goals = $goals;
 				$this->name = $name;
-				$this->teamFlag = $teamFlag;
+				$this->team_flag = $teamFlag;
 			}
 
 		}
