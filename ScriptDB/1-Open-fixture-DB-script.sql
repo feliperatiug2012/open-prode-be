@@ -99,10 +99,10 @@ create table games
 create table users
 (
 	id int primary key auto_increment NOT NULL,
-	title varchar(45) NOT NULL,
-	alias varchar(45) NOT NULL,
+	title varchar(45) NULL,
+	alias varchar(45) NULL,
 	username varchar(45) NOT NULL,
-	password varchar(300) NOT NULL,
+	password varchar(300) NULL,
 	approved int(1) default '0' NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL,

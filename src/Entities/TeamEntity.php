@@ -1,5 +1,5 @@
 <?php
-
+namespace OpenFixture\Entities;
 class TeamEntity
 {
     protected $id;

@@ -1,6 +1,13 @@
 <?php
 
-class SuperAppEntity extends \Slim\App {
+
+	namespace OpenFixture\Entities;
+
+	use Slim\App;
+	use OpenFixture\Middlewares\CorsMiddleware;
+
+
+	class SuperAppEntity extends App {
 
     public $dbConn;
 
