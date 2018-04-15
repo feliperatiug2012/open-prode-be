@@ -1,19 +1,16 @@
 <?php
-	/**
-	 * Created by PhpStorm.
-	 * User: nullpointer13
-	 * Date: 4/12/18
-	 * Time: 8:41 PM
-	 */
+
+require '../vendor/autoload.php';
+require '../autoload_open_fixture.php';
+use OpenFixture\Entities\SuperAppEntity;
+use OpenFixture\Mappers\GroupMapper;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-require '../vendor/autoload.php';
-require '../enviromentsManager.php';
 $app = new SuperAppEntity();
 
 $app->get('/list', function (Request $request, Response $response, $args) use ($app)  {
-	$mapper=new GroupMapper($app->getConn());
+	$mapper=new  GroupMapper($app->getConn());
 	$groups = $mapper->list();
 	return  $response->withJson($groups);
 });

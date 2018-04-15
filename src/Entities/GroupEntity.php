@@ -1,4 +1,5 @@
 <?php
+namespace OpenFixture\Entities;
 class GroupEntity
 {
     protected $id;
