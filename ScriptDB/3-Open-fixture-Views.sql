@@ -23,7 +23,7 @@ concat((SELECT c.url FROM configurations c where c.short_name='BE-ROOT-URL'),
          when now() < g.date_up then 0 # POR JUGAR
          when now() >= g.date_up  and now() <= ADDTIME(g.date_up,'1:30:00') then 1 #EN CURSO
          else 2 #OVERTIME - WAITING FOR ADMINISTRATORS TO END THE GAME
-       END AS Status
+       END AS game_status
 FROM games g
 JOIN teams ta on g.team_a_id = ta.id AND g.deleted=0
 JOIN teams tb on g.team_b_id = tb.id AND tb.deleted=0
@@ -36,21 +36,29 @@ CREATE OR REPLACE VIEW V_DAILY_BETS AS
 SELECT  u.id as user_id,
         u.username,
         g.id as game_id,
-        g.date_up,
+        (SELECT DATE_FORMAT(g.date_up, '%H:%i') from  dual) as time,
         ta.id as team_a_id,
         ta.title as name_team_a,
+        g.goals_team_a,
         concat((SELECT c.url FROM configurations c where c.short_name='BE-ROOT-URL'),
          (SELECT c.url FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(ta.short_name),
          '.png')  AS flag_team_a,
           ta.id as team_b_id,
         tb.title as name_team_b,
+        g.goals_team_b,
         concat((SELECT c.url FROM configurations c where c.short_name='BE-ROOT-URL'),
          (SELECT c.url FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(tb.short_name),
          '.png')  AS flag_team_b,
         b.goals_team_a as bet_goals_team_a,
-        b.goals_team_b as bet_goals_team_b
+        b.goals_team_b as bet_goals_team_b,
+        s.title as stadium,
+        CASE
+           when now() < g.date_up then 0 # POR JUGAR
+           when now() >= g.date_up  and now() <= ADDTIME(g.date_up,'1:30:00') then 1 #EN CURSO
+           else 2 #OVERTIME - WAITING FOR ADMINISTRATORS TO END THE GAME
+        END AS game_status
 
 FROM
   games g
