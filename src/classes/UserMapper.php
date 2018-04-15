@@ -5,7 +5,8 @@ class UserMapper extends Mapper
     public function list()
     {
         $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.deleted
-            from users t";
+            from users t
+            where t.deleted = 0";
         $stmt = $this->db->query($sql);
 
         $results = [];
@@ -40,7 +41,22 @@ class UserMapper extends Mapper
 
     }
 
-    public function add(UserEntity $user)
+    public function delete($id)
+    {
+        // TODO: Implement delete() method.
+        $sql = "update users
+                set deleted = 1
+                where id = :user_id";
+        $stmt = $this->db->prepare($sql);
+        $result = $stmt->execute(["user_id" => $id]);
+
+        if ($result) {
+            //return new UserEntity($stmt->fetch());
+            return $stmt->fetch();
+        }
+    }
+
+    public function add($user)
     {
         $sql = "insert into users
             (title, alias, username, password, created, modified) values
@@ -57,6 +73,11 @@ class UserMapper extends Mapper
         if (!$result) {
             throw new Exception("could not save record");
         }
+    }
+
+    public function update($id)
+    {
+        // TODO: Implement update() method.
     }
 
 }

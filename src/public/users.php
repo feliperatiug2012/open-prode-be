@@ -13,7 +13,7 @@ $app = new SuperAppEntity();
  *************************************************************/
 $app->get('/list', function (Request $request, Response $response) use ($app) {
     $mapper = new UserMapper($app->getConn());
-    $users = $mapper->getUsers();
+    $users = $mapper->list();
     $jsonResponse = $response->withJson($users);
     return $jsonResponse;
 });
@@ -25,7 +25,7 @@ $app->get('/list', function (Request $request, Response $response) use ($app) {
 $app->get('/{id}', function (Request $request, Response $response, $args) use ($app) {
     $user_id = (int)$args['id'];
     $mapper = new UserMapper($app->getConn());
-    $user = $mapper->getUserById($user_id);
+    $user = $mapper->view($user_id);
 
     $jsonResponse = $response->withJson($user);
     return $jsonResponse;
@@ -45,7 +45,7 @@ $app->post('/new', function (Request $request, Response $response) use ($app) {
 
     $user = new UserEntity($user_data);
     $user_mapper = new UserMapper($app->getConn());
-    $user_mapper->save($user);
+    $user_mapper->add($user);
 
     $response = $response->withRedirect("/users.php/list");
     return $response;
