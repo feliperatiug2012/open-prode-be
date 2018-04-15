@@ -5,7 +5,7 @@
 	 * Date: 4/10/18
 	 * Time: 12:47 AM
 	 */
-
+namespace OpenFixture\Interfaces;
 	interface Imapper
 	{
 		/**
@@ -43,8 +43,6 @@
 		 * @return boolean
 		 */
 		public function update($id);
-
-
 
 
 	}

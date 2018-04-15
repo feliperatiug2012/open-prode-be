@@ -1,7 +1,9 @@
 <?php
+	error_reporting(E_ALL ^ E_NOTICE);
+	ini_set('display_errors', 1);
 	require_once 'settings.php';
-	require_once 'interfaces/Imapper.php';
-	require_once 'middlewares/CorsMiddleware.php';
+//	require_once 'Interfaces/Imapper.php';
+//	require_once 'Middlewares/CorsMiddleware.php';
 	function getEnviromentDataBase(){
 		global $env, $enviroments;
 
