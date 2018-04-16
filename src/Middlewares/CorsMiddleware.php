@@ -5,6 +5,7 @@
 	 * Date: 4/10/18
 	 * Time: 1:08 AM
 	 */
+	namespace OpenFixture\Middlewares;
 	class CorsMiddleware
 	{
 		/**

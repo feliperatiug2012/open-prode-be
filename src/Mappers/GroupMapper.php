@@ -1,4 +1,7 @@
 <?php
+	namespace OpenFixture\Mappers;
+
+use OpenFixture\Entities\TeamEntity;
 
 class GroupMapper extends Mapper
 {
