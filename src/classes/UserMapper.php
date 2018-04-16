@@ -5,8 +5,7 @@ class UserMapper extends Mapper
     public function list()
     {
         $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.deleted
-            from users t
-            where t.deleted = 0";
+            from users t";
         $stmt = $this->db->query($sql);
 
         $results = [];
