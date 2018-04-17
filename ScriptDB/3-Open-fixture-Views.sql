@@ -70,3 +70,16 @@ FROM
 WHERE
   g.date_up >= current_date() AND g.date_up <= DATE_ADD(current_date() , interval 1 day)
   AND g.deleted=0;
+
+# VISTA PARA LA TABLA DE POSICIONES (LISTAR USUARIOS)
+CREATE OR REPLACE VIEW V_SCORE_BOARD AS
+SELECT  U.username AS username,
+        U.title AS name,
+        U.alias AS alias,
+        U.picture_url as picture_url,
+        GET_USER_TOTAL_POINTS(U.username) AS total_points
+FROM users U
+WHERE
+  U.deleted=0
+  AND U.approved=1;
+
