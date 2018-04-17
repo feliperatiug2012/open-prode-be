@@ -24,7 +24,8 @@ create table configurations
 	modified datetime default CURRENT_TIMESTAMP NOT NULL,
 	deleted int(1) default '0' NOT NULL
 );
-
+CREATE UNIQUE INDEX
+	configurations__index_SHORT_NAME ON configurations (short_name);
 
 create table stadiums
 (
@@ -102,6 +103,7 @@ create table users
 	title varchar(45) NULL,
 	alias varchar(45) NULL,
 	username varchar(45) NOT NULL,
+	picture_url varchar(2000) NULL,
 	password varchar(300) NULL,
 	approved int(1) default '0' NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
@@ -110,21 +112,23 @@ create table users
 )
 engine=InnoDB charset=utf8;
 
-CREATE UNIQUE INDEX
-	configurations__index_SHORT_NAME ON configurations (short_name);
+CREATE UNIQUE INDEX unique_username
+ON users (username);
 
 
-create index phase_id
-	on games (phase_id);
 
-create index team_a_id
-	on games (team_a_id);
-
-create index team_b_id
-	on games (team_b_id);
-
-create index group_id
-	on teams (group_id);
+#
+# create index phase_id
+# 	on games (phase_id);
+#
+# create index team_a_id
+# 	on games (team_a_id);
+#
+# create index team_b_id
+# 	on games (team_b_id);
+#
+# create index group_id
+# 	on teams (group_id);
 
 create table bets
 (
@@ -143,9 +147,9 @@ create table bets
 )
 comment 'Información de los puntos obtenidos en cada partido' engine=InnoDB charset=utf8;
 
-create index game_id
-	on bets (game_id);
-
-create index user_id
-	on bets (user_id);
+# create index game_id
+# 	on bets (game_id);
+#
+# create index user_id
+# 	on bets (user_id);
 
