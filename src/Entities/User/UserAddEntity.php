@@ -6,10 +6,12 @@
 	 * Time: 12:29 AM
 	 */
 	namespace OpenFixture\Entities\User;
+	use http\Url;
 	use OpenFixture\Exceptions\DataBaseInsertException;
+	use OpenFixture\Interfaces\IAddEntity;
 	use PDOException;
 
-	class UserAddEntity
+	class UserAddEntity implements IAddEntity
 	{
 		public $name;
 		public $alias;

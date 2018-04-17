@@ -9,7 +9,18 @@
 	namespace OpenFixture\Interfaces;
 
 
-	class IAddEntity
-	{
+	use OpenFixture\Exceptions\DataBaseInsertException;
 
+	Interface IAddEntity
+	{
+		/**
+		 * UserAddEntity constructor.
+		 * @param array $data
+		 * @param \PDO $db
+		 */
+		public function __construct(array $data, $db);
+		/**
+		 * @throws DataBaseInsertException
+		 */
+		public function save();
 	}
