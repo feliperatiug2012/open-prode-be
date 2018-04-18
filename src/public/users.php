@@ -23,7 +23,7 @@ $app->post('/add', function (Request $request, Response $response) use ($app) {
     $user_data['name'] = filter_var($data['name'], FILTER_SANITIZE_STRING);
     $user_data['alias'] = filter_var($data['alias'], FILTER_SANITIZE_STRING);
     $user_data['username'] = filter_var($data['username'], FILTER_SANITIZE_STRING);
-    $user_data['picture_url'] = filter_var($data['picture_url'], FILTER_SANITIZE_STRING);
+    $user_data['picture'] = filter_var($data['picture'], FILTER_SANITIZE_STRING);
 
 //    $user = new UserListEntity($user_data);
     $mapper = new UserMapper($app->getConn());
