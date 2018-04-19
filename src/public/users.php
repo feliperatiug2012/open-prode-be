@@ -17,7 +17,7 @@
 	    return $jsonResponse;
 	});
 
-$app->post('/add', function (Request $request, Response $response) use ($app) {
+$app->post('/save', function (Request $request, Response $response) use ($app) {
     $data = $request->getParsedBody();
     $user_data = [];
     $user_data['name'] = filter_var($data['name'], FILTER_SANITIZE_STRING);
@@ -25,20 +25,18 @@ $app->post('/add', function (Request $request, Response $response) use ($app) {
     $user_data['username'] = filter_var($data['username'], FILTER_SANITIZE_STRING);
     $user_data['picture'] = filter_var($data['picture'], FILTER_SANITIZE_STRING);
 
-//    $user = new UserListEntity($user_data);
     $mapper = new UserMapper($app->getConn());
-	$response = $response->withJson($mapper->add($user_data));
+	$response = $response->withJson($mapper->save($user_data));
     return $response;
 });
 
-$app->get('/user/{id}', function (Request $request, Response $response, $args) use ($app)  {
-    $user_id = (int)$args['id'];
+$app->get('/view/{id}', function (Request $request, Response $response, $args) use ($app)  {
+    //todo: check if this function works
+	$user_id = (int)$args['id'];
     $mapper = new UserMapper($app->getConn());
     $user = $mapper->getUserById($user_id);
     $jsonResponse = $response->withJson($user);
     return $jsonResponse;
 })->setName('user-detail');
-
-
 
 $app->run();

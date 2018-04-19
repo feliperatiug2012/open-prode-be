@@ -1,9 +1,9 @@
 <?php
 namespace OpenFixture\Mappers;
-use OpenFixture\Entities\User\UserAddEntity;
+use OpenFixture\Entities\User\UserEntity;
 use OpenFixture\Entities\User\UserListEntity;
-use OpenFixture\Entities\UserEntity;
 use OpenFixture\Exceptions\DataBaseInsertException;
+use OpenFixture\Exceptions\DataBaseUpdateException;
 use OpenFixture\Mappers\Mapper;
 class UserMapper extends Mapper
 {
@@ -14,7 +14,7 @@ class UserMapper extends Mapper
         $users = [];
         $scoreBoard=null;
         while ($row = $stmt->fetch()) {
-	        $scoreBoard[] = (array)new UserListEntity($row);
+	        $scoreBoard[] = (array)new UserListEntity($row,$this->db);
         }
 	    return $scoreBoard;
     }
@@ -22,11 +22,12 @@ class UserMapper extends Mapper
     /**
      * Get one ticket by its ID
      *
-     * @param int $$id The ID of the user
+     * @param int $id The ID of the user
      * @return UserEntity  The user
      */
     public function view($id)
     {
+    	//todo: check if this function works
         $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.created, t.modified, t.deleted
             from users t
             where t.id = :id";
@@ -40,15 +41,17 @@ class UserMapper extends Mapper
 
     }
 
-    public function add($user_array)
+    public function save($user_array)
     {
-       //$userEntity=new UserAddEntity($user_array,$this->db);
+        $userEntity=new UserEntity($user_array,$this->db);
        try {
-	     //  $userEntity->save();
-	        return true;
+	       return $userEntity->save();
        }catch (DataBaseInsertException $e){
 			return false;
         }
+       catch (DataBaseUpdateException $e){
+	       return false;
+       }
     }
 
 	/**
@@ -61,14 +64,4 @@ class UserMapper extends Mapper
 		// TODO: Implement delete() method.
 	}
 
-	/**
-	 * Funcion que debe actualizar un individuo de la clase dado su Id unico, devuelve true
-	 * en caso de exito y false en caso de error
-	 * @param $id integer
-	 * @return boolean
-	 */
-	public function update($id)
-	{
-		// TODO: Implement update() method.
-	}
 }

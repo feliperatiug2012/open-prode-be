@@ -96,21 +96,11 @@ class GroupMapper extends Mapper
 	 * @param $entity
 	 * @return integer
 	 */
-	public function add($entity)
+	public function save($entity)
 	{
 		// TODO: Implement add() method.
 	}
 
-	/**
-	 * Funcion que debe actualizar un individuo de la clase dado su Id unico, devuelve true
-	 * en caso de exito y false en caso de error
-	 * @param $id integer
-	 * @return boolean
-	 */
-	public function update($id)
-	{
-		// TODO: Implement update() method.
-	}
 
 
 
