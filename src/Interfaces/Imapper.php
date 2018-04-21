@@ -10,7 +10,7 @@ namespace OpenFixture\Interfaces;
 	{
 		/**
 		 * Debe listar todos los elementos de la clase
-		 * @return mixed
+		 * @return array
 		 */
 		public function list();
 
@@ -29,20 +29,12 @@ namespace OpenFixture\Interfaces;
 		public function delete($id);
 
 		/**
-		 * funcion que recibe un objeto de la clase y la agrega a la BD, el valor que devuelve
+		 * funcion que recibe un objeto de la clase y la agrega o la actualiza en la BD segun sea el caso, el valor que devuelve
 		 * es el id unico generado al insertar el registro
 		 * @param $entity
-		 * @return integer
+		 * @return integer | boolean
 		 */
-		public function add($entity);
-
-		/**
-		 * Funcion que debe actualizar un individuo de la clase dado su Id unico, devuelve true
-		 * en caso de exito y false en caso de error
-		 * @param $id integer
-		 * @return boolean
-		 */
-		public function update($id);
+		public function save($entity);
 
 
 	}

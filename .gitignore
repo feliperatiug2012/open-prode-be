@@ -5,12 +5,12 @@
  
 # User-specific stuff: 
 /src/settings.php
-
-#/vendors
+/src/vendor
+/vendors
 /.idea
-*/vendor
-/logs
 /vendor
+/logs
+
 
 #Visual Studio Code
 /*.code-workspace

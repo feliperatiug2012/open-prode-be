@@ -1,37 +1,38 @@
 <?php
-
+namespace OpenFixture\Mappers;
+use OpenFixture\Entities\User\UserEntity;
+use OpenFixture\Entities\User\UserListEntity;
+use OpenFixture\Exceptions\DataBaseInsertException;
+use OpenFixture\Exceptions\DataBaseUpdateException;
+use OpenFixture\Mappers\Mapper;
 class UserMapper extends Mapper
 {
-    public function getUsers()
+    public function list()
     {
-        $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.deleted
-            from users t";
+        $sql = "SELECT * FROM V_SCORE_BOARD";
         $stmt = $this->db->query($sql);
-
-        $results = [];
+        $users = [];
+        $scoreBoard=null;
         while ($row = $stmt->fetch()) {
-            $results [] = $row;
-            echo "<pre>";
-                var_dump($row);
-            echo "</pre>";
+	        $scoreBoard[] = (array)new UserListEntity($row,$this->db);
         }
-        exit();
-        return $results;
+	    return $scoreBoard;
     }
 
     /**
      * Get one ticket by its ID
      *
-     * @param int $user_id The ID of the user
+     * @param int $id The ID of the user
      * @return UserEntity  The user
      */
-    public function getUserById($user_id)
+    public function view($id)
     {
+    	//todo: check if this function works
         $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.created, t.modified, t.deleted
             from users t
-            where t.id = :user_id";
+            where t.id = :id";
         $stmt = $this->db->prepare($sql);
-        $result = $stmt->execute(["user_id" => $user_id]);
+        $result = $stmt->execute([":id" => $$id]);
 
         if ($result) {
             //return new UserEntity($stmt->fetch());
@@ -40,23 +41,27 @@ class UserMapper extends Mapper
 
     }
 
-    public function save(UserEntity $user)
+    public function save($user_array)
     {
-        $sql = "insert into users
-            (title, alias, username, password, created, modified) values
-            (:title, :alias, :username, :password, now(), now())";
-
-        $stmt = $this->db->prepare($sql);
-        $result = $stmt->execute([
-            "title" => $user->getTitle(),
-            "alias" => $user->getAlias(),
-            "username" => $user->getUsername(),
-            "password" => $user->getPassword(),
-        ]);
-
-        if (!$result) {
-            throw new Exception("could not save record");
+        $userEntity=new UserEntity($user_array,$this->db);
+       try {
+	       return $userEntity->save();
+       }catch (DataBaseInsertException $e){
+			return false;
         }
+       catch (DataBaseUpdateException $e){
+	       return false;
+       }
     }
+
+	/**
+	 * Funcion que debe leliminar un individuo de la clase dado su Id unico
+	 * @param $id integer
+	 * @return boolean
+	 */
+	public function delete($id)
+	{
+		// TODO: Implement delete() method.
+	}
 
 }

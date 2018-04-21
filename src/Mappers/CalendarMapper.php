@@ -29,7 +29,7 @@
 
 		}
 
-		public function add($entity)
+		public function save($entity)
 		{
 			// TODO: Implement add() method.
 		}
@@ -44,8 +44,4 @@
 			// TODO: Implement view() method.
 		}
 
-		public function update($id)
-		{
-			// TODO: Implement update() method.
-		}
 	}
