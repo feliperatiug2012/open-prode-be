@@ -21,7 +21,7 @@ create table configurations
   short_name varchar(15) not null ,
   url varchar(1000) not null,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
-	modified datetime default CURRENT_TIMESTAMP NOT NULL,
+	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL
 );
 CREATE UNIQUE INDEX
@@ -32,7 +32,7 @@ create table stadiums
 	id int primary key auto_increment NOT NULL ,
 	title varchar(45) NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
-	modified datetime default CURRENT_TIMESTAMP NOT NULL,
+	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL
 )engine=InnoDB charset=utf8;
 
@@ -41,7 +41,7 @@ create table groups
 	id int primary key auto_increment NOT NULL ,
 	title varchar(45) NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
-	modified datetime default CURRENT_TIMESTAMP NOT NULL,
+	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL
 )engine=InnoDB charset=utf8
 comment 'Organizacion por grupos de los equipos' engine=InnoDB charset=utf8;
@@ -53,7 +53,7 @@ create table phases
 	start_date datetime NOT NULL,
 	end_date datetime NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
-	modified datetime default CURRENT_TIMESTAMP NOT NULL,
+	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL
 )engine=InnoDB charset=utf8
 comment 'Fase de Partidos entre los equipos. Se dividen en: Fase de Grupos, Fase Octavos, Fase Cuartos, Fase Semifinal, Fase 3ro, Fase final' engine=InnoDB charset=utf8;
@@ -65,7 +65,7 @@ create table teams
 	short_name varchar(45) NOT NULL,
 	group_id int NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
-	modified datetime default CURRENT_TIMESTAMP NOT NULL,
+	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL,
 	constraint teams_ibfk_1
 		foreign key (group_id) references groups (id)
@@ -84,7 +84,7 @@ create table games
 	goals_team_b int default '0' NOT NULL,
   stadium_id int NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL ,
-	modified datetime default CURRENT_TIMESTAMP NOT NULL,
+	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL,
 
 	constraint games_ibfk_3	foreign key (phase_id) references phases (id),
@@ -107,7 +107,7 @@ create table users
 	password varchar(300) NULL,
 	approved int(1) default '0' NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
-	modified datetime default CURRENT_TIMESTAMP NOT NULL,
+	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL
 )
 engine=InnoDB charset=utf8;
@@ -138,7 +138,7 @@ create table bets
 	goals_team_a int(2) default '0' NOT NULL,
 	goals_team_b int(2) default '0' NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
-	modified datetime default CURRENT_TIMESTAMP NOT NULL,
+	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL,
 	constraint scores_ibfk_2
 		foreign key (user_id) references users (id),

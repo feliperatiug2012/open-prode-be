@@ -14,3 +14,9 @@ $enviroments = [
     
 ];
 
+	function get_var_enviroment($var_name){
+		global $enviroments;
+		global $env;
+		return $enviroments[$env][$var_name];
+	}
+
