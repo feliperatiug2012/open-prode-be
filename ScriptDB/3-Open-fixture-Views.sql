@@ -77,7 +77,7 @@ SELECT  U.username AS username,
         U.title AS name,
         U.alias AS alias,
         U.picture_url as picture_url,
-        GET_USER_TOTAL_POINTS(U.username) AS total_points
+        GET_USER_TOTAL_POINTS(U.id) AS total_points
 FROM users U
 WHERE
   U.deleted=0
