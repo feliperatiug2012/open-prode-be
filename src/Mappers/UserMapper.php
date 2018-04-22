@@ -4,43 +4,50 @@ use OpenFixture\Entities\User\UserEntity;
 use OpenFixture\Entities\User\UserListEntity;
 use OpenFixture\Exceptions\DataBaseInsertException;
 use OpenFixture\Exceptions\DataBaseUpdateException;
+use OpenFixture\Exceptions\ViewEndPointInvalidOptionException;
 use OpenFixture\Mappers\Mapper;
 class UserMapper extends Mapper
 {
     public function list()
     {
-        $sql = "SELECT * FROM V_SCORE_BOARD";
-        $stmt = $this->db->query($sql);
-        $users = [];
-        $scoreBoard=null;
-        while ($row = $stmt->fetch()) {
-	        $scoreBoard[] = (array)new UserListEntity($row,$this->db);
-        }
+	    // TODO: Implement list() method.
+    }
+
+	/**
+	 * Get one ticket by its ID
+	 *
+	 * @param int $id The ID of the user
+	 * @return UserEntity  The user
+	 * @throws ViewEndPointInvalidOptionException
+	 */
+    public function view($id)
+    {
+       	if ($id=='score-board') {
+		    $sql = "SELECT * FROM V_SCORE_BOARD";
+		    $stmt = $this->db->query($sql);
+		    $v_score_board = $stmt->fetchAll();
+		    $scoreBoard = from($v_score_board)
+			    ->select(function ($users) use ($v_score_board) {
+				    return [
+					    "name"          => $users["name"],
+					    "alias"         => $users["alias"],
+					    "username"      => $users["username"],
+					    "picture_url"   => $users["picture_url"],
+					    "total_points"  => $users["total_points"],
+					    "rank"  => $users["rank"]
+				    ];
+			    })
+			    ->toList();
+	    }else{
+    		throw new ViewEndPointInvalidOptionException();
+	    }
 	    return $scoreBoard;
     }
 
-    /**
-     * Get one ticket by its ID
-     *
-     * @param int $id The ID of the user
-     * @return UserEntity  The user
-     */
-    public function view($id)
-    {
-    	//todo: check if this function works
-        $sql = "SELECT t.id, t.title, t.alias, t.username, t.password, t.approved, t.created, t.modified, t.deleted
-            from users t
-            where t.id = :id";
-        $stmt = $this->db->prepare($sql);
-        $result = $stmt->execute([":id" => $$id]);
-
-        if ($result) {
-            //return new UserEntity($stmt->fetch());
-            return $stmt->fetch();
-        }
-
-    }
-
+	/**
+	 * @param $user_array
+	 * @return bool|int
+	 */
     public function save($user_array)
     {
         $userEntity=new UserEntity($user_array,$this->db);

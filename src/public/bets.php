@@ -12,7 +12,8 @@
 	use OpenFixture\Entities\SuperAppEntity;
 	use OpenFixture\Mappers\BetMapper;
 	use \Psr\Http\Message\ServerRequestInterface as Request;
-	use \Psr\Http\Message\ResponseInterface as Response;
+	//	use \Psr\Http\Message\ResponseInterface as Response;
+	use \Slim\Http\Response as Response;
 
 	$app = new SuperAppEntity();
 	$app->get('/view/{id}', function (Request $request, Response $response, $args) use ($app)  {

@@ -20,7 +20,6 @@
 		public function __invoke($request, $response, $next)
 		{
 			$response = $next($request, $response);
-			//todo: remove hardcoded URL http://localhost:4200 and check allowed methods and authorizations headers
 			return $response->withHeader('Access-Control-Allow-Origin', get_var_enviroment('CORS_URL')/*'http://localhost:4200'*/)
 							->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
 							->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
