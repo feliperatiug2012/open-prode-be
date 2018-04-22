@@ -54,7 +54,7 @@
 		}
 
 
-		private function _listUserBets($id)
+		private function _listUserBets($id): array
 		{
 			if(is_numeric($id))
 				$query =    'SELECT *
@@ -122,31 +122,38 @@
 		/**
 		 * @return array
 		 */
-		private function _listDailyBets() : array
-		{
-			$matches=null;
-			$query = 'SELECT DISTINCT G.game_id FROM V_DAILY_BETS G ORDER BY G.game_id ASC';
-			$conn = $this->db->query($query);
-			$game_id = null;
-			$games_id=null;
-			while ($game_id = $conn->fetch()) {
-				$games_id[] = $game_id;
-			}
-			$game_id=null;
+		private function _listDailyBets() : array {
+
 			$bets=null;
-
-			foreach ($games_id as $k => $v){
-				$query ='SELECT * FROM V_DAILY_BETS BETS WHERE BETS.game_id=:BETS';
-				$stm=$this->db->prepare($query);
-				$stm->execute([':BETS' => $v['game_id']]);
-				$bets=null;
-				while ($bet=$stm->fetch()) {
-					$bets[]=$bet;
-				}
-				$matches[] = (array) new BetListEntity($bets);
-			}
-			return $matches;
+			$query = 'SELECT DISTINCT * FROM V_DAILY_BETS G ORDER BY G.game_id ASC';
+			$conn = $this->db->query($query);
+			$bets = $conn->fetchAll();
+			$bets=from($bets)->select(function($games) use($bets){return[
+				"date"          =>  null,
+				"game_id"       =>  $games["game_id"],
+				"time"          =>  $games["time"],
+				"stadium"       =>  $games["stadium"],
+				"game_status"   =>  $games["game_status"],
+				"team_1"    =>  [
+					"team_flag" =>  $games['flag_team_a'],
+					"name"      =>  $games['name_team_a'],
+					'goals'     =>  $games['goals_team_a']],
+				"team_2"    =>  [
+					"team_flag" =>  $games['flag_team_b'],
+					"name"      =>  $games['name_team_b'],
+					"goals"     =>  $games['goals_team_b']],
+				"bets"          => from($bets)
+					->where(function($usersBet) use ($games) {return $usersBet["game_id"]==$games["game_id"];})
+					->select(function($usersBet) use ($games){return[
+					"user_name"     =>  $usersBet["username"],
+					"goals_team_1"  =>  $usersBet["bet_goals_team_a"],
+					"goals_team_2"  =>  $usersBet["bet_goals_team_b"],
+					"game_id"       =>  $usersBet["game_id"],
+				];})
+					->toList()
+			];})->distinct('$v["game_id"]')
+				->toList();
+		//exit();
+		return $bets;
 		}
-
-
 	}
