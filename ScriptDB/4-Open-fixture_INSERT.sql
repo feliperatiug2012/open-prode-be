@@ -165,19 +165,81 @@ COMMIT;
 
 ##############################  INSERTS DE LA TABLA BETS ###############
 #rbenal@gmail.com
+delete from bets;
+
 INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (1, 1, 1, 3, 2, sysdate(), sysdate(), 0);
 INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (2, 1, 2, 5, 7, sysdate(), sysdate(), 0);
 INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (3, 1, 3, 1, 0, sysdate(), sysdate(), 0);
-COMMIT;
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (4, 1, 4, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (5, 1, 5, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (6, 1, 6, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (7, 1, 7, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (8, 1, 8, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (9, 1, 9, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (10, 1, 10, 1, 0, sysdate(), sysdate(), 0);
 
-#rbenal@outlook.com
-INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (4, 2, 1, 3, 7, sysdate(), sysdate(), 0);
-INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (5, 2, 2, 1, 2, sysdate(), sysdate(), 0);
-INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (6, 2, 3, 2, 4, sysdate(), sysdate(), 0);
-COMMIT;
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (11, 1, 11, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (12, 1, 12, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (13, 1, 13, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (14, 1, 14, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (15, 1, 15, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (16, 1, 16, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (17, 1, 17, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (18, 1, 18, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (19, 1, 19, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (20, 1, 20, 1, 0, sysdate(), sysdate(), 0);
 
-#dlmora91@gmail.com
-INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (7, 3, 1, 1, 0, sysdate(), sysdate(), 0);
-INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (8, 3, 2, 3, 0, sysdate(), sysdate(), 0);
-INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (9, 3, 3, 2, 2, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (21, 1, 21, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (22, 1, 22, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (23, 1, 23, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (24, 1, 24, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (25, 1, 25, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (26, 1, 26, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (27, 1, 27, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (28, 1, 28, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (29, 1, 29, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (30, 1, 30, 1, 0, sysdate(), sysdate(), 0);
+
+
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (31, 1, 31, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (32, 1, 32, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (33, 1, 33, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (34, 1, 34, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (35, 1, 35, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (36, 1, 36, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (37, 1, 37, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (38, 1, 38, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (39, 1, 39, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (40, 1, 40, 1, 0, sysdate(), sysdate(), 0);
+
+
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (41, 1, 41, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (42, 1, 42, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (43, 1, 43, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (44, 1, 44, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (45, 1, 45, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (46, 1, 46, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (47, 1, 47, 1, 0, sysdate(), sysdate(), 0);
+INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (48, 1, 48, 1, 0, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (49, 1, 49, 1, 0, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (50, 1, 50, 1, 0, sysdate(), sysdate(), 0);
+#
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (51, 1, 51, 1, 0, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (52, 1, 52, 1, 0, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (53, 1, 53, 1, 0, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (54, 1, 54, 1, 0, sysdate(), sysdate(), 0);
+
+
 COMMIT;
+#
+# #rbenal@outlook.com
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (4, 2, 1, 3, 7, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (5, 2, 2, 1, 2, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (6, 2, 3, 2, 4, sysdate(), sysdate(), 0);
+# COMMIT;
+#
+# #dlmora91@gmail.com
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (7, 3, 1, 1, 0, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (8, 3, 2, 3, 0, sysdate(), sysdate(), 0);
+# INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (9, 3, 3, 2, 2, sysdate(), sysdate(), 0);
+# COMMIT;

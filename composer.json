@@ -1,12 +1,8 @@
 {
 	"require":{
 		"php": ">=7.1.0",
-		"slim/slim":"3.*"
-	},
-	"autoload": {
-		"psr-4": {
-			"": "classes/"
-		}
+		"slim/slim":"3.*",
+        "athari/yalinqo": "2.*"
 	}
-}}
 }
+

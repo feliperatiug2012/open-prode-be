@@ -17,8 +17,6 @@
 		public $alias;
 		public $username;
 		public $picture;
-		static protected $table_name="users";
-
 		/**
 		 * UserEntity constructor.
 		 * @param array $data

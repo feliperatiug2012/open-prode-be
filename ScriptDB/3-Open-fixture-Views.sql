@@ -3,6 +3,7 @@ USE `nullpoin_open-fixture`;
 # VISTA PARA EL CALENDARIO DE JUEGOS
 CREATE OR REPLACE VIEW V_GAMES_CALENDAR AS
 SELECT
+  g.id as game_id,
   p.id as phase_id,
   p.title as phase,
   g.date_up as date,
@@ -12,12 +13,14 @@ SELECT
          upper(ta.short_name),
          '.png')  AS flag_team_a,
   ta.title as name_team_a,
+  ta.id as team_id_a,
   g.goals_team_a as goals_team_a,
 concat((SELECT c.url FROM configurations c where c.short_name='BE-ROOT-URL'),
          (SELECT c.url FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(tb.short_name),
          '.png')  AS flag_team_b,
     tb.title as name_team_b,
+  tb.id as team_id_b,
   g.goals_team_b as goals_team_b,
   CASE
          when now() < g.date_up then 0 # POR JUGAR
@@ -83,3 +86,14 @@ WHERE
   U.deleted=0
   AND U.approved=1;
 
+CREATE OR REPLACE VIEW V_USER_BETS AS
+SELECT  C.*,
+        B.goals_team_a AS bet_goals_team_a,
+        B.goals_team_b AS bet_goals_team_b,
+        U.id AS user_id,
+        U.username
+FROM V_GAMES_CALENDAR C
+left JOIN bets B ON B.game_id=C.game_id
+left JOIN users U on B.user_id = U.id
+ WHERE
+   B.deleted=0 AND U.deleted=0;

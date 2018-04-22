@@ -1,10 +1,10 @@
 <?php
-	error_reporting(E_ALL ^ E_NOTICE);
+	error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 	ini_set('display_errors', 1);
 	require_once 'settings.php';
 //	require_once 'Interfaces/Imapper.php';
 //	require_once 'Middlewares/CorsMiddleware.php';
-	function getEnviromentDataBase(){
+	function getEnviromentDataBase() {
 		global $env, $enviroments;
 
 		$dbCfg=$enviroments[$env];
