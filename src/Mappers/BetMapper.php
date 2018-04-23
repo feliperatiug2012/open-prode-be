@@ -145,7 +145,9 @@
 				"bets"          => from($bets)
 					->where(function($usersBet) use ($games) {return $usersBet["game_id"]==$games["game_id"];})
 					->select(function($usersBet) use ($games){return[
-					"user_name"     =>  $usersBet["username"],
+					"user_picture"  =>  $usersBet["picture_url"],
+					"user_name"     =>  $usersBet["name"],
+					"username"      =>  $usersBet["username"],
 					"goals_team_1"  =>  $usersBet["bet_goals_team_a"],
 					"goals_team_2"  =>  $usersBet["bet_goals_team_b"],
 					"game_id"       =>  $usersBet["game_id"],
