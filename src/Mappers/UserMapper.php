@@ -37,6 +37,7 @@ class UserMapper extends Mapper
 					    "rank"  => $users["rank"]
 				    ];
 			    })
+			    ->orderBy('$v["rank"]')
 			    ->toList();
 	    }else{
     		throw new ViewEndPointInvalidOptionException();
