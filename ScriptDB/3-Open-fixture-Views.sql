@@ -38,6 +38,8 @@ ORDER BY date ASC;
 CREATE OR REPLACE VIEW V_DAILY_BETS AS
 SELECT  u.id as user_id,
         u.username,
+        u.title as name,
+        u.picture_url,
         g.id as game_id,
         (SELECT DATE_FORMAT(g.date_up, '%H:%i') from  dual) as time,
         ta.id as team_a_id,
