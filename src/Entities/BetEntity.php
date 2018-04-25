@@ -24,8 +24,8 @@
 			{
 				parent::__construct($data,$db); 
 				//$this->$user_id = $data['user_id'];
-				$this->$user_id = 0;
-				$this->username = $data['username'];
+				$this->user_id = 0;
+				$this->username = $data['name'];
 				$this->game_id = $data['game_id'];
 				$this->goals_team_a = $data['bet_goals_team_a'];
 				$this->goals_team_b = $data['bet_goals_team_b'];
@@ -50,7 +50,10 @@
 				{
 					echo $sql1 . "<br>" . $e->getMessage();
 				}
-	
+				
+				//echo("BetEntity= ");
+				//var_dump($this->username);
+				
 				// gets the id of the game of the bet
 				try {
 					$sql2 = "SELECT id from bets where user_id=:user_id and game_id=:game_id";

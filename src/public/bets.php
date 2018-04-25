@@ -27,8 +27,9 @@
 		$bets_data['bet_goals_team_b'] = $data['bet_goals_team_b'];
 
 		$mapper = new BetMapper($app->getConn());
-		$response = $response->withJson($mapper->save($bets_data));
-		return $response;
+		//$jsonResponse = $response->withJson($bets_data);
+		$jsonResponse = $response->withJson($mapper->save($bets_data));
+		return $jsonResponse;
 	});
 
 	$app->get('/view/{id}', function (Request $request, Response $response, $args) use ($app)  {
