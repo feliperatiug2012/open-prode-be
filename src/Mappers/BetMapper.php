@@ -1,8 +1,10 @@
 <?php
 	namespace OpenFixture\Mappers;
-	use OpenFixture\Entities\Bet\BetListEntity;
+
+	use OpenFixture\Entities\BetEntity;
 	use OpenFixture\Exceptions\NotImplementedException;
 	use \InvalidArgumentException;
+	use OpenFixture\Mappers\Mapper;
 
 	class BetMapper extends Mapper
 	{
@@ -24,6 +26,15 @@
 		 */
 		public function save($entity)
 		{
+			$betEntity=new BetEntity($entity,$this->db);
+			try {
+				return $betEntity->save();
+			}catch (DataBaseInsertException $e){
+					return false;
+				}
+			catch (DataBaseUpdateException $e){
+				return false;
+			}
 			throw new NotImplementedException();
 		}
 
