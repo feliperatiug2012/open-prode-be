@@ -1,11 +1,13 @@
 <?php
 namespace OpenFixture\Mappers;
+
 use OpenFixture\Entities\User\UserEntity;
-use OpenFixture\Entities\User\UserListEntity;
+//use OpenFixture\Entities\User\UserListEntity;
 use OpenFixture\Exceptions\DataBaseInsertException;
 use OpenFixture\Exceptions\DataBaseUpdateException;
 use OpenFixture\Exceptions\ViewEndPointInvalidOptionException;
 use OpenFixture\Mappers\Mapper;
+
 class UserMapper extends Mapper
 {
     public function list()
@@ -51,7 +53,7 @@ class UserMapper extends Mapper
 	 */
     public function save($user_array)
     {
-        $userEntity=new UserEntity($user_array,$this->db);
+       $userEntity=new UserEntity($user_array,$this->db);
        try {
 	       return $userEntity->save();
        }catch (DataBaseInsertException $e){
