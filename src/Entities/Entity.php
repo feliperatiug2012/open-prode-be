@@ -38,6 +38,7 @@
 		/**
 		 * @throws DataBaseUpdateException
 		 * @throws DataBaseInsertException
+		 *  @return bool|int
 		 */
 		public function save()
 		{

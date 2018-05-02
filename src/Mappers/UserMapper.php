@@ -6,7 +6,6 @@ use OpenFixture\Entities\User\UserEntity;
 use OpenFixture\Exceptions\DataBaseInsertException;
 use OpenFixture\Exceptions\DataBaseUpdateException;
 use OpenFixture\Exceptions\ViewEndPointInvalidOptionException;
-use OpenFixture\Mappers\Mapper;
 
 class UserMapper extends Mapper
 {
