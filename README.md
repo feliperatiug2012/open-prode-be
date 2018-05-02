@@ -1,3 +1,15 @@
+## Open-Fixture API
+
+- GET:
+1. /bets/view/{id} (_DAILY_ | `NUMBER` | **<user_mail>**)
+2. /calendar/list
+3. /groups/list
+4. /groups/view/{id}
+
+- POST:
+1. /bets/save
+2. /post/save
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/rbenal/open-fixture-be/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
