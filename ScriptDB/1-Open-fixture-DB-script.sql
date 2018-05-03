@@ -86,6 +86,7 @@ create table games
 	created datetime default CURRENT_TIMESTAMP NOT NULL ,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL,
+        status_game char DEFAULT 'SI',
 
 	constraint games_ibfk_3	foreign key (phase_id) references phases (id),
  	constraint games_ibfk_1 foreign key (team_a_id) references teams (id),
