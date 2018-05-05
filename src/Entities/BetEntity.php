@@ -54,7 +54,7 @@
 				//echo("BetEntity= ");
 				//var_dump($this->username);
 				
-				// gets the id of the game of the bet
+				// gets the game's id of the bet
 				try {
 					$sql2 = "SELECT id from bets where user_id=:user_id and game_id=:game_id";
 					$stm2=$this->db->prepare($sql2);
