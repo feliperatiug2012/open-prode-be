@@ -9,7 +9,7 @@
 
 	class BetMapper extends Mapper
 	{
-		/**
+		/*
 		 * @return array|void
 		 * @throws NotImplementedException
 		 */

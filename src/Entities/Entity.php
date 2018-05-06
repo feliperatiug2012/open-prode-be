@@ -31,7 +31,9 @@
 		{
 			$this->db=$db;
 			if(isset($data['id']))
+			{
 				$this->id=$data['id'];
+			}	
 			else
 				$this->id=$this->getId();
 		}

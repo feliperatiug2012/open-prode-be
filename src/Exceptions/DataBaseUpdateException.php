@@ -18,5 +18,6 @@
 		 */
 		public function __construct($string)
 		{
+			$this->message=$msg;
 		}
 	}
