@@ -7,8 +7,9 @@
 4. /groups/view/{id}
 
 - POST:
-1. /bets/save
-2. /post/save
+1. /bets/save `{ "username" , "game_id" , "bet_goals_team_a" , "bet_goals_team_b" }`
+2. /users/save `{ "name" , "alias" , "username" , "picture" }`
+3. /match/save `{ "id" , "goals_team_a" , "goals_team_b" }`
 
 ## Welcome to GitHub Pages
 
