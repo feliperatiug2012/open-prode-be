@@ -13,7 +13,8 @@ CREATE FUNCTION GET_USER_TOTAL_POINTS (p_user_id int) RETURNS int(11)
         g.goals_team_b, g.team_a_id, g.team_b_id -- INTO vGamesId, vGolBetsA, vGolBetsB, vGolGamesA, vGolGamesB, vIdTeamA, vIdTeamB
       FROM bets b, games g
       WHERE b.game_id=g.id
-            AND b.user_id = p_user_id;
+      AND date_add(g.date_up, INTERVAL '1 40' HOUR_MINUTE) <= SYSdate()
+      AND b.user_id = p_user_id;
     DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 
     set vPtos = 0;
