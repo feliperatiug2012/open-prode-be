@@ -88,7 +88,8 @@
 					$result=$stm->execute([":alias"=>$this->alias,":id"=>$this->id]);
 				}
 				else{
-					$sql = "UPDATE users  SET title=:title, alias=:alias, picture_url=:picture WHERE id =:id";
+//					$sql = "UPDATE users  SET title=:title, alias=:alias, picture_url=:picture WHERE id =:id";
+					$sql = "UPDATE users  SET title=:title, picture_url=:picture WHERE id =:id";
 					$stm=$this->db->prepare($sql);
 					$result=$stm->execute([":title"=>$this->name, ":alias"=>$this->alias, ":picture"=>$this->picture, ":id"=>$this->id]);
 				}

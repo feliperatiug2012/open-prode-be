@@ -35,7 +35,7 @@ class UserMapper extends Mapper
 					    "username"      => $users["username"],
 					    "picture_url"   => $users["picture_url"],
 					    "total_points"  => $users["total_points"],
-					    "rank"  => $users["rank"]
+					    "rank"          => $users["rank"]
 				    ];
 			    })
 			    ->orderBy('$v["rank"]')

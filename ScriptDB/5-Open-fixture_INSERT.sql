@@ -158,13 +158,14 @@ UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','18:00:00')
 COMMIT;
 
 ##############################  INSERTS DE LA TABLA USERS ###############
-INSERT INTO users (id, title, alias, username, password, approved, created, modified, deleted) VALUES (1, null, null, 'rbenal@gmail.com', null, 0,sysdate(),sysdate(), 0);
-INSERT INTO users (id, title, alias, username, password, approved, created, modified, deleted) VALUES (2, null, null, 'rbenal@outlook.com', null, 0,sysdate(),sysdate(), 0);
-INSERT INTO users (id, title, alias, username, password, approved, created, modified, deleted) VALUES (3, null, null, 'dlmora91@gmail.com', null, 0, sysdate(), sysdate(), 0);
-COMMIT;
+# INSERT INTO users (id, title, alias, username, password, approved, created, modified, deleted) VALUES (1, null, null, 'rbenal@gmail.com', null, 0,sysdate(),sysdate(), 0);
+# INSERT INTO users (id, title, alias, username, password, approved, created, modified, deleted) VALUES (2, null, null, 'rbenal@outlook.com', null, 0,sysdate(),sysdate(), 0);
+# INSERT INTO users (id, title, alias, username, password, approved, created, modified, deleted) VALUES (3, null, null, 'dlmora91@gmail.com', null, 0, sysdate(), sysdate(), 0);
+# COMMIT;
 
 ##############################  INSERTS DE LA TABLA BETS ###############
 #rbenal@gmail.com
+/*
 delete from bets;
 commit;
 
@@ -296,3 +297,4 @@ COMMIT;
 # INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (8, 3, 2, 3, 0, sysdate(), sysdate(), 0);
 # INSERT INTO `nullpoin_open-fixture`.bets (id, user_id, game_id, goals_team_a, goals_team_b, created, modified, deleted) VALUES (9, 3, 3, 2, 2, sysdate(), sysdate(), 0);
 # COMMIT;
+*/
