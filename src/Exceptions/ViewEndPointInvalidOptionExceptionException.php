@@ -8,4 +8,7 @@
 	namespace OpenFixture\Exceptions;
 	use Exception;
 
-	class ViewEndPointInvalidOptionException extends Exception { }
+	class ViewEndPointInvalidOptionException extends Exception 
+	{ 
+		
+	}

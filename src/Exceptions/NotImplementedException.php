@@ -10,5 +10,12 @@ namespace OpenFixture\Exceptions;
 use \Exception;
 	class NotImplementedException extends Exception
 	{
-
+		/**
+		 * NotImplementedException constructor.
+		 * @param string $string
+		 */
+		public function __construct($msg)
+		{
+			$this->message=$msg;
+		}
 	}
