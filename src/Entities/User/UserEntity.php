@@ -80,13 +80,22 @@
 			if(!isset($this->id))
 				throw new DataBaseUpdateException("no se puede hacer el update sin un ID");
 
+
 			try {
-				$sql = "UPDATE users  SET title=:title, alias=:alias, picture_url=:picture WHERE id =:id";
-				$stm=$this->db->prepare($sql);
-				$result=$stm->execute([":title"=>$this->name, ":alias"=>$this->alias, ":picture"=>$this->picture, ":id"=>$this->id]);
+				if($this->alias && !($this->name && $this->picture)) {
+					$sql = "UPDATE users  SET  alias=:alias WHERE id =:id";
+					$stm=$this->db->prepare($sql);
+					$result=$stm->execute([":alias"=>$this->alias,":id"=>$this->id]);
+				}
+				else{
+					$sql = "UPDATE users  SET title=:title, alias=:alias, picture_url=:picture WHERE id =:id";
+					$stm=$this->db->prepare($sql);
+					$result=$stm->execute([":title"=>$this->name, ":alias"=>$this->alias, ":picture"=>$this->picture, ":id"=>$this->id]);
+				}
+
 				if (!$result)
 					throw new DataBaseUpdateException("no se pudo agregar el usuario, username existente");
-			}
+				}
 			catch(PDOException $e)
 			{
 				echo $sql . "<br>" . $e->getMessage();
