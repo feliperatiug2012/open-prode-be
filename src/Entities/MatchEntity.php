@@ -2,28 +2,36 @@
     namespace OpenFixture\Entities {
 
         use OpenFixture\Entities\Entity;
+	    use OpenFixture\Exceptions\DataBaseInsertException;
+	    use OpenFixture\Exceptions\DataBaseUpdateException;
+	    use OpenFixture\Exceptions\NotEntityIdFoundException;
+	    use OpenFixture\Exceptions\NotImplementedException;
+	    use PDOException;
 
-        class MatchEntity extends Entity
+	    class MatchEntity extends Entity
         {
             protected $goals_team_a;
             protected $goals_team_b;
-            
-            /**
-             * GameEntity construtor
-             * @param $data of the game
-             */
-            public function __construct($data,$db)
+
+		    /**
+		     * MatchEntity constructor.
+		     * @param $data
+		     * @param $db
+		     */
+            public function __construct($data, $db)
             {
-                parent::__construct($data,$db); 
+	            parent::__construct($data,$db);
 				$this->goals_team_a = $data['goals_team_a'];
                 $this->goals_team_b = $data['goals_team_b'];
             }
 
-            /**
-             * Obtain a Match id
-             * @return int
-             * @trows NotImplementedException
-             */
+		    /**
+		     * Obtain a Match id
+		     * @return int
+		     * @trows NotImplementedException
+		     * @throws NotImplementedException
+		     * @throws NotEntityIdFoundException
+		     */
             public function getId()
             {
                 // if the instance have an id
@@ -31,8 +39,6 @@
                 {
                     return $this->id;
                 }
-                    
-
                 // Gets the id of the match
                 try {
                     $sql1 = "SELECT id from games 
@@ -45,10 +51,7 @@
                 }
                 catch(PDOException $e)
                 {
-                    throw new NotImplementedException("Hubo un error en la ejecución en la sentencia: " .
-                     $sql1 .
-                     "<br>" .
-                     $e->getMessage());
+                    throw new NotEntityIdFoundException("No se encontro el id de la entidad" );
                 }
                 
                 if (isset($stm1['id'])){
@@ -61,17 +64,16 @@
             }
 
 
-            /**
-			 * @throws DataBaseInsertException
-			 */
+		    /**
+		     * @throws DataBaseInsertException
+		     * @throws DataBaseUpdateException
+		     * @throws NotImplementedException
+		     */
 			protected function update(){
                 $stm=null;
-                    
 				if(!isset($this->id))
 					throw new DataBaseUpdateException("no se puede hacer el update sin un ID");
-
 				try {
-                    
 					$sql = "UPDATE games
 					SET modified = sysdate(),
                         goals_team_a = :goals_a, 
@@ -96,11 +98,13 @@
 				}
 				return $this->id;
 			}
-            
-            /**
-			 * @throws DataBaseInsertException
-			 */
-            protected function add(){}
+
+		    /**
+		     * @throws NotImplementedException
+		     */
+            protected function add(){
+            	throw New NotImplementedException();
+            }
                 
 
         }

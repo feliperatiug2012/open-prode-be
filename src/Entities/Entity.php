@@ -44,6 +44,7 @@
 		 */
 		public function save()
 		{
+
 			$this->id=$this->getId();
 			if (!isset($this->id))
 				return $this->add();
