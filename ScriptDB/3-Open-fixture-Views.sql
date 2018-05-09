@@ -102,7 +102,7 @@ left JOIN users U on B.user_id = U.id
    B.deleted=0 AND U.deleted=0;
 
 
-CREATE VIEW V_POSICION_EQUIPO AS
+CREATE OR REPLACE VIEW V_POSICION_EQUIPO AS
   SELECT
     c.team_id AS team_id,
     SUM((CASE

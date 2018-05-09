@@ -14,7 +14,7 @@
 	$app->post('/save', function (Request $request, Response $response) use ($app) {
 	    $data = $request->getParsedBody();
 	    $match_data = [];
-	    $match_data['id'] = $data['id'];
+	    $match_data['id'] = $data['game_id'];
 	    $match_data['goals_team_a'] = $data['goals_team_a'];
 	    $match_data['goals_team_b'] = $data['goals_team_b'];
 

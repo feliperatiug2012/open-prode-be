@@ -77,7 +77,8 @@
 					$sql = "UPDATE games
 					SET modified = sysdate(),
                         goals_team_a = :goals_a, 
-						goals_team_b = :goals_b
+						goals_team_b = :goals_b,
+						finished = 1						
 					WHERE id = :id";
 						
 					$stm=$this->db->prepare($sql);
