@@ -32,10 +32,10 @@
 		return $jsonResponse;
 	});
 
-	$app->get('/view/{id}', function (Request $request, Response $response, $args) use ($app)  {
-		$id = $args['id'];
+	$app->get('/view[/{params:.*}]', function (Request $request, Response $response, $args) use ($app)  {
+		$params = explode('/',$request->getAttribute('params'));
 		$mapper=new  BetMapper($app->getConn());
-		$dailyBets = $mapper->view($id);
+		$dailyBets = $mapper->view($params);
 		$jsonResponse = $response->withJson($dailyBets);
 		return $jsonResponse;
 

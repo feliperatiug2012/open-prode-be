@@ -19,7 +19,7 @@ namespace OpenFixture\Interfaces;
 		 * @param $id integer
 		 * @return array
 		 */
-		public function view($id);
+		public function view($params);
 
 		/**
 		 * Funcion que debe leliminar un individuo de la clase dado su Id unico
