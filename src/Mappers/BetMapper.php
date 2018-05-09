@@ -52,19 +52,33 @@
 		 * @return array | null
 		 * @throws NotImplementedException
 		 */
-		public function view($id)
+		public function view($params)
 		{
 			$bets=null;
-			if(strtoupper($id)=='DAILY'){
-				$bets= $this->_listDailyBets();
-			}elseif(is_numeric($id) or filter_var($id, FILTER_VALIDATE_EMAIL)){
-				$bets=$this->_listUserBets($id);
+			switch ($params[0])
+			{
+				case 'DAILY': {
+					$bets= $this->_listDailyBets(); break;
+				}
+				case 'USER':{
+					$bets = $this->_listUserToday($params[1]); break;
+				}
+				case (is_numeric($params[0]) or filter_var($params[0], FILTER_VALIDATE_EMAIL)): {
+					$bets=$this->_listUserBets($params[0]); break;
+				}
+				default:
+					throw new InvalidArgumentException("El URL del Request es inválido");
 			}
-			else throw new InvalidArgumentException();
 		return $bets;
 		}
 
-
+		/**
+		 * Función para obtener todas las apuestas de un usuario
+		 * @param id
+		 * @return array | null
+		 * @throws NotImplementedException
+		 * 
+		 */
 		private function _listUserBets($id): array
 		{
 			if(is_numeric($id))
@@ -130,6 +144,7 @@
 				->toList();
 			return $mapped_bets[0];
 		}
+		
 		/**
 		 * @return array
 		 */
@@ -166,5 +181,80 @@
 				->toList();
 		//exit();
 		return $bets;
+		}
+
+		/**
+		 * Función para obtener las apuestas de un usuario hasta el día actual
+		 * @param id
+		 * @return array | null
+		 * @throws NotImplementedException
+		 */
+		private function _listUserToday($id): array
+		{
+			if(is_numeric($id)){
+				$query =    'SELECT *
+							FROM V_USER_BETS G 
+							WHERE G.user_id = :id
+							AND G.date <= sysdate()
+							ORDER BY G.game_id ASC';
+			}else{
+				$query =    'SELECT *
+							FROM V_USER_BETS G 
+							WHERE G.username = :id
+							AND G.date <= sysdate()
+							ORDER BY G.game_id ASC';
+			}
+			$matches=null;
+			$stmt = $this->db->prepare($query);
+			$stmt->execute([":id"=>$id]);
+			$bets = $stmt->fetchAll();
+
+			$mapped_bets = from($bets)
+				->where(function ($user) use($id){return
+				$user['username']==$id or $user['user_id']==$id;
+				})
+				->distinct(function($user){
+					return $user['username'];
+				})
+				->select(function($user) use ($bets) {
+					return [
+					"username"  =>  $user["username"],
+					"user_id"   =>  $user["user_id"],
+					"phases"    =>  from($bets)
+									->select(function($phase,$k) use ($bets){
+										return [
+											"phase_id"=>$phase["phase_id"],
+											"phase_name"=>$phase["phase"],
+											"games" =>  from($bets)
+												->where(function($game) use ($phase){
+													return $game["phase_id"]==$phase["phase_id"];
+												})
+												->select(function($game,$k) use ($bets){
+													return [
+														"game_id"=>$game["game_id"],
+														"date"=>$game["date"],
+														"stadium"=>$game["stadium"],
+														"user_bets"=> [
+															"team_a"=>$game['bet_goals_team_a'],
+															"team_b"=>$game['bet_goals_team_b']
+														],
+														"team_a"=>  [
+															"id"     => $game['team_id_a'],
+															"name"   => $game['name_team_a'],
+															"flag"   => $game['flag_team_a'],
+															"goals"  => $game['goals_team_a'],
+														],
+														"team_b"=>  [
+															"id"     => $game['team_id_b'],
+															"name"   => $game['name_team_b'],
+															"flag"   => $game['flag_team_b'],
+															"goals"  => $game['goals_team_b'],
+														],
+													];})->toList()
+										];})
+									->distinct('$v["phase_id"]')->toList()
+				];})
+				->toList();
+			return $mapped_bets[0];
 		}
 	}
