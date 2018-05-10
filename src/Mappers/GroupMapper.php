@@ -12,6 +12,12 @@ class GroupMapper extends Mapper
 	public function list()
 	{
 		$results = [];
+
+		$sql = "SELECT * FROM V_POSICION_EQUIPO";
+		$stmt = $this->db->query($sql);
+		$groups_table = $stmt->fetchAll();
+		
+		
 		$group = ["name"=>"","teams"=>[]];
 		$arrayAux = [];
 		// Query to obtain all the Groups

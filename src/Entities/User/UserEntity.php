@@ -91,7 +91,7 @@
 //					$sql = "UPDATE users  SET title=:title, alias=:alias, picture_url=:picture WHERE id =:id";
 					$sql = "UPDATE users  SET title=:title, picture_url=:picture WHERE id =:id";
 					$stm=$this->db->prepare($sql);
-					$result=$stm->execute([":title"=>$this->name, ":alias"=>$this->alias, ":picture"=>$this->picture, ":id"=>$this->id]);
+					$result=$stm->execute([":title"=>$this->name, ":picture"=>$this->picture, ":id"=>$this->id]);
 				}
 
 				if (!$result)
