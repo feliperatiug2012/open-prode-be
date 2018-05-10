@@ -15,7 +15,8 @@ BEGIN
 				IF NOT done THEN 
 					UPDATE games 
 					SET goals_team_a = TRUNCATE(RAND()*5,0),
-						goals_team_b = TRUNCATE(RAND()*5,0)
+						goals_team_b = TRUNCATE(RAND()*5,0),
+                                             finished = 1
 					WHERE id = vID;
 				END IF;
 		UNTIL done END REPEAT;
