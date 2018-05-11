@@ -39,7 +39,7 @@
 			// TODO: Implement delete() method.
 		}
 
-		public function view($id)
+		public function view($id,$param=NULL)
 		{
 			// TODO: Implement view() method.
 		}

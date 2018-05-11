@@ -56,7 +56,7 @@ class GroupMapper extends Mapper
 	 * @param $id integer
 	 * @return array
 	 */
-	public function view($id)
+	public function view($id, $param=NULL)
 	{
 		$group = ["name"=>"","teams"=>[]];
 		$arrayAux = [];
