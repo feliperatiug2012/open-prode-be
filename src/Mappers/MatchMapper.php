@@ -41,11 +41,12 @@ class MatchMapper extends Mapper {
     }
 
 	/**
-	 * @param  $id
-	 * @return void
+	 * @param $filter String | null
+	 * @param $id integer | null
+	 * @return array
 	 * @throws NotImplementedException
 	 */
-    public function view($id){
+    public function view($filter, $id=null){
     	throw new NotImplementedException("Funcion no implementada por el momento");
     }
 

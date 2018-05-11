@@ -104,7 +104,7 @@
 		     * @throws NotImplementedException
 		     */
             protected function add(){
-            	throw New NotImplementedException();
+            	throw New NotImplementedException('Funcion no implementada');
             }
                 
 
