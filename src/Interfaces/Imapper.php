@@ -16,11 +16,11 @@ namespace OpenFixture\Interfaces;
 
 		/**
 		 * Funcion que debe listar el detalle de un individuo de la clase dado su Id unico
-		 * @param $name String
-		 * @param $id integer | String | null
+		 * @param $filter String | null
+		 * @param $id integer | null
 		 * @return array
 		 */
-		public function view($id,$name=NULL);
+		public function view($filter, $id=NULL);
 
 		/**
 		 * Funcion que debe leliminar un individuo de la clase dado su Id unico
