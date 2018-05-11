@@ -9,6 +9,9 @@
 	use Exception;
 
 	class ViewEndPointInvalidOptionException extends Exception 
-	{ 
-		
+	{
+		public function __construct($msg)
+		{
+			$this->message=$msg;
+		}
 	}

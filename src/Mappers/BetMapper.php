@@ -4,7 +4,8 @@
 	use OpenFixture\Entities\BetEntity;
 	use OpenFixture\Exceptions\NotImplementedException;
 	use \InvalidArgumentException;
-	use OpenFixture\Mappers\Mapper;
+	use OpenFixture\Exceptions\DataBaseInsertException;
+	use OpenFixture\Exceptions\DataBaseUpdateException;
 
 	class BetMapper extends Mapper
 	{
@@ -21,8 +22,7 @@
 
 		/**
 		 * @param $entity
-		 * @return bool|int|void
-		 * @throws NotImplementedException
+		 * @return bool|int
 		 */
 		public function save($entity)
 		{
@@ -35,7 +35,6 @@
 			catch (DataBaseUpdateException $e){
 				return false;
 			}
-			throw new NotImplementedException();
 		}
 
 		/**
@@ -50,7 +49,6 @@
 		/**
 		 * @param  $id
 		 * @return array | null
-		 * @throws NotImplementedException
 		 */
 		public function view($params)
 		{
@@ -108,7 +106,7 @@
 					"username"  =>  $user["username"],
 					"user_id"   =>  $user["user_id"],
 					"phases"    =>  from($bets)
-									->select(function($phase,$k) use ($bets){
+									->select(function($phase) use ($bets){
 										return [
 											"phase_id"=>$phase["phase_id"],
 											"phase_name"=>$phase["phase"],
@@ -116,7 +114,7 @@
 												->where(function($game) use ($phase){
 													return $game["phase_id"]==$phase["phase_id"];
 												})
-												->select(function($game,$k) use ($bets){
+												->select(function($game) use ($bets){
 													return [
 														"game_id"=>$game["game_id"],
 														"date"=>$game["date"],
@@ -171,7 +169,9 @@
 				"bets"          => from($bets)
 					->where(function($usersBet) use ($games) {return $usersBet["game_id"]==$games["game_id"];})
 					->select(function($usersBet) use ($games){return[
-					"user_name"     =>  $usersBet["username"],
+					"user_picture"  =>  $usersBet["picture_url"],
+					"user_name"     =>  $usersBet["name"],
+					"username"      =>  $usersBet["username"],
 					"goals_team_1"  =>  $usersBet["bet_goals_team_a"],
 					"goals_team_2"  =>  $usersBet["bet_goals_team_b"],
 					"game_id"       =>  $usersBet["game_id"],
