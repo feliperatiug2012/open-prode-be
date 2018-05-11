@@ -102,7 +102,7 @@ left JOIN users U on B.user_id = U.id
    B.deleted=0 AND U.deleted=0;
 
 #SE CREA VISTA PARA CALCULO DE PTOS DE EQUIPOS
-CREATE
+CREATE OR REPLACE
     ALGORITHM = UNDEFINED
     DEFINER = `batman`@`%`
     SQL SECURITY DEFINER
