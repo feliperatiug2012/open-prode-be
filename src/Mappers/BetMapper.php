@@ -4,7 +4,8 @@
 	use OpenFixture\Entities\BetEntity;
 	use OpenFixture\Exceptions\NotImplementedException;
 	use \InvalidArgumentException;
-	use OpenFixture\Mappers\Mapper;
+	use OpenFixture\Exceptions\DataBaseInsertException;
+	use OpenFixture\Exceptions\DataBaseUpdateException;
 
 	class BetMapper extends Mapper
 	{
@@ -21,8 +22,7 @@
 
 		/**
 		 * @param $entity
-		 * @return bool|int|void
-		 * @throws NotImplementedException
+		 * @return bool|int
 		 */
 		public function save($entity)
 		{
@@ -35,7 +35,6 @@
 			catch (DataBaseUpdateException $e){
 				return false;
 			}
-			throw new NotImplementedException();
 		}
 
 		/**
@@ -50,7 +49,6 @@
 		/**
 		 * @param  $id
 		 * @return array | null
-		 * @throws NotImplementedException
 		 */
 		public function view($params,$id=NULL)
 		{
@@ -97,51 +95,51 @@
 			$bets = $stmt->fetchAll();
 			
 			$mapped_bets = from($bets)
-			->where(function ($user) use($id){return
-			$user['username']==$id or $user['user_id']==$id;
-			})
-			->distinct(function($user){
-				return $user['username'];
-			})
-			->select(function($user) use ($bets) {
-				return [
-				"username"  =>  $user["username"],
-				"user_id"   =>  $user["user_id"],
-				"phases"    =>  from($bets)
-								->select(function($phase,$k) use ($bets){
-									return [
-										"phase_id"=>$phase["phase_id"],
-										"phase_name"=>$phase["phase"],
-										"games" =>  from($bets)
-											->where(function($game) use ($phase){
-												return $game["phase_id"]==$phase["phase_id"];
-											})
-											->select(function($game,$k) use ($bets){
-												return [
-													"game_id"=>$game["game_id"],
-													"date"=>$game["date"],
-													"stadium"=>$game["stadium"],
-													"user_bets"=> [
-														"team_a"=>$game['bet_goals_team_a'],
-														"team_b"=>$game['bet_goals_team_b']
-													],
-													"team_a"=>  [
-														"id"     => $game['team_id_a'],
-														"name"   => $game['name_team_a'],
-														"flag"   => $game['flag_team_a'],
-														"goals"  => $game['goals_team_a'],
-													],
-													"team_b"=>  [
-														"id"     => $game['team_id_b'],
-														"name"   => $game['name_team_b'],
-														"flag"   => $game['flag_team_b'],
-														"goals"  => $game['goals_team_b'],
-													],
-												];})->toList()
-									];})
-								->distinct('$v["phase_id"]')->toList()
-			];})
-			->toList();
+				->where(function ($user) use($id){return
+				$user['username']==$id or $user['user_id']==$id;
+				})
+				->distinct(function($user){
+					return $user['username'];
+				})
+				->select(function($user) use ($bets) {
+					return [
+					"username"  =>  $user["username"],
+					"user_id"   =>  $user["user_id"],
+					"phases"    =>  from($bets)
+									->select(function($phase) use ($bets){
+										return [
+											"phase_id"=>$phase["phase_id"],
+											"phase_name"=>$phase["phase"],
+											"games" =>  from($bets)
+												->where(function($game) use ($phase){
+													return $game["phase_id"]==$phase["phase_id"];
+												})
+												->select(function($game) use ($bets){
+													return [
+														"game_id"=>$game["game_id"],
+														"date"=>$game["date"],
+														"stadium"=>$game["stadium"],
+														"user_bets"=> [
+															"team_a"=>$game['bet_goals_team_a'],
+															"team_b"=>$game['bet_goals_team_b']
+														],
+														"team_a"=>  [
+															"id"     => $game['team_id_a'],
+															"name"   => $game['name_team_a'],
+															"flag"   => $game['flag_team_a'],
+															"goals"  => $game['goals_team_a'],
+														],
+														"team_b"=>  [
+															"id"     => $game['team_id_b'],
+															"name"   => $game['name_team_b'],
+															"flag"   => $game['flag_team_b'],
+															"goals"  => $game['goals_team_b'],
+														],
+													];})->toList()
+										];})
+									->distinct('$v["phase_id"]')->toList()
+				];})
+				->toList();
 			return $mapped_bets[0];
 		}
 		
@@ -171,7 +169,9 @@
 				"bets"          => from($bets)
 					->where(function($usersBet) use ($games) {return $usersBet["game_id"]==$games["game_id"];})
 					->select(function($usersBet) use ($games){return[
-					"user_name"     =>  $usersBet["username"],
+					"user_picture"  =>  $usersBet["picture_url"],
+					"user_name"     =>  $usersBet["name"],
+					"username"      =>  $usersBet["username"],
 					"goals_team_1"  =>  $usersBet["bet_goals_team_a"],
 					"goals_team_2"  =>  $usersBet["bet_goals_team_b"],
 					"game_id"       =>  $usersBet["game_id"],

@@ -40,9 +40,11 @@
 		/**
 		 * @throws DataBaseUpdateException
 		 * @throws DataBaseInsertException
+		 *  @return bool|int
 		 */
 		public function save()
 		{
+
 			$this->id=$this->getId();
 			if (!isset($this->id))
 				return $this->add();

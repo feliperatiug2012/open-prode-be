@@ -6,7 +6,6 @@ use OpenFixture\Entities\User\UserEntity;
 use OpenFixture\Exceptions\DataBaseInsertException;
 use OpenFixture\Exceptions\DataBaseUpdateException;
 use OpenFixture\Exceptions\ViewEndPointInvalidOptionException;
-use OpenFixture\Mappers\Mapper;
 
 class UserMapper extends Mapper
 {
@@ -36,7 +35,7 @@ class UserMapper extends Mapper
 					    "username"      => $users["username"],
 					    "picture_url"   => $users["picture_url"],
 					    "total_points"  => $users["total_points"],
-					    "rank"  => $users["rank"]
+					    "rank"          => $users["rank"]
 				    ];
 			    })
 			    ->orderBy('$v["rank"]')

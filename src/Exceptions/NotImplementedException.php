@@ -12,7 +12,7 @@ use \Exception;
 	{
 		/**
 		 * NotImplementedException constructor.
-		 * @param string $string
+		 * @param $msg
 		 */
 		public function __construct($msg)
 		{

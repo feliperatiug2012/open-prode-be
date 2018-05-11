@@ -17,7 +17,7 @@
 
 	$app = new SuperAppEntity();
 	
-	//update && save users to db from social networks
+	//update && save user bet to db
 	$app->post('/save', function (Request $request, Response $response) use ($app) {
 		$data = $request->getParsedBody();
 		$bets_data = [];
