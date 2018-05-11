@@ -21,11 +21,30 @@ class GroupMapper extends Mapper
 		$groups_table = from($v_groups_table)
 			->select(function ($group) use ($v_groups_table) {
 				return [
-					"name"          => "NOMBRE DEL GRUPO" //$GROUP['group_name']
-					//"teams"         => from ()
+					"name"          => $group['group_title'],
+					"group_id"      => $group['group_id'],
+					"teams"         => from ($v_groups_table)
+						->select(function ($team) use ($v_groups_table) {
+							return [
+								"flag_url"  =>  $team['flag_team_a'],
+								"name"      =>  $team['title_team'],
+								"pg"        =>  $team['PG'],
+								"pe"        =>  $team['PE'],
+								"pp"        =>  $team['PP'],
+								"gf"        =>  $team['GF'],
+								"gc"        =>  $team['GC'],
+								"dg"        =>  $team['DG'],
+								"dg"        =>  $team['DG'],
+								"pj"        =>  $team['PJ'],
+								"pts"       =>  $team['PTS'],
+								"team_id"   =>  $team['team_id'],
+								"group_id"   =>  $team['group_id']
+							];
+						})->where(function($team) use ($group){
+							return $team["group_id"]==$group["group_id"];
+						})->toList()
 				];
-			})
-			->toList();
+			})->distinct('$v["group_id"]')->toList();
 		return $groups_table;
 	}
 
