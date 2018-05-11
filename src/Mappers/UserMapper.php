@@ -22,7 +22,7 @@ class UserMapper extends Mapper
 	 * @return UserEntity  The user
 	 * @throws ViewEndPointInvalidOptionException
 	 */
-    public function view($id)
+    public function view($id,$param=NULL)
     {
        	if ($id=='score-board') {
 		    $sql = "SELECT * FROM V_SCORE_BOARD";

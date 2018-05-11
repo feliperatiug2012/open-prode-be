@@ -47,7 +47,7 @@ class MatchMapper extends mapper {
      * @return array | null
      * @throws NotImplementedException
      */
-    public function view($id){
+    public function view($id,$param=NULL){
 
     }
 
