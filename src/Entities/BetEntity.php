@@ -11,6 +11,8 @@
 		use OpenFixture\Entities\Bet\Team;
 		use OpenFixture\Entities\Bet\Bet;
 		use OpenFixture\Entities\Entity;
+		use OpenFixture\Exceptions\DataBaseInsertException;
+		use OpenFixture\Exceptions\DataBaseUpdateException;
 
 		class BetEntity extends Entity 
 		{
@@ -78,6 +80,7 @@
 
 			/**
 			 * @throws DataBaseInsertException
+			 * @throws DataBaseUpdateException
 			 */
 			protected function update(){
 				$stm=null;

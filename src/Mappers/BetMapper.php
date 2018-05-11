@@ -49,11 +49,12 @@
 		/**
 		 * @param  $id
 		 * @return array | null
+		 * @throws NotImplementedException
 		 */
-		public function view($params,$id=NULL)
+		public function view($filter, $id=NULL)
 		{
 			$bets=null;
-			switch ($params)
+			switch (strtoupper($filter))
 			{
 				case 'DAILY': {
 					$bets= $this->_listDailyBets(); break;
@@ -61,8 +62,8 @@
 				case 'USER':{
 					$bets = $this->_listUserToday($id); break;
 				}
-				case (is_numeric($params) or filter_var($params, FILTER_VALIDATE_EMAIL)): {
-					$bets=$this->_listUserBets($params); break;
+				case (is_numeric($filter) or filter_var($filter, FILTER_VALIDATE_EMAIL)): {
+					$bets=$this->_listUserBets($filter); break;
 				}
 				default:
 					throw new InvalidArgumentException("El URL del Request es inválido");
@@ -74,8 +75,7 @@
 		 * Función para obtener todas las apuestas de un usuario
 		 * @param id
 		 * @return array | null
-		 * @throws NotImplementedException
-		 * 
+		 *
 		 */
 		private function _listUserBets($id): array
 		{
@@ -185,9 +185,8 @@
 
 		/**
 		 * Función para obtener las apuestas de un usuario hasta el día actual
-		 * @param id
+		 * @param $id int
 		 * @return array | null
-		 * @throws NotImplementedException
 		 */
 		private function _listUserToday($id): array
 		{
