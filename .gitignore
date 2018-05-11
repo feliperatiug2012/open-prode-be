@@ -16,3 +16,6 @@
 /*.code-workspace
 /.vscode
 _config.yml
+
+#Workbench
+*.swp

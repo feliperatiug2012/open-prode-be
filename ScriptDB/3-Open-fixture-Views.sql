@@ -106,7 +106,7 @@ CREATE
   ALGORITHM = UNDEFINED
   DEFINER = `batman`@`%`
   SQL SECURITY DEFINER
-VIEW `V_POSICION_EQUIPO_2` AS
+VIEW `V_POSICION_EQUIPO` AS
   SELECT DISTINCT
     `g`.`team_id` AS `team_id`,
     `ta`.`title` AS `title_team`,
