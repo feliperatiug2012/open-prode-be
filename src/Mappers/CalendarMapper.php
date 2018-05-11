@@ -39,7 +39,12 @@
 			// TODO: Implement delete() method.
 		}
 
-		public function view($id)
+		/**
+		 * @param $filter String | null
+		 * @param $id integer | null
+		 * @return void
+		 */
+		public function view($filter, $id=null)
 		{
 			// TODO: Implement view() method.
 		}

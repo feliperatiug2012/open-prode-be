@@ -1,7 +1,7 @@
 ## Open-Fixture API
 
 - GET:
-1. /bets/view/{id} (_DAILY_ | `NUMBER` | **<user_mail>**)
+1. /bets/view/{params} (_DAILY_ | [_USER_/{`NUMBER` | **<user_mail>**}] | `NUMBER` | **<user_mail>**)
 2. /calendar/list
 3. /groups/list
 4. /groups/view/{id}

@@ -6,7 +6,6 @@ use OpenFixture\Entities\User\UserEntity;
 use OpenFixture\Exceptions\DataBaseInsertException;
 use OpenFixture\Exceptions\DataBaseUpdateException;
 use OpenFixture\Exceptions\ViewEndPointInvalidOptionException;
-use OpenFixture\Mappers\Mapper;
 
 class UserMapper extends Mapper
 {
@@ -18,13 +17,14 @@ class UserMapper extends Mapper
 	/**
 	 * Get one ticket by its ID
 	 *
-	 * @param int $id The ID of the user
-	 * @return UserEntity  The user
+	 * @param $filter String | null
+	 * @param $id integer | null
+	 * @return array
 	 * @throws ViewEndPointInvalidOptionException
 	 */
-    public function view($id)
+    public function view($filter, $id=NULL)
     {
-       	if ($id=='score-board') {
+       	if ($filter=='score-board') {
 		    $sql = "SELECT * FROM V_SCORE_BOARD";
 		    $stmt = $this->db->query($sql);
 		    $v_score_board = $stmt->fetchAll();
@@ -36,13 +36,13 @@ class UserMapper extends Mapper
 					    "username"      => $users["username"],
 					    "picture_url"   => $users["picture_url"],
 					    "total_points"  => $users["total_points"],
-					    "rank"  => $users["rank"]
+					    "rank"          => $users["rank"]
 				    ];
 			    })
 			    ->orderBy('$v["rank"]')
 			    ->toList();
 	    }else{
-    		throw new ViewEndPointInvalidOptionException();
+    		throw new ViewEndPointInvalidOptionException($filter.' no es un filtro valido');
 	    }
 	    return $scoreBoard;
     }

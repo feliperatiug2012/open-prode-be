@@ -83,18 +83,15 @@ create table games
 	goals_team_a int default '0' NOT NULL,
 	goals_team_b int default '0' NOT NULL,
   stadium_id int NOT NULL,
+  finished int(1) default '0' NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL ,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL,
-
 	constraint games_ibfk_3	foreign key (phase_id) references phases (id),
  	constraint games_ibfk_1 foreign key (team_a_id) references teams (id),
   constraint games_ibfk_2 foreign key (team_b_id) references teams (id),
   constraint games_ibfk_4 foreign key (stadium_id) references stadiums (id)
-
-
-
-)engine=InnoDB charset=utf8;
+  )engine=InnoDB charset=utf8;
 
 
 create table users
@@ -106,6 +103,7 @@ create table users
 	picture_url varchar(2000) NULL,
 	password varchar(300) NULL,
 	approved int(1) default '0' NOT NULL,
+	admin    int(1) default '0' NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL

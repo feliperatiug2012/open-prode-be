@@ -30,8 +30,7 @@
 					$team2 = new Team($v['flag_team_b'], $v['name_team_b'], $v['goals_team_b']);
 					$stadium = $v['stadium'];
 
-					$cm = new CalendarMatch($v['date'], $team1, $team2, $stadium);
-
+					$cm = new CalendarMatch($v['game_id'], $v['date'], $team1, $team2, $stadium);
 					$this->matches[] = $cm;
 
 				}
@@ -48,9 +47,12 @@
 			public $team_1;
 			public $team_2;
 			public $stadium;
+			public $game_id;
 
-			public function __construct($date, $team_1, $team_2, $stadium)
+
+			public function __construct($game_id,$date, $team_1, $team_2, $stadium)
 			{
+				$this->game_id = $game_id;
 				$this->date = $date;
 				$this->team_1 = $team_1;
 				$this->team_2 = $team_2;

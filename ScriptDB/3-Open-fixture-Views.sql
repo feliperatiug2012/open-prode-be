@@ -38,6 +38,8 @@ ORDER BY date ASC;
 CREATE OR REPLACE VIEW V_DAILY_BETS AS
 SELECT  u.id as user_id,
         u.username,
+        u.title as name,
+        u.picture_url,
         g.id as game_id,
         (SELECT DATE_FORMAT(g.date_up, '%H:%i') from  dual) as time,
         ta.id as team_a_id,
@@ -98,3 +100,50 @@ left JOIN bets B ON B.game_id=C.game_id
 left JOIN users U on B.user_id = U.id
  WHERE
    B.deleted=0 AND U.deleted=0;
+
+
+CREATE OR REPLACE VIEW V_POSICION_EQUIPO AS
+  SELECT
+    `c`.`team_id` AS `team_id`,
+    SUM((CASE
+         WHEN (`c`.`goals_team_a` > `c`.`goals_team_b`) THEN 1
+         ELSE 0
+         END)) AS `PG`,
+    SUM((CASE
+         WHEN (`c`.`goals_team_a` < `c`.`goals_team_b`) THEN 1
+         ELSE 0
+         END)) AS `PP`,
+    SUM((CASE
+         WHEN (`c`.`goals_team_a` = `c`.`goals_team_b`) THEN 1
+         ELSE 0
+         END)) AS `PE`,
+    SUM(`c`.`goals_team_a`) AS `GF`,
+    SUM(`c`.`goals_team_b`) AS `GC`,
+    (SUM(`c`.`goals_team_a`) - SUM(`c`.`goals_team_b`)) AS `DG`,
+    SUM((CASE
+         WHEN (`c`.`goals_team_a` > `c`.`goals_team_b`) THEN 3
+         WHEN (`c`.`goals_team_a` = `c`.`goals_team_b`) THEN 1
+         ELSE 0
+         END)) AS `PTS`,
+    COUNT(0) AS `count(*)`
+  FROM
+    (SELECT
+       `nullpoin_open-fixture`.`games`.`team_a_id` AS `team_id`,
+       `nullpoin_open-fixture`.`games`.`goals_team_a` AS `goals_team_a`,
+       `nullpoin_open-fixture`.`games`.`goals_team_b` AS `goals_team_b`,
+       `nullpoin_open-fixture`.`games`.`date_up` AS `date_up`
+     FROM
+       `nullpoin_open-fixture`.`games`
+     WHERE
+       (`nullpoin_open-fixture`.`games`.`finished` = 1) UNION ALL SELECT
+                                                                    `nullpoin_open-fixture`.`games`.`team_b_id` AS `team_id`,
+                                                                    `nullpoin_open-fixture`.`games`.`goals_team_b` AS `goals_team_b`,
+                                                                    `nullpoin_open-fixture`.`games`.`goals_team_a` AS `goals_team_a`,
+                                                                    `nullpoin_open-fixture`.`games`.`date_up` AS `date_up`
+                                                                  FROM
+                                                                    `nullpoin_open-fixture`.`games`
+                                                                  WHERE
+                                                                    (`nullpoin_open-fixture`.`games`.`finished` = 1)) `c`
+  GROUP BY `c`.`team_id`;
+
+

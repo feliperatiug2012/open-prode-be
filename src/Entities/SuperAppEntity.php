@@ -12,7 +12,9 @@
     public $dbConn;
 
     public function __construct(){
-        parent::__construct();
+        $conf= get_var_enviroment('configuration');
+    	parent::__construct($conf);
+
         $this->dbConn = getEnviromentDataBase();
         $this->add(New CorsMiddleware());
     }

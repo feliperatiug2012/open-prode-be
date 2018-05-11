@@ -2,19 +2,20 @@
 	/**
 	 * Created by PhpStorm.
 	 * User: nullpointer13
-	 * Date: 4/18/18
-	 * Time: 10:05 PM
+	 * Date: 5/6/18
+	 * Time: 2:42 PM
 	 */
 
 	namespace OpenFixture\Exceptions;
 	use Exception;
 
-	class DataBaseUpdateException extends Exception
+
+	class NotEntityIdFoundException extends Exception
 	{
 
 		/**
 		 * DataBaseUpdateException constructor.
-		 * @param string $string
+		 * @param $msg
 		 */
 		public function __construct($msg)
 		{

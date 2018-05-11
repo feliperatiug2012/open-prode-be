@@ -17,7 +17,7 @@
 
 	$app = new SuperAppEntity();
 	
-	//update && save users to db from social networks
+	//update && save user bet to db
 	$app->post('/save', function (Request $request, Response $response) use ($app) {
 		$data = $request->getParsedBody();
 		$bets_data = [];
@@ -32,10 +32,15 @@
 		return $jsonResponse;
 	});
 
-	$app->get('/view/{id}', function (Request $request, Response $response, $args) use ($app)  {
-		$id = $args['id'];
+	$app->get('/view/{name}[/{id}]', function (Request $request, Response $response, $args) use ($app)  {
+		$name = $args['name'];
+		if (isset($args['id']))
+			$id = $args['id'];
+		else {
+			$id = NULL;
+		}
 		$mapper=new  BetMapper($app->getConn());
-		$dailyBets = $mapper->view($id);
+		$dailyBets = $mapper->view($name,$id);
 		$jsonResponse = $response->withJson($dailyBets);
 		return $jsonResponse;
 
