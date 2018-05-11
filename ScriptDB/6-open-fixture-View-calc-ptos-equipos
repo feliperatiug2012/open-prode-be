@@ -1,4 +1,4 @@
-EATE 
+CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `batman`@`%` 
     SQL SECURITY DEFINER
