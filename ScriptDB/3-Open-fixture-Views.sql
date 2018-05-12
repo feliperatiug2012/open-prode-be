@@ -93,6 +93,7 @@ CREATE OR REPLACE VIEW V_USER_BETS AS
 SELECT  C.*,
         B.goals_team_a AS bet_goals_team_a,
         B.goals_team_b AS bet_goals_team_b,
+        GET_USER_POINTS_BY_GAME(U.id,C.game_id ) as bet_points,
         U.id AS user_id,
         U.username
 FROM V_GAMES_CALENDAR C
