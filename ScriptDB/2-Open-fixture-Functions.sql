@@ -77,3 +77,9 @@ CREATE FUNCTION GET_USER_RANK(total_points INTEGER) RETURNS INT
                       ) INTO rank FROM dual;
     RETURN rank;
   END;
+#calcula la posicion en la quiniela de un usuario segun su puntuacion total
+DROP FUNCTION IF EXISTS GET_USER_POINTS_BY_GAME;
+CREATE FUNCTION GET_USER_POINTS_BY_GAME(USER_ID INTEGER, GAME_ID INTEGER) RETURNS INT
+  BEGIN
+    RETURN TRUNCATE(RAND()*10,0);
+  END;

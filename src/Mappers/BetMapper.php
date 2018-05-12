@@ -59,8 +59,8 @@
 				case 'DAILY': {
 					$bets= $this->_listDailyBets(); break;
 				}
-				case 'USER':{
-					$bets = $this->_listUserToday($id); break;
+				case 'HISTORY':{
+					$bets = $this->_listHistoryBets($id); break;
 				}
 				case (is_numeric($filter) or filter_var($filter, FILTER_VALIDATE_EMAIL)): {
 					$bets=$this->_listUserBets($filter); break;
@@ -188,7 +188,7 @@
 		 * @param $id int
 		 * @return array | null
 		 */
-		private function _listUserToday($id): array
+		private function _listHistoryBets($id): array
 		{
 			if(is_numeric($id)){
 				$query =    'SELECT *
@@ -209,51 +209,34 @@
 			$bets = $stmt->fetchAll();
 
 			$mapped_bets = from($bets)
-				->where(function ($user) use($id){return
-				$user['username']==$id or $user['user_id']==$id;
-				})
-				->distinct(function($user){
-					return $user['username'];
-				})
 				->select(function($user) use ($bets) {
 					return [
 					"username"  =>  $user["username"],
 					"user_id"   =>  $user["user_id"],
-					"phases"    =>  from($bets)
-									->select(function($phase,$k) use ($bets){
-										return [
-											"phase_id"=>$phase["phase_id"],
-											"phase_name"=>$phase["phase"],
-											"games" =>  from($bets)
-												->where(function($game) use ($phase){
-													return $game["phase_id"]==$phase["phase_id"];
-												})
-												->select(function($game,$k) use ($bets){
-													return [
-														"game_id"=>$game["game_id"],
-														"date"=>$game["date"],
-														"stadium"=>$game["stadium"],
-														"user_bets"=> [
-															"team_a"=>$game['bet_goals_team_a'],
-															"team_b"=>$game['bet_goals_team_b']
-														],
-														"team_a"=>  [
-															"id"     => $game['team_id_a'],
-															"name"   => $game['name_team_a'],
-															"flag"   => $game['flag_team_a'],
-															"goals"  => $game['goals_team_a'],
-														],
-														"team_b"=>  [
-															"id"     => $game['team_id_b'],
-															"name"   => $game['name_team_b'],
-															"flag"   => $game['flag_team_b'],
-															"goals"  => $game['goals_team_b'],
-														],
-													];})->toList()
-										];})
-									->distinct('$v["phase_id"]')->toList()
-				];})
-				->toList();
+					"bets"    =>  from($bets)
+						->select(function($game,$k) use ($bets){
+							return ["game_id"=>$game["game_id"],
+									"date"=>$game["date"],
+									"stadium"=>$game["stadium"],
+									"user_bets"=> [
+										"team_a"        =>  $game['bet_goals_team_a'],
+										"team_b"        =>  $game['bet_goals_team_b'],
+										"bet_points"    =>  $game['bet_points']
+									],
+									"team_a"=>  [
+										"id"     => $game['team_id_a'],
+										"name"   => $game['name_team_a'],
+										"flag"   => $game['flag_team_a'],
+										"goals"  => $game['goals_team_a'],
+									],
+									"team_b"=>  [
+										"id"     => $game['team_id_b'],
+										"name"   => $game['name_team_b'],
+										"flag"   => $game['flag_team_b'],
+										"goals"  => $game['goals_team_b'],
+									],
+								];})->toList()
+					];})->toList();
 			return $mapped_bets[0];
 		}
 	}
