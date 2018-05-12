@@ -8,15 +8,15 @@ SELECT
   p.title as phase,
   g.date_up as date,
   s.title as stadium,
-  concat((SELECT c.url FROM configurations c where c.short_name='BE-ROOT-URL'),
-         (SELECT c.url FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
+  concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+         (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(ta.short_name),
          '.png')  AS flag_team_a,
   ta.title as name_team_a,
   ta.id as team_id_a,
   g.goals_team_a as goals_team_a,
-concat((SELECT c.url FROM configurations c where c.short_name='BE-ROOT-URL'),
-         (SELECT c.url FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
+concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+         (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(tb.short_name),
          '.png')  AS flag_team_b,
     tb.title as name_team_b,
@@ -45,15 +45,15 @@ SELECT  u.id as user_id,
         ta.id as team_a_id,
         ta.title as name_team_a,
         g.goals_team_a,
-        concat((SELECT c.url FROM configurations c where c.short_name='BE-ROOT-URL'),
-         (SELECT c.url FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
+        concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+         (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(ta.short_name),
          '.png')  AS flag_team_a,
           ta.id as team_b_id,
         tb.title as name_team_b,
         g.goals_team_b,
-        concat((SELECT c.url FROM configurations c where c.short_name='BE-ROOT-URL'),
-         (SELECT c.url FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
+        concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+         (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(tb.short_name),
          '.png')  AS flag_team_b,
         b.goals_team_a as bet_goals_team_a,
@@ -121,13 +121,13 @@ VIEW `V_POSICION_EQUIPO` AS
         `j`.`id` AS `group_id`,
         `j`.`title` AS `group_title`,
         CONCAT(CONVERT( (SELECT
-                        `c`.`url`
+                        `c`.`value`
                     FROM
                         `nullpoin_open-fixture`.`configurations` `c`
                     WHERE
                         (`c`.`short_name` = 'BE-ROOT-URL')) USING UTF8),
                 CONVERT( (SELECT
-                        `c`.`url`
+                        `c`.`value`
                     FROM
                         `nullpoin_open-fixture`.`configurations` `c`
                     WHERE

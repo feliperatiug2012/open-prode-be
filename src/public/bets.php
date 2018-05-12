@@ -32,15 +32,15 @@
 		return $jsonResponse;
 	});
 
-	$app->get('/view/{name}[/{id}]', function (Request $request, Response $response, $args) use ($app)  {
-		$name = $args['name'];
+	$app->get('/view/{filter}[/{id}]', function (Request $request, Response $response, $args) use ($app)  {
+		$filter = $args['filter'];
 		if (isset($args['id']))
 			$id = $args['id'];
 		else {
 			$id = NULL;
 		}
 		$mapper=new  BetMapper($app->getConn());
-		$dailyBets = $mapper->view($name,$id);
+		$dailyBets = $mapper->view($filter,$id);
 		$jsonResponse = $response->withJson($dailyBets);
 		return $jsonResponse;
 

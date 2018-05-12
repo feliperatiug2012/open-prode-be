@@ -19,7 +19,7 @@ create table configurations
 	id int primary key auto_increment NOT NULL ,
 	title varchar(45) NOT NULL,
   short_name varchar(15) not null ,
-  url varchar(1000) not null,
+  value varchar(2000) not null,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL
