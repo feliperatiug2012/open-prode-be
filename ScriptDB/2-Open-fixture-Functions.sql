@@ -77,9 +77,66 @@ CREATE FUNCTION GET_USER_RANK(total_points INTEGER) RETURNS INT
                       ) INTO rank FROM dual;
     RETURN rank;
   END;
+
 #calcula la posicion en la quiniela de un usuario segun su puntuacion total
-DROP FUNCTION IF EXISTS GET_USER_POINTS_BY_GAME;
-CREATE FUNCTION GET_USER_POINTS_BY_GAME(USER_ID INTEGER, GAME_ID INTEGER) RETURNS INT
-  BEGIN
-    RETURN TRUNCATE(RAND()*10,0);
-  END;
+
+CREATE DEFINER=`batman`@`%` FUNCTION `get_users_points_by_game`(p_user_id int, p_game_id INT) RETURNS int(11)
+BEGIN
+
+     DECLARE vGamesId, vGolBetsA, vGolBetsB, vGolGamesA, 
+            vGolGamesB, vPtos, vIdTeamA, vIdTeamB, vPtosTot INT; 
+	DECLARE vWinGame, vWinBets CHAR(1 );
+       
+        DECLARE done INT DEFAULT 0;
+        
+         DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+         
+         SET vGamesId = 0; SET vGolBetsA = 0; SET vGolBetsB = 0; SET vGolGamesA = 0; 
+            SET vGolGamesB = 0; SET vPtos = 0; set vIdTeamA = 0; SET vIdTeamB = 0; 
+            SET vPtosTot = 0;
+         
+       SELECT g.id games_id, b.goals_team_a bets_goal_a, b.goals_team_b bets_goal_a, g.goals_team_a games_goal_a,
+		g.goals_team_b games_goal_a, g.team_a_id , g.team_b_id 
+        INTO vGamesId, vGolBetsA, vGolBetsB, vGolGamesA, vGolGamesB, vIdTeamA, vIdTeamB
+		FROM bets b join  games g on  b.game_id=g.id
+		WHERE g.id = p_game_id 
+		AND b.user_id = p_user_id  AND b.deleted = 0
+        AND g.deleted = 0;
+         
+         
+         IF vGolGamesA > vGolGamesB THEN 
+           SET vWinGame = 'A';
+		ELSEIF vGolGamesB > vGolGamesA THEN 
+           set vWinGame = 'B';
+		ELSE 
+           SET vWinGame = 'E'; 
+		END IF;    
+     
+       -- Buscar ganador del Usuario
+	    IF vGolBetsA > vGolBetsB THEN 
+			SET vWinBets = 'A';
+		ELSEIF vGolBetsB > vGolBetsA THEN 
+            SET vWinBets = 'B';
+		ELSE 
+            SET vWinBets = 'E'; 
+		END IF;
+   
+       IF vGolBetsA = vGolGamesA AND vGolBetsB = vGolGamesB THEN
+          SET vPtos = 10;
+	   ELSEIF (vWinGame = vWinBets) AND (vGolGamesA = vGolBetsA OR vGolGamesB = vGolBetsB) THEN
+		  SET vPtos = 6;
+	   ELSEIF (vWinGame = vWinBets) AND (vGolGamesA != vGolBetsA OR vGolGamesB != vGolBetsB) THEN
+          set vPtos = 4;
+	   ELSEIF (vGolGamesA = vGolBetsA) OR (vGolGamesB = vGolBetsB) THEN
+          SET vPtos = 2;
+	   ELSE 
+          SET vPtos = 0;
+       END IF;
+       
+       SET vPtosTot = vPtosTot +  vPtos;
+	       
+           
+	RETURN vPtosTot;
+END
+
+
