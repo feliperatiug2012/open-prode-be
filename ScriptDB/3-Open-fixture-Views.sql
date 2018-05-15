@@ -103,127 +103,92 @@ left JOIN users U on B.user_id = U.id
    B.deleted=0 AND U.deleted=0;
 
 #SE CREA VISTA PARA CALCULO DE PTOS DE EQUIPOS
-CREATE OR REPLACE
-    ALGORITHM = UNDEFINED
-    DEFINER = `batman`@`%`
-    SQL SECURITY DEFINER
-VIEW `V_POSICION_EQUIPO` AS
-    SELECT DISTINCT
-        `g`.`team_id` AS `team_id`,
-        `ta`.`title` AS `title_team`,
-        `g`.`PG` AS `PG`,
-        `g`.`PE` AS `PE`,
-        `g`.`PP` AS `PP`,
-        `g`.`GF` AS `GF`,
-        `g`.`GC` AS `GC`,
-        `g`.`DG` AS `DG`,
-        `g`.`PTS` AS `PTS`,
-        `g`.`PJ` AS `PJ`,
-        `j`.`id` AS `group_id`,
-        `j`.`title` AS `group_title`,
-        CONCAT(CONVERT( (SELECT
-                        `c`.`value`
+
+CREATE OR REPLACE VIEW V_INTERNAL_SCORE_BOARD AS
+  SELECT
+    g.team_a_id    AS team_id,
+    SUM(g.goals_team_a) AS gf,
+    SUM(g.goals_team_b) AS gc,
+    SUM(CASE WHEN (g.finished = 1) THEN
+      1 ELSE 0
+    END) AS pj,
+    SUM(CASE WHEN (g.goals_team_a > g.goals_team_b AND g.finished = 1 ) THEN
+      1  ELSE 0
+    END) AS pg,
+    SUM(CASE WHEN (g.goals_team_a < g.goals_team_b AND g.finished = 1) THEN
+      1  ELSE 0
+    END) AS pp,
+    SUM(CASE WHEN (g.goals_team_a = g.goals_team_b AND g.finished = 1) THEN
+      1  ELSE 0
+    END) AS pe,
+    /*SUM(
+        CASE WHEN (g.goals_team_a > g.goals_team_b AND g.finished = 1 ) THEN 3 ELSE
+          CASE WHEN (g.goals_team_a = g.goals_team_b AND g.finished = 1 ) THEN 1 ELSE 0 END
+        END)AS pts,*/
+    SUM(g.goals_team_a) - SUM(g.goals_team_b) AS dg
+  FROM games g
+WHERE g.deleted = 0
+group by g.team_a_id
+UNION ALL
+  SELECT
+    g.team_b_id    AS team_id,
+    SUM(g.goals_team_b) AS gf,
+    SUM(g.goals_team_a) AS gc,
+    SUM(CASE WHEN (g.finished = 1) THEN
+      1 ELSE 0
+    END) AS pj,
+    SUM(CASE WHEN (g.goals_team_b > g.goals_team_a AND g.finished = 1 ) THEN
+      1  ELSE 0
+    END) AS pg,
+    SUM(CASE WHEN (g.goals_team_b < g.goals_team_a AND g.finished = 1) THEN
+      1  ELSE 0
+    END) AS pp,
+    SUM(CASE WHEN (g.goals_team_b = g.goals_team_a AND g.finished = 1) THEN
+      1  ELSE 0
+    END) AS pe,
+    /*SUM(
+        CASE WHEN (g.goals_team_a > g.goals_team_b AND g.finished = 1 ) THEN 3 ELSE
+          CASE WHEN (g.goals_team_a = g.goals_team_b AND g.finished = 1 ) THEN 1 ELSE 0 END
+        END)AS pts,*/
+    SUM(g.goals_team_b) - SUM(g.goals_team_a) AS dg
+  FROM games g
+WHERE g.deleted = 0
+group by g.team_b_id;
+
+CREATE OR REPLACE VIEW V_POSICION_EQUIPO AS 
+SELECT
+--  INTERNAL.*,
+  team_id AS team_id,
+  sum(pj) as pj,
+  sum(pg) as pg,
+  sum(pp) as pp,
+  sum(pe) as pe,
+  sum(gf) as gf,
+  sum(gc) as gc,
+  sum(dg) as dg,
+  SUM(INTERNAL.pg * 3 + INTERNAL.pe) AS pts,
+  t.title as title_team,
+  CONCAT((SELECT
+                        c.value
                     FROM
-                        `nullpoin_open-fixture`.`configurations` `c`
+                        configurations c
                     WHERE
-                        (`c`.`short_name` = 'BE-ROOT-URL')) USING UTF8),
-                CONVERT( (SELECT
-                        `c`.`value`
+                        c.short_name = 'BE-ROOT-URL'),
+                (SELECT
+                        c.value
                     FROM
-                        `nullpoin_open-fixture`.`configurations` `c`
+                        configurations c
                     WHERE
-                        (`c`.`short_name` = 'TEAM-FLAGS-URL')) USING UTF8),
-                UPPER(`ta`.`short_name`),
-                '.png') AS `flag_team_a`
-    FROM
-        (((((SELECT
-            `c`.`team_id` AS `team_id`,
-                SUM((CASE
-                    WHEN
-                        ((`c`.`goals_team_a` > `c`.`goals_team_b`)
-                            AND (`c`.`finished` = 1))
-                    THEN
-                        1
-                    ELSE 0
-                END)) AS `PG`,
-                SUM((CASE
-                    WHEN
-                        ((`c`.`goals_team_a` < `c`.`goals_team_b`)
-                            AND (`c`.`finished` = 1))
-                    THEN
-                        1
-                    ELSE 0
-                END)) AS `PP`,
-                SUM((CASE
-                    WHEN
-                        ((`c`.`goals_team_a` = `c`.`goals_team_b`)
-                            AND (`c`.`finished` = 1))
-                    THEN
-                        1
-                    ELSE 0
-                END)) AS `PE`,
-                SUM((CASE
-                    WHEN (`c`.`finished` = 1) THEN `c`.`goals_team_a`
-                    ELSE 0
-                END)) AS `GF`,
-                SUM((CASE
-                    WHEN (`c`.`finished` = 1) THEN `c`.`goals_team_b`
-                    ELSE 0
-                END)) AS `GC`,
-                (SUM((CASE
-                    WHEN (`c`.`finished` = 1) THEN `c`.`goals_team_a`
-                    ELSE 0
-                END)) - SUM((CASE
-                    WHEN (`c`.`finished` = 1) THEN `c`.`goals_team_b`
-                    ELSE 0
-                END))) AS `DG`,
-                SUM((CASE
-                    WHEN
-                        ((`c`.`goals_team_a` > `c`.`goals_team_b`)
-                            AND (`c`.`finished` = 1))
-                    THEN
-                        3
-                    WHEN
-                        ((`c`.`goals_team_a` = `c`.`goals_team_b`)
-                            AND (`c`.`finished` = 1))
-                    THEN
-                        1
-                    ELSE 0
-                END)) AS `PTS`,
-                SUM((CASE
-                    WHEN (`c`.`finished` = 1) THEN 1
-                    ELSE 0
-                END)) AS `PJ`
-        FROM
-            (SELECT
-            `nullpoin_open-fixture`.`games`.`team_a_id` AS `team_id`,
-                `nullpoin_open-fixture`.`games`.`goals_team_a` AS `goals_team_a`,
-                `nullpoin_open-fixture`.`games`.`goals_team_b` AS `goals_team_b`,
-                `nullpoin_open-fixture`.`games`.`finished` AS `finished`
-        FROM
-            `nullpoin_open-fixture`.`games`
-        WHERE
-            (`nullpoin_open-fixture`.`games`.`finished` IN (1 , 0)) UNION ALL SELECT
-            `nullpoin_open-fixture`.`games`.`team_b_id` AS `team_id`,
-                `nullpoin_open-fixture`.`games`.`goals_team_b` AS `goals_team_b`,
-                `nullpoin_open-fixture`.`games`.`goals_team_a` AS `goals_team_a`,
-                `nullpoin_open-fixture`.`games`.`finished` AS `finished`
-        FROM
-            `nullpoin_open-fixture`.`games`
-        WHERE
-            (`nullpoin_open-fixture`.`games`.`finished` IN (1 , 0))) `c`
-        GROUP BY `c`.`team_id`)) `g`
-        JOIN (SELECT
-            `ga`.`team_a_id` AS `team_id`, `ga`.`phase_id` AS `phase_id`
-        FROM
-            `nullpoin_open-fixture`.`games` `ga` UNION ALL SELECT
-            `gb`.`team_a_id` AS `team_id`, `gb`.`phase_id` AS `phase_id`
-        FROM
-            `nullpoin_open-fixture`.`games` `gb`) `h`)
-        JOIN `nullpoin_open-fixture`.`groups` `j`)
-        JOIN `nullpoin_open-fixture`.`teams` `ta`)
-    WHERE
-        ((`g`.`team_id` = `h`.`team_id`)
-            AND (`ta`.`group_id` = `j`.`id`)
-            AND (`g`.`team_id` = `ta`.`id`))
-    ORDER BY `g`.`team_id`
+                        c.short_name = 'TEAM-FLAGS-URL'),
+                UPPER(t.short_name),
+                '.png') AS team_flag,
+                g.id as group_id,
+                g.title as group_title
+
+
+FROM V_INTERNAL_SCORE_BOARD INTERNAL
+  JOIN teams t ON t.id=INTERNAL.team_id AND t.deleted = 0
+  JOIN groups g on t.group_id = g.id
+GROUP BY INTERNAL.team_id,team_flag,group_id,group_title,title_team;
+
+

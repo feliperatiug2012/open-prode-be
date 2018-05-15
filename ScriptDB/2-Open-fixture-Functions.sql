@@ -79,8 +79,8 @@ CREATE FUNCTION GET_USER_RANK(total_points INTEGER) RETURNS INT
   END;
 
 #calcula la posicion en la quiniela de un usuario segun su puntuacion total
-
-CREATE DEFINER=`batman`@`%` FUNCTION `get_users_points_by_game`(p_user_id int, p_game_id INT) RETURNS int(11)
+DROP FUNCTION IF EXISTS GET_USER_POINTS_BY_GAME;
+CREATE  FUNCTION GET_USER_POINTS_BY_GAME (p_user_id int, p_game_id INT) RETURNS int(11)
 BEGIN
 
      DECLARE vGamesId, vGolBetsA, vGolBetsB, vGolGamesA, 
