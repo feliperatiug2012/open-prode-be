@@ -26,17 +26,17 @@ class GroupMapper extends Mapper
 					"teams"         => from ($v_groups_table)
 						->select(function ($team) use ($v_groups_table) {
 							return [
-								"flag_url"  =>  $team['flag_team_a'],
+								"flag_url"  =>  $team['team_flag'],
 								"name"      =>  $team['title_team'],
-								"pg"        =>  $team['PG'],
-								"pe"        =>  $team['PE'],
-								"pp"        =>  $team['PP'],
-								"gf"        =>  $team['GF'],
-								"gc"        =>  $team['GC'],
-								"dg"        =>  $team['DG'],
-								"dg"        =>  $team['DG'],
-								"pj"        =>  $team['PJ'],
-								"pts"       =>  $team['PTS'],
+								"pg"        =>  $team['pg'],
+								"pe"        =>  $team['pe'],
+								"pp"        =>  $team['pp'],
+								"gf"        =>  $team['gf'],
+								"gc"        =>  $team['gc'],
+								"dg"        =>  $team['dg'],
+								"dg"        =>  $team['dg'],
+								"pj"        =>  $team['pj'],
+								"pts"       =>  $team['pts'],
 								"team_id"   =>  $team['team_id'],
 								"group_id"   =>  $team['group_id']
 							];

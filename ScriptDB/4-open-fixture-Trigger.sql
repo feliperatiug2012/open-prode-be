@@ -1,6 +1,6 @@
 ## CREACION DE TRIGGER EN TABLA USERS PARA CREAR APUESTAS POR DEFECTO.
-
-CREATE DEFINER=`batman`@`%` TRIGGER trg_insert_bets_default AFTER INSERT ON users 
+DROP trigger  IF EXISTS trg_insert_bets_default;
+CREATE TRIGGER trg_insert_bets_default AFTER INSERT ON users
 FOR each row 
 BEGIN
 DECLARE vGameId INT;
