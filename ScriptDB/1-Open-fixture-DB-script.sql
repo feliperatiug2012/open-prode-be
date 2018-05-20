@@ -106,7 +106,9 @@ create table users
 	admin    int(1) default '0' NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
 	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
-	deleted int(1) default '0' NOT NULL
+	deleted int(1) default '0' NOT NULL,
+	approver_id   int                                null,
+        date_approved date                               null
 )
 engine=InnoDB charset=utf8;
 
