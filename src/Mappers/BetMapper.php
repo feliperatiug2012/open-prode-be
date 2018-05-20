@@ -155,7 +155,7 @@
 			$bets=from($bets)->select(function($games) use($bets){return[
 				"date"          =>  null,
 				"game_id"       =>  $games["game_id"],
-				"time"          =>  $games["time"],
+				"date_up"          =>  $games["date_up"],
 				"stadium"       =>  $games["stadium"],
 				"game_status"   =>  $games["game_status"],
 				"team_1"    =>  [
