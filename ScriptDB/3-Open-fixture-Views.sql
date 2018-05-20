@@ -15,7 +15,7 @@ SELECT
   ta.title as name_team_a,
   ta.id as team_id_a,
   g.goals_team_a as goals_team_a,
-concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+  concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
          (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(tb.short_name),
          '.png')  AS flag_team_b,
@@ -23,10 +23,17 @@ concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
   tb.id as team_id_b,
   g.goals_team_b as goals_team_b,
   CASE
-         when now() < g.date_up then 0 # POR JUGAR
-         when now() >= g.date_up  and now() <= ADDTIME(g.date_up,'1:30:00') then 1 #EN CURSO
+         when now() < g.date_up
+           then 0 # POR JUGAR
+         when now() >= g.date_up  and now() <= ADDTIME(g.date_up,'1:30:00')
+           then 1 #EN CURSO
          else 2 #OVERTIME - WAITING FOR ADMINISTRATORS TO END THE GAME
-       END AS game_status
+       END AS game_status,
+  case
+    when ADDTIME(now(),GET_TIME_FORMAT((select value from configurations c where c.short_name='LOCK-BETS-MINS'))) > g.date_up
+      then false  #lock bets=TRUE
+    else true    #lock bets=FALSE
+  end AS bets_open
 FROM games g
 JOIN teams ta on g.team_a_id = ta.id AND g.deleted=0
 JOIN teams tb on g.team_b_id = tb.id AND tb.deleted=0

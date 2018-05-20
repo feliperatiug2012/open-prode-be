@@ -18,21 +18,24 @@ COMMIT;
 
 
 ################ INSERT DE LA TABLA CONFIGURATIONS DESARROLLO #######################
-/*
-INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (1,'Team Flags URL','TEAM-FLAGS-URL','/public/assets/images/team-flags/',  sysdate(), sysdate(),0);
-INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (2,'Backend Root URL','BE-ROOT-URL','http://open-fixture-be.com',  sysdate(), sysdate(),0);
-INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (3,'Contribution Per User','CONT-PER-USER','200',  sysdate(), sysdate(),0);
-INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (4,'Prize Currency Symbol','PRIZE-CURRENCY','$',  sysdate(), sysdate(),0);
+
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (1, 'Team Flags URL', 'TEAM-FLAGS-URL', '/public/assets/images/team-flags/', '2018-05-15 00:53:41', '2018-05-15 00:53:41', 0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (2, 'Backend Root URL', 'BE-ROOT-URL', 'http://open-fixture-be.nullpointer13.com', '2018-05-15 00:53:42', '2018-05-15 00:53:42', 0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (3, 'Contribution Per User', 'CONT-PER-USER', '200', '2018-05-15 00:53:43', '2018-05-15 00:53:43', 0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (4, 'Prize Currency Symbol', 'PRIZE-CURRENCY', '$', '2018-05-15 00:53:44', '2018-05-15 00:53:44', 0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (5, 'Minutes to close game''s bets', 'LOCK-BETS-MINS', '120', '2018-05-20 14:32:36', '2018-05-20 14:32:36', 0);
 COMMIT;
-*/
+
 
 ################ INSERT DE LA TABLA CONFIGURATIONS PRODUCCION #######################
-
-INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (1,'Team Flags URL','TEAM-FLAGS-URL','/public/assets/images/team-flags/',  sysdate(), sysdate(),0);
-INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (2,'Backend Root URL','BE-ROOT-URL','http://open-fixture-be.nullpointer13.com',  sysdate(), sysdate(),0);
-INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (3,'Contribution Per User','CONT-PER-USER','200',  sysdate(), sysdate(),0);
-INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (4,'Prize Currency Symbol','PRIZE-CURRENCY','$',  sysdate(), sysdate(),0);
+/*
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (1, 'Team Flags URL','TEAM-FLAGS-URL','/public/assets/images/team-flags/',  sysdate(), sysdate(),0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (2, 'Backend Root URL','BE-ROOT-URL','http://open-fixture-be.nullpointer13.com',  sysdate(), sysdate(),0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (3, 'Contribution Per User','CONT-PER-USER','200',  sysdate(), sysdate(),0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (4, 'Prize Currency Symbol','PRIZE-CURRENCY','$',  sysdate(), sysdate(),0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (5, 'Minutes to close game''s bets', 'LOCK-BETS-MINS', '120', '2018-05-20 14:32:36', '2018-05-20 14:32:36', 0);
 COMMIT;
+*/
 ################ INSERT DE LA TABLA STADIUMS #######################
 
 INSERT INTO stadiums (id,`title`, `created`, `modified`, `deleted`) VALUES (1,'Kaliningrad Stadium',  sysdate(), sysdate(),0);
@@ -167,9 +170,13 @@ COMMIT;
 # cambiar la fecha de los primeros  3 juegos a la #
 # fecha del dia, solo para DEVELOPMENT MODE       #
 # #################################################
+
 UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','11:15:00'),'%Y-%m-%d %H:%i:%s') where games.id=1;
 UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','14:45:00'),'%Y-%m-%d %H:%i:%s') where games.id=2;
 UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','18:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=3;
+UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','13:51:00'),'%Y-%m-%d %H:%i:%s')where games.id=4;
+UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','15:58:00'),'%Y-%m-%d %H:%i:%s')where games.id=5;
+UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','18:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=6;
 COMMIT;
 
 ##############################  INSERTS DE LA TABLA USERS ###############

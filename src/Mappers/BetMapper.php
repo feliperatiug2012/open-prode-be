@@ -117,6 +117,7 @@
 												->select(function($game) use ($bets){
 													return [
 														"game_id"=>$game["game_id"],
+														"bets_open"=>intval($game["bets_open"]),
 														"date"=>$game["date"],
 														"stadium"=>$game["stadium"],
 														"user_bets"=> [

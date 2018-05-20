@@ -11,8 +11,10 @@
 		use OpenFixture\Entities\Bet\Team;
 		use OpenFixture\Entities\Bet\Bet;
 		use OpenFixture\Entities\Entity;
+		use OpenFixture\Exceptions\BetClosedForGameException;
 		use OpenFixture\Exceptions\DataBaseInsertException;
 		use OpenFixture\Exceptions\DataBaseUpdateException;
+		use PDOException;
 
 		class BetEntity extends Entity 
 		{
@@ -81,6 +83,7 @@
 			/**
 			 * @throws DataBaseInsertException
 			 * @throws DataBaseUpdateException
+			 * @throws BetClosedForGameException
 			 */
 			protected function update(){
 				$stm=null;
@@ -88,6 +91,14 @@
 					throw new DataBaseUpdateException("no se puede hacer el update sin un ID");
 
 				try {
+				// validar que las apuestas para el juego estan abiertas
+					$sql="SELECT C.bets_open FROM V_GAMES_CALENDAR C WHERE C.game_id= :game_id";
+					$stm=$this->db->prepare($sql);
+					$result=$stm->execute([":game_id"=>$this->game_id]);
+					if($stm->fetchAll()[0]['bets_open']==0){
+						throw new BetClosedForGameException('Las apuestas para el juego estan cerradas');
+					}
+
 					$sql = "UPDATE bets
 					SET goals_team_a = :goals_a, 
 						goals_team_b = :goals_b

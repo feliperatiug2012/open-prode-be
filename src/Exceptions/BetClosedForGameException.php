@@ -1,0 +1,23 @@
+<?php
+	/**
+	 * Created by PhpStorm.
+	 * User: nullpointer13
+	 * Date: 4/17/18
+	 * Time: 1:09 AM
+	 */
+
+	namespace OpenFixture\Exceptions;
+	use Exception;
+
+	class BetClosedForGameException extends Exception
+	{
+
+		/**
+		 * DataBaseInsertException constructor.
+		 * @param $msg
+		 */
+		public function __construct($msg)
+		{
+			$this->message=$msg;
+		}
+	}
