@@ -171,16 +171,19 @@ COMMIT;
 # fecha del dia, solo para DEVELOPMENT MODE       #
 # #################################################
 
-UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','11:15:00'),'%Y-%m-%d %H:%i:%s') where games.id=1;
-UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','14:45:00'),'%Y-%m-%d %H:%i:%s') where games.id=2;
-UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','18:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=3;
-UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','13:51:00'),'%Y-%m-%d %H:%i:%s')where games.id=4;
-UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','15:58:00'),'%Y-%m-%d %H:%i:%s')where games.id=5;
-UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','18:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=6;
+# UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','11:15:00'),'%Y-%m-%d %H:%i:%s') where games.id=1;
+# UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','14:45:00'),'%Y-%m-%d %H:%i:%s') where games.id=2;
+# UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','18:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=3;
+# UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','13:51:00'),'%Y-%m-%d %H:%i:%s')where games.id=4;
+# UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','15:58:00'),'%Y-%m-%d %H:%i:%s')where games.id=5;
+# UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','18:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=6;
+UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','1:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=7;
+UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','1:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=8;
+UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','1:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=9;
 COMMIT;
 
 ##############################  INSERTS DE LA TABLA USERS ###############
-/*
+
 INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (1, 'Roquefelix Benal', 'rbenal', 'rbenal@gmail.com', 'https://lh4.googleusercontent.com/-kVxShPWGf3Y/AAAAAAAAAAI/AAAAAAAAGpE/1zwZEXXsUWk/photo.jpg', null, 1, 0, '2018-05-06 00:33:55', '2018-05-11 01:10:31', 0);
 INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (2, 'Lorena Mora', 'dlmora91', 'dlmora91@gmail.com', 'https://lh4.googleusercontent.com/-H6SH17_A6mk/AAAAAAAAAAI/AAAAAAAAJ74/ST5QoKX0oLQ/photo.jpg', null, 1, 0, '2018-05-06 00:39:45', '2018-05-06 00:39:49', 0);
 INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (3, 'Lorena Mora Vivas', 'labebe_lorena2_1', 'labebe_lorena2_1@hotmail.com', 'https://lookaside.facebook.com/platform/profilepic/?asid=10214864099691939&height=50&width=50&ext=1525837265&hash=AeTapKgRlrPi2PeO', null, 1, 0, '2018-05-06 00:41:26', '2018-05-06 00:41:35', 0);
@@ -188,4 +191,3 @@ INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_u
 INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (5, 'Ana Pinto Correia', 'ana2624', 'ana2624@hotmail.com', 'https://lookaside.facebook.com/platform/profilepic/?asid=10215973143351562&height=50&width=50&ext=1525837569&hash=AeRiIC6Nrx_3AuGo', null, 1, 0, '2018-05-06 00:46:33', '2018-05-06 00:47:19', 0);
 INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (6, 'Vanessa Virginia Benal Mora', 'vbenal', 'vbenal@gmail.com', 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', null, 1, 0, '2018-05-09 19:34:30', '2018-05-09 19:36:14', 0);
 COMMIT;
-*/

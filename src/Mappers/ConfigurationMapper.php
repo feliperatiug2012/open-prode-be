@@ -30,7 +30,7 @@
 		{
 			$sql = "SELECT  COUNT(*) * (SELECT C.value FROM configurations C WHERE C.short_name='CONT-PER-USER') value,
         					(SELECT C.value FROM configurations C WHERE C.short_name='PRIZE-CURRENCY') currency
-					FROM V_SCORE_BOARD";
+					FROM V_SCORE_BOARD WHERE approved=1";
 			$stmt = $this->db->query($sql);
 			$configurations = $stmt->fetchAll();
 			$prize_amount = from($configurations)->select(function($conf){

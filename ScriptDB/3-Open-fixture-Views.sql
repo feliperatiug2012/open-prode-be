@@ -86,16 +86,22 @@ WHERE
 
 # VISTA PARA LA TABLA DE POSICIONES (LISTAR USUARIOS)
 CREATE OR REPLACE VIEW V_SCORE_BOARD AS
-SELECT  U.username AS username,
+SELECT  U.id as user_id,
+        U.username AS username,
         U.title AS name,
         U.alias AS alias,
         U.picture_url as picture_url,
+        U.approved AS approved,
+        U.date_approved as date_approved,
+        U.approver_id as approver_id,
         GET_USER_TOTAL_POINTS(U.id) AS total_points,
-        GET_USER_RANK(GET_USER_TOTAL_POINTS(U.id)) as rank
+        GET_USER_RANK(GET_USER_TOTAL_POINTS(U.id)) as rank,
+        CASE WHEN U.admin = 1 THEN true
+          ELSE false
+        END as admin
 FROM users U
 WHERE
-  U.deleted=0
-  AND U.approved=1;
+  U.deleted=0;
 
 CREATE OR REPLACE VIEW V_USER_BETS AS
 SELECT  C.*,
