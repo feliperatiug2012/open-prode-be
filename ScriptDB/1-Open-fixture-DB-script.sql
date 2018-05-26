@@ -108,7 +108,8 @@ create table users
 	modified datetime default CURRENT_TIMESTAMP NOT NULL ON UPDATE NOW(),
 	deleted int(1) default '0' NOT NULL,
 	approver_id   int                                null,
-        date_approved date                               null
+        date_approved date                               null,
+	id_team_fav int
 )
 engine=InnoDB charset=utf8;
 
