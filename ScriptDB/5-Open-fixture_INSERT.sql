@@ -23,6 +23,7 @@ INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modifie
 INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (2,'Backend Root URL','BE-ROOT-URL','http://open-fixture-be.com',  sysdate(), sysdate(),0);
 INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (3,'Contribution Per User','CONT-PER-USER','200',  sysdate(), sysdate(),0);
 INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (4,'Prize Currency Symbol','PRIZE-CURRENCY','$',  sysdate(), sysdate(),0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted)          VALUES (5, 'WordWide Start Date', 'Start Date', '2018-06-14', sysdate(), sysdate(),0);
 COMMIT;
 */
 
