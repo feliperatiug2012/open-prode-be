@@ -109,7 +109,9 @@ SELECT  C.*,
         B.goals_team_b AS bet_goals_team_b,
         GET_USER_POINTS_BY_GAME(U.id,C.game_id ) as bet_points,
         U.id AS user_id,
-        U.username
+        U.username as username,
+        U.title as name,
+        U.alias as alias
 FROM V_GAMES_CALENDAR C
 left JOIN bets B ON B.game_id=C.game_id
 left JOIN users U on B.user_id = U.id

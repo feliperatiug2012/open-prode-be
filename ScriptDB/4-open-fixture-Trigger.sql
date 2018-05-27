@@ -20,3 +20,13 @@ DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 		END IF;
         UNTIL done END REPEAT;
 END;
+
+## CREACION DE TRIGGER EN TABLA USERS PARA CREAR APUESTAS POR DEFECTO.
+DROP trigger  IF EXISTS trg_update_user;
+CREATE TRIGGER trg_update_user BEFORE UPDATE ON users
+FOR each row
+BEGIN
+	IF (OLD.approved = 0 AND NEW.approved = 1) THEN
+		SET NEW.date_approved=now();
+	END IF;
+END;

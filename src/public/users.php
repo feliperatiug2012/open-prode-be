@@ -8,7 +8,7 @@
 	require '../vendor/autoload.php';
 	require '../autoload_open_fixture.php';
 
-	$app = new SuperAppEntity();
+	$app = new SuperAppEntity(['ignore' => '/view/score-board']);
 
 //update && save users to db from social networks
 $app->post('/save', function (Request $request, Response $response) use ($app) {
@@ -39,6 +39,7 @@ $app->post('/save', function (Request $request, Response $response) use ($app) {
 	 */
 $app->get('/view/{id}', function (Request $request, Response $response, $args) use ($app)  {
 	$id=$args['id'];
+//	$id=$request->getAttribute('token')['email'];
 
 	if(is_numeric($id))
 		$id=(int)$id;

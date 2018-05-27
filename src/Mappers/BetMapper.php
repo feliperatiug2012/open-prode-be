@@ -211,8 +211,11 @@
 
 			$mapped_bets = from($bets)
 				->select(function($user) use ($bets) {
+					if(!isset($user["alias"]) || $user["alias"]==null)
+						$user["alias"]=$user["name"];
 					return [
 					"username"  =>  $user["username"],
+					"alias"  =>  $user["alias"],
 					"user_id"   =>  $user["user_id"],
 					"bets"    =>  from($bets)
 						->select(function($game,$k) use ($bets){

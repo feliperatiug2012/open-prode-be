@@ -29,9 +29,12 @@
 		public function view($filter, $id = NULL)
 		{
 			$sql = "SELECT  COUNT(*) * (SELECT C.value FROM configurations C WHERE C.short_name='CONT-PER-USER') value,
-        					(SELECT C.value FROM configurations C WHERE C.short_name='PRIZE-CURRENCY') currency
+        					(SELECT C.value FROM configurations C WHERE C.short_name=:filter) currency
 					FROM V_SCORE_BOARD WHERE approved=1";
-			$stmt = $this->db->query($sql);
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute([":filter" => $filter]);
+//			$stmt = $this->db->query($sql);
 			$configurations = $stmt->fetchAll();
 			$prize_amount = from($configurations)->select(function($conf){
 				return ["value"     =>  $conf['value'],

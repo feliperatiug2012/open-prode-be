@@ -32,6 +32,7 @@ class UserMapper extends Mapper
 				    if($users["admin"]==1) $users["admin"] = true; else $users["admin"]=false;
 				    if($users["approved"]==1) $users["approved"] = true; else $users["approved"]=false;
 				    return [
+					    "id"            => $users["user_id"],
 					    "name"          => $users["name"],
 					    "alias"         => $users["alias"],
 					    "username"      => $users["username"],
