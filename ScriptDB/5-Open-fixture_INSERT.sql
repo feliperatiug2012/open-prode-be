@@ -24,6 +24,7 @@ INSERT INTO configurations (id, title, short_name, value, created, modified, del
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (3, 'Contribution Per User', 'CONT-PER-USER', '200', '2018-05-15 00:53:43', '2018-05-15 00:53:43', 0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (4, 'Prize Currency Symbol', 'PRIZE-CURRENCY', '$', '2018-05-15 00:53:44', '2018-05-15 00:53:44', 0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (5, 'Minutes to close game''s bets', 'LOCK-BETS-MINS', '120', '2018-05-20 14:32:36', '2018-05-20 14:32:36', 0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted)          VALUES (5, 'WordWide Start Date', 'Start Date', '2018-06-14', sysdate(), sysdate(),0);
 COMMIT;
 
 
