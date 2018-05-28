@@ -137,6 +137,21 @@ BEGIN
 	       
            
 	RETURN vPtosTot;
-END
+END;
 
 
+#transforma una cantidad entera de minutos en formato '00:00:00'
+DROP FUNCTION IF EXISTS GET_TIME_FORMAT;
+CREATE FUNCTION GET_TIME_FORMAT(MINUTES INTEGER) RETURNS VARCHAR(8)
+  BEGIN
+    DECLARE FORMATED_TIME VARCHAR(8);
+    DECLARE HOURS varchar(2);
+    DECLARE MINS varchar(2);
+#     DECLARE MINUTES INT;
+
+    set HOURS   = substr(concat('00',MINUTES DIV 60),-2);
+    set MINS   = substr(concat('00',MINUTES MOD 60),-2);
+
+    set FORMATED_TIME= CONCAT(HOURS,':',MINS,':00');
+    RETURN FORMATED_TIME;
+  END;

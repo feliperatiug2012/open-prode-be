@@ -8,7 +8,7 @@ use OpenFixture\Entities\SuperAppEntity;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-$app = new SuperAppEntity();
+$app = new SuperAppEntity(['ignore' => '/']);
 
 	$app->get(/**
 	 * @param Request $request

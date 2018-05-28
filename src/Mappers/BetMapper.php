@@ -117,6 +117,7 @@
 												->select(function($game) use ($bets){
 													return [
 														"game_id"=>$game["game_id"],
+														"bets_open"=>intval($game["bets_open"]),
 														"date"=>$game["date"],
 														"stadium"=>$game["stadium"],
 														"user_bets"=> [
@@ -155,7 +156,7 @@
 			$bets=from($bets)->select(function($games) use($bets){return[
 				"date"          =>  null,
 				"game_id"       =>  $games["game_id"],
-				"time"          =>  $games["time"],
+				"date_up"          =>  $games["date_up"],
 				"stadium"       =>  $games["stadium"],
 				"game_status"   =>  $games["game_status"],
 				"team_1"    =>  [
@@ -210,8 +211,11 @@
 
 			$mapped_bets = from($bets)
 				->select(function($user) use ($bets) {
+					if(!isset($user["alias"]) || $user["alias"]==null)
+						$user["alias"]=$user["name"];
 					return [
 					"username"  =>  $user["username"],
+					"alias"  =>  $user["alias"],
 					"user_id"   =>  $user["user_id"],
 					"bets"    =>  from($bets)
 						->select(function($game,$k) use ($bets){

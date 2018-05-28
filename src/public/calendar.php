@@ -9,7 +9,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 
-$app = new SuperAppEntity();
+$app = new SuperAppEntity(['ignore' => '/']);
 $app->get('/list', function (Request $request, Response $response, $args) use ($app)  {
 	$mapper=new Mappers\CalendarMapper($app->getConn());
 	$calendar = $mapper->list();
