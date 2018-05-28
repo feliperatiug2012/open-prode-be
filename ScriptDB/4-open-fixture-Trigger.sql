@@ -23,8 +23,8 @@ END;
 
 ## CREACION DE TRIGGER EN TABLA USERS PARA VALIDAR LA ACTUALIZACION DEL EQUIPO FAVORITO DE CADA PARTICIPANTE
 DROP TRIGGER IF EXISTS TRG_team_favorite_users;
-CREATE DEFINER=`batman`@`%` TRIGGER `nullpoin_open-fixture`.`TRG_team_favorite_users` 
-  BEFORE update ON `users` FOR EACH ROW
+CREATE TRIGGER TRG_team_favorite_users
+  BEFORE update ON users FOR EACH ROW
 BEGIN
   
   DECLARE l_date datetime;

@@ -102,6 +102,7 @@ create table users
 	username varchar(45) NOT NULL,
 	picture_url varchar(2000) NULL,
 	password varchar(300) NULL,
+  id_team_fav int default null,
 	approved int(1) default '0' NOT NULL,
 	admin    int(1) default '0' NOT NULL,
 	created datetime default CURRENT_TIMESTAMP NOT NULL,
@@ -109,7 +110,8 @@ create table users
 	deleted int(1) default '0' NOT NULL,
 	approver_id   int default null,
   date_approved datetime default null,
-	constraint users_ibfk_1 foreign key (approver_id) references users (id)
+	constraint users_ibfk_1 foreign key (approver_id) references users (id),
+	constraint users_ibfk_2 foreign key (id_team_fav) references teams (id)
 )
 engine=InnoDB charset=utf8;
 

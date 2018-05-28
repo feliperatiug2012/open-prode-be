@@ -47,6 +47,8 @@ SELECT  u.id as user_id,
         u.username,
         u.title as name,
         u.picture_url,
+        t.id as team_fav_id,
+        t.title as team_fav_name,
         g.id as game_id,
 #         (SELECT DATE_FORMAT(g.date_up, '%H:%i') from  dual) as time,
         g.date_up as date_up,
@@ -80,6 +82,7 @@ FROM
   JOIN stadiums s on g.stadium_id = s.id AND s.deleted=0
   JOIN bets b on g.id = b.game_id AND b.deleted=0
   JOIN users u on b.user_id=u.id AND u.deleted=0
+  left JOIN teams t on t.id = u.id_team_fav AND t.deleted=0
 WHERE
   g.date_up >= current_date() AND g.date_up <= DATE_ADD(current_date() , interval 1 day)
   AND g.deleted=0;
@@ -91,6 +94,8 @@ SELECT  U.id as user_id,
         U.title AS name,
         U.alias AS alias,
         U.picture_url as picture_url,
+        T.id as team_fav_id,
+        T.title as team_fav_name,
         U.approved AS approved,
         U.date_approved as date_approved,
         U.approver_id as approver_id,
@@ -100,6 +105,7 @@ SELECT  U.id as user_id,
           ELSE false
         END as admin
 FROM users U
+  left JOIN teams T ON T.id = U.id_team_fav and T.deleted = 0
 WHERE
   U.deleted=0;
 
@@ -111,12 +117,13 @@ SELECT  C.*,
         U.id AS user_id,
         U.username as username,
         U.title as name,
-        U.alias as alias
+        U.alias as alias,
+        T.id as team_fav_id,
+        T.title as team_fav_name
 FROM V_GAMES_CALENDAR C
-left JOIN bets B ON B.game_id=C.game_id
-left JOIN users U on B.user_id = U.id
- WHERE
-   B.deleted=0 AND U.deleted=0;
+left JOIN bets B ON B.game_id=C.game_id and B.deleted=0
+left JOIN users U on B.user_id = U.id AND U.deleted=0
+left JOIN  teams T on T.id =U.id_team_fav AND T.deleted = 0;
 
 #SE CREA VISTA PARA CALCULO DE PTOS DE EQUIPOS
 
