@@ -214,10 +214,13 @@
 					if(!isset($user["alias"]) || $user["alias"]==null)
 						$user["alias"]=$user["name"];
 					return [
-					"username"  =>  $user["username"],
-					"alias"  =>  $user["alias"],
-					"user_id"   =>  $user["user_id"],
-					"bets"    =>  from($bets)
+					"username"      =>  $user["username"],
+					"alias"         =>  $user["alias"],
+					"user_id"       =>  $user["user_id"],
+					"team_fav_id"   => $user["team_fav_id"],
+					"team_fav_name" => $user["team_fav_name"],
+					"team_fav_flag" => $user["team_fav_flag"],
+					"bets"          =>  from($bets)
 						->select(function($game,$k) use ($bets){
 							return ["game_id"=>$game["game_id"],
 									"date"=>$game["date"],

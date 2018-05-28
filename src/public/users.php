@@ -23,6 +23,8 @@ $app->post('/save', function (Request $request, Response $response) use ($app) {
 	    $user_data['username']          = filter_var($data['username'], FILTER_SANITIZE_EMAIL);
 	if(isset($data['picture_url']))
 	    $user_data['picture_url']       = filter_var($data['picture_url'],  FILTER_SANITIZE_STRING);
+	if(isset($data['team_fav_id']))
+		$user_data['team_fav_id']       = filter_var($data['picture_url'],  FILTER_SANITIZE_NUMBER_INT);
 	if(isset($data['approved']))
 	    $user_data['approved']          = filter_var($data['approved'], FILTER_SANITIZE_NUMBER_INT);
 	if(isset($data['approver_id']))

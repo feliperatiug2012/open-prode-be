@@ -21,6 +21,7 @@
 			public $approved;
 			public $approver_id;
 			public $date_approved;
+			public $team_fav_id;
 
 			/**
 			 * UserEntity constructor.
@@ -45,6 +46,7 @@
 				$this->picture_url = $data['picture'];
 				$this->approver_id = $data['approver_id'];
 				$this->date_approved = $data['date_approved'];
+				$this->team_fav_id = $data['team_fav_id'];
 				$this->approved = $data['approved'];
 				$this->picture_url =$data['picture_url'];
 
@@ -77,9 +79,13 @@
 			protected function add()
 			{
 				try {
-					$sql = "INSERT INTO users (title, alias,username, picture_url)VALUES (:title, :alias, :username, :picture)";
+					$sql = "INSERT INTO users (title, alias,username, picture_url, id_team_fav)VALUES (:title, :alias, :username, :picture,:team_fav_id)";
 					$stm = $this->db->prepare($sql);
-					$result = $stm->execute([":title" => $this->name, ":alias" => $this->alias, ":username" => $this->username, ":picture" => $this->picture_url]);
+					$result = $stm->execute([
+						":title" => $this->name,
+						":alias" => $this->alias,
+						":username" => $this->username,
+						":team_fav_id" => $this->team_fav_id]);
 					if (!$result)
 						throw new DataBaseInsertException("no se pudo agregar el usuario, username existente");
 				} catch (PDOException $e) {
