@@ -49,6 +49,10 @@ SELECT  u.id as user_id,
         u.picture_url,
         t.id as team_fav_id,
         t.title as team_fav_name,
+        concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+        (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
+        upper(t.short_name),
+        '.png')  AS team_fav_flag,
         g.id as game_id,
 #         (SELECT DATE_FORMAT(g.date_up, '%H:%i') from  dual) as time,
         g.date_up as date_up,
@@ -96,6 +100,10 @@ SELECT  U.id as user_id,
         U.picture_url as picture_url,
         T.id as team_fav_id,
         T.title as team_fav_name,
+        concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+         (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
+         upper(T.short_name),
+         '.png')  AS team_fav_flag,
         U.approved AS approved,
         U.date_approved as date_approved,
         U.approver_id as approver_id,
@@ -119,7 +127,11 @@ SELECT  C.*,
         U.title as name,
         U.alias as alias,
         T.id as team_fav_id,
-        T.title as team_fav_name
+        T.title as team_fav_name,
+        concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+         (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
+         upper(T.short_name),
+         '.png')  AS team_fav_flag
 FROM V_GAMES_CALENDAR C
 left JOIN bets B ON B.game_id=C.game_id and B.deleted=0
 left JOIN users U on B.user_id = U.id AND U.deleted=0
@@ -214,4 +226,17 @@ FROM V_INTERNAL_SCORE_BOARD INTERNAL
   JOIN groups g on t.group_id = g.id
 GROUP BY INTERNAL.team_id,team_flag,group_id,group_title,title_team;
 
-
+CREATE OR REPLACE VIEW V_TEAMS AS
+SELECT  T.id AS team_id,
+        T.title as team_name,
+        T.short_name AS short_name,
+        concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
+         (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
+         upper(T.short_name),
+         '.png')  AS team_flag,
+        T.group_id AS  group_id,
+        G.title AS group_name
+FROM teams T
+  JOIN groups G on T.Group_id = G.id and G.deleted = 0
+  
+  WHERE T.deleted =0;
