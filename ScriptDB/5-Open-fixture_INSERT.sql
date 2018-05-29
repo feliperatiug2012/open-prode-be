@@ -24,6 +24,12 @@ INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modifie
 INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (3,'Contribution Per User','CONT-PER-USER','200',  sysdate(), sysdate(),0);
 INSERT INTO configurations (id,`title`,`short_name`,`value`, `created`, `modified`, `deleted`) VALUES (4,'Prize Currency Symbol','PRIZE-CURRENCY','$',  sysdate(), sysdate(),0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted)          VALUES (5, 'WordWide Start Date', 'Start Date', '2018-06-14', sysdate(), sysdate(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 6,'Points by Team Favarite', 'Pts by Team Fav', '2', now(), now(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 7,'Cat 1 Result Exact', 'Cat Uno', '10', now(), now(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 8,'Cat 2 Win-Goal 1 Team', 'Cat Dos', '6', now(), now(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 9,'Cat 3 Win-Without-Goal', 'Cat Tres', '4', now(), now(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 10,'Cat 4 Goal-1-team', 'Cat Cuatro', '2', now(), now(),0);
+
 COMMIT;
 */
 
