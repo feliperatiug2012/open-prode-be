@@ -8,6 +8,7 @@
 	require '../vendor/autoload.php';
 	require '../autoload_open_fixture.php';
 
+//	$app = new SuperAppEntity(['ignore' => '/']);
 	$app = new SuperAppEntity(['ignore' => '/view/score-board']);
 
 //update && save users to db from social networks
@@ -24,7 +25,7 @@ $app->post('/save', function (Request $request, Response $response) use ($app) {
 	if(isset($data['picture_url']))
 	    $user_data['picture_url']       = filter_var($data['picture_url'],  FILTER_SANITIZE_STRING);
 	if(isset($data['team_fav_id']))
-		$user_data['team_fav_id']       = filter_var($data['picture_url'],  FILTER_SANITIZE_NUMBER_INT);
+		$user_data['team_fav_id']       = filter_var($data['team_fav_id'],  FILTER_SANITIZE_NUMBER_INT);
 	if(isset($data['approved']))
 	    $user_data['approved']          = filter_var($data['approved'], FILTER_SANITIZE_NUMBER_INT);
 	if(isset($data['approver_id']))

@@ -214,13 +214,13 @@
 					if(!isset($user["alias"]) || $user["alias"]==null)
 						$user["alias"]=$user["name"];
 					return [
-					"username"      =>  $user["username"],
-					"alias"         =>  $user["alias"],
-					"user_id"       =>  $user["user_id"],
-					"team_fav_id"   => $user["team_fav_id"],
-					"team_fav_name" => $user["team_fav_name"],
-					"team_fav_flag" => $user["team_fav_flag"],
-					"bets"          =>  from($bets)
+					"username"          =>  $user["username"],
+					"alias"             =>  $user["alias"],
+					"user_id"           =>  $user["user_id"],
+					"team_fav_id"       => $user["team_fav_id"],
+					"team_fav_name"     => $user["team_fav_name"],
+					"team_fav_flag"     => $user["team_fav_flag"],
+					"bets"              =>  from($bets)
 						->select(function($game,$k) use ($bets){
 							return ["game_id"=>$game["game_id"],
 									"date"=>$game["date"],
@@ -231,16 +231,18 @@
 										"bet_points"    =>  $game['bet_points']
 									],
 									"team_a"=>  [
-										"id"     => $game['team_id_a'],
-										"name"   => $game['name_team_a'],
-										"flag"   => $game['flag_team_a'],
-										"goals"  => $game['goals_team_a'],
+										"id"            => $game['team_id_a'],
+										"name"          => $game['name_team_a'],
+										"short_name"    => $game["team_a_short_name"],
+										"flag"          => $game['flag_team_a'],
+										"goals"         => $game['goals_team_a'],
 									],
 									"team_b"=>  [
-										"id"     => $game['team_id_b'],
-										"name"   => $game['name_team_b'],
-										"flag"   => $game['flag_team_b'],
-										"goals"  => $game['goals_team_b'],
+										"id"            => $game['team_id_b'],
+										"name"          => $game['name_team_b'],
+										"short_name"    => $game["team_b_short_name"],
+										"flag"          => $game['flag_team_b'],
+										"goals"         => $game['goals_team_b'],
 									],
 								];})->toList()
 					];})->toList();

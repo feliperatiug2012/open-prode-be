@@ -17,14 +17,14 @@
 			$groups_table = from($v_teams)
 				->select(function ($team) use ($v_teams) {
 					return [
-						"team_id"       =>  $team['team_id'],
+						"team_id"       =>  intval($team['team_id']),
 						"team_name"     =>  $team['team_name'],
 						"short_name"    =>  $team['short_name'],
 						"team_flag"     =>  $team['team_flag'],
-						"group_id"      =>  $team['group_id'],
+						"group_id"      =>  intval($team['group_id']),
 						"group_name"    =>  $team['group_name']
 					];
-				})->toList();
+				})->orderBy('$v["team_name"]')->toList();
 			return $groups_table;
 		}
 

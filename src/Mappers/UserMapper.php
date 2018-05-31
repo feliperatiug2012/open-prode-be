@@ -32,12 +32,12 @@ class UserMapper extends Mapper
 				    if($users["admin"]==1) $users["admin"] = true; else $users["admin"]=false;
 				    if($users["approved"]==1) $users["approved"] = true; else $users["approved"]=false;
 				    return [
-					    "id"            => $users["user_id"],
+					    "id"            => intval($users["user_id"]),
 					    "name"          => $users["name"],
 					    "alias"         => $users["alias"],
 					    "username"      => $users["username"],
 					    "picture_url"   => $users["picture_url"],
-					    "team_fav_id"   => $users["team_fav_id"],
+					    "team_fav_id"   => intval($users["team_fav_id"]),
 					    "team_fav_name" => $users["team_fav_name"],
 					    "team_fav_flag" => $users["team_fav_flag"],
 					    "total_points"  => intval($users["total_points"]),
@@ -45,6 +45,7 @@ class UserMapper extends Mapper
 					    "approved"      => $users["approved"],
 					    "date_approved" => $users["date_approved"],
 					    "approver_id"	=> intval($users["approver_id"]),
+					    "event_start"	=> ($users["event_start"]),
 					    "admin"	        => $users["admin"]
 				    ];
 			    });

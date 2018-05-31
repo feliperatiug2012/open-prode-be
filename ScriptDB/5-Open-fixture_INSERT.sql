@@ -19,7 +19,7 @@ COMMIT;
 
 
 ################ INSERT DE LA TABLA CONFIGURATIONS DESARROLLO #######################
-
+/*
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (1, 'Team Flags URL', 'TEAM-FLAGS-URL', '/public/assets/images/team-flags/', '2018-05-15 00:53:41', '2018-05-15 00:53:41', 0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (2, 'Backend Root URL', 'BE-ROOT-URL', 'http://open-fixture-be.nullpointer13.com', '2018-05-15 00:53:42', '2018-05-15 00:53:42', 0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (3, 'Contribution Per User', 'CONT-PER-USER', '200', '2018-05-15 00:53:43', '2018-05-15 00:53:43', 0);
@@ -27,17 +27,18 @@ INSERT INTO configurations (id, title, short_name, value, created, modified, del
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (5, 'Minutes to close game''s bets', 'LOCK-BETS-MINS', '120', '2018-05-20 14:32:36', '2018-05-20 14:32:36', 0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (6, 'Event Start Date', 'EVENT-START', '2018-06-14 00:00:00', sysdate(), sysdate(),0);
 COMMIT;
-
+*/
 
 ################ INSERT DE LA TABLA CONFIGURATIONS PRODUCCION #######################
-/*
+
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (1, 'Team Flags URL','TEAM-FLAGS-URL','/public/assets/images/team-flags/',  sysdate(), sysdate(),0);
-INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (2, 'Backend Root URL','BE-ROOT-URL','http://open-fixture-be.nullpointer13.com',  sysdate(), sysdate(),0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (2, 'Backend Root URL','BE-ROOT-URL','http://pyxis-prode.nullpointer13.com',  sysdate(), sysdate(),0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (3, 'Contribution Per User','CONT-PER-USER','200',  sysdate(), sysdate(),0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (4, 'Prize Currency Symbol','PRIZE-CURRENCY','$',  sysdate(), sysdate(),0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (5, 'Minutes to close game''s bets', 'LOCK-BETS-MINS', '120', '2018-05-20 14:32:36', '2018-05-20 14:32:36', 0);
+INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (6, 'Event Start Date', 'EVENT-START', '2018-06-14 00:00:00', sysdate(), sysdate(),0);
 COMMIT;
-*/
+
 ################ INSERT DE LA TABLA STADIUMS #######################
 
 INSERT INTO stadiums (id,`title`, `created`, `modified`, `deleted`) VALUES (1,'Kaliningrad Stadium',  sysdate(), sysdate(),0);
@@ -182,14 +183,16 @@ COMMIT;
 UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','1:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=7;
 UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','1:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=8;
 UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','1:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=9;
+UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','1:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=6;
+UPDATE games set games.date_up=STR_TO_DATE(concat(current_date(),' ','1:00:00'),'%Y-%m-%d %H:%i:%s')where games.id=41;
 COMMIT;
 
 ##############################  INSERTS DE LA TABLA USERS ###############
 
-INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (1, 'Roquefelix Benal', 'rbenal', 'rbenal@gmail.com', 'https://lh4.googleusercontent.com/-kVxShPWGf3Y/AAAAAAAAAAI/AAAAAAAAGpE/1zwZEXXsUWk/photo.jpg', null, 1, 1, '2018-05-06 00:33:55', '2018-05-11 01:10:31', 0);
-INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (2, 'Lorena Mora', 'dlmora91', 'dlmora91@gmail.com', 'https://lh4.googleusercontent.com/-H6SH17_A6mk/AAAAAAAAAAI/AAAAAAAAJ74/ST5QoKX0oLQ/photo.jpg', null, 0, 0, '2018-05-06 00:39:45', '2018-05-06 00:39:49', 0);
-INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (3, 'Lorena Mora Vivas', 'labebe_lorena2_1', 'labebe_lorena2_1@hotmail.com', 'https://lookaside.facebook.com/platform/profilepic/?asid=10214864099691939&height=50&width=50&ext=1525837265&hash=AeTapKgRlrPi2PeO', null, 1, 0, '2018-05-06 00:41:26', '2018-05-06 00:41:35', 0);
-INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (4, 'Ana Pinto', 'katoka2612', 'katoka2612@gmail.com', 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', null, 0, 0, '2018-05-06 00:44:54', '2018-05-06 00:45:05', 0);
-INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (5, 'Ana Pinto Correia', 'ana2624', 'ana2624@hotmail.com', 'https://lookaside.facebook.com/platform/profilepic/?asid=10215973143351562&height=50&width=50&ext=1525837569&hash=AeRiIC6Nrx_3AuGo', null, 1, 0, '2018-05-06 00:46:33', '2018-05-06 00:47:19', 0);
-INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (6, 'Vanessa Virginia Benal Mora', 'vbenal', 'vbenal@gmail.com', 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', null, 0, 0, '2018-05-09 19:34:30', '2018-05-09 19:36:14', 0);
-COMMIT;
+# INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (1, 'Roquefelix Benal', 'rbenal', 'rbenal@gmail.com', 'https://lh4.googleusercontent.com/-kVxShPWGf3Y/AAAAAAAAAAI/AAAAAAAAGpE/1zwZEXXsUWk/photo.jpg', null, 1, 1, '2018-05-06 00:33:55', '2018-05-11 01:10:31', 0);
+# INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (2, 'Lorena Mora', 'dlmora91', 'dlmora91@gmail.com', 'https://lh4.googleusercontent.com/-H6SH17_A6mk/AAAAAAAAAAI/AAAAAAAAJ74/ST5QoKX0oLQ/photo.jpg', null, 0, 0, '2018-05-06 00:39:45', '2018-05-06 00:39:49', 0);
+# INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (3, 'Lorena Mora Vivas', 'labebe_lorena2_1', 'labebe_lorena2_1@hotmail.com', 'https://lookaside.facebook.com/platform/profilepic/?asid=10214864099691939&height=50&width=50&ext=1525837265&hash=AeTapKgRlrPi2PeO', null, 1, 0, '2018-05-06 00:41:26', '2018-05-06 00:41:35', 0);
+# INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (4, 'Ana Pinto', 'katoka2612', 'katoka2612@gmail.com', 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', null, 0, 0, '2018-05-06 00:44:54', '2018-05-06 00:45:05', 0);
+# INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (5, 'Ana Pinto Correia', 'ana2624', 'ana2624@hotmail.com', 'https://lookaside.facebook.com/platform/profilepic/?asid=10215973143351562&height=50&width=50&ext=1525837569&hash=AeRiIC6Nrx_3AuGo', null, 1, 0, '2018-05-06 00:46:33', '2018-05-06 00:47:19', 0);
+# INSERT INTO `nullpoin_open-fixture`.users (id, title, alias, username, picture_url, password, approved, admin, created, modified, deleted) VALUES (6, 'Vanessa Virginia Benal Mora', 'vbenal', 'vbenal@gmail.com', 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', null, 0, 0, '2018-05-09 19:34:30', '2018-05-09 19:36:14', 0);
+# COMMIT;

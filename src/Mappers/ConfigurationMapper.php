@@ -28,13 +28,31 @@
 		 */
 		public function view($filter, $id = NULL)
 		{
-			$sql = "SELECT  COUNT(*) * (SELECT C.value FROM configurations C WHERE C.short_name='CONT-PER-USER') value,
-        					(SELECT C.value FROM configurations C WHERE C.short_name=:filter) currency
-					FROM V_SCORE_BOARD WHERE approved=1";
+			$filter = strtoupper($filter);
 
-			$stmt = $this->db->prepare($sql);
-			$stmt->execute([":filter" => $filter]);
-//			$stmt = $this->db->query($sql);
+			if($filter == 'NOW'){
+
+				$now=getdate();
+				$date=$now['year'].'-' //year
+					.substr('00'.$now['mon'],-2).'-' //month 2 digits
+					.substr('00'.$now['mday'],-2).' '//day 2 digits
+					.substr('00'.$now['hours'],-2).':'//hours 2 digits
+					.substr('00'.$now['minutes'],-2).':'//minutes 2 digits
+					.substr('00'.$now['seconds'],-2);//seconds 2 digits
+
+				return $date;
+			}
+
+
+
+			if($filter == 'PRIZE-CURRENCY')
+				$sql = "SELECT  COUNT(*) * (SELECT C.value FROM configurations C WHERE C.short_name='CONT-PER-USER') value,
+	                            (SELECT C.value FROM configurations C WHERE C.short_name='PRIZE-CURRENCY') currency
+						FROM V_SCORE_BOARD WHERE approved=1";
+
+//			$stmt = $this->db->prepare($sql);
+//			$stmt->execute([":filter" => $filter]);
+			$stmt = $this->db->query($sql);
 			$configurations = $stmt->fetchAll();
 			$prize_amount = from($configurations)->select(function($conf){
 				return ["value"     =>  $conf['value'],

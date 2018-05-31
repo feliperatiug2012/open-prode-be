@@ -10,6 +10,8 @@
 //	use OpenFixture\Entities\Entity;
 		use OpenFixture\Exceptions\DataBaseInsertException;
 		use OpenFixture\Exceptions\DataBaseUpdateException;
+		use OpenFixture\Exceptions\ViewEndPointInvalidOptionException;
+		use OpenFixture\Mappers\UserMapper;
 		use PDOException;
 
 		class UserEntity extends Entity
@@ -33,7 +35,6 @@
 				parent::__construct($data, $db);
 				$this->username = $data['username'];
 				$this->getId();
-
 				if ($this->id) {
 					$query = "SELECT * FROM users U WHERE U.id=:user_id";
 					$stmt = $this->db->prepare($query);
@@ -79,19 +80,28 @@
 			protected function add()
 			{
 				try {
-					$sql = "INSERT INTO users (title, alias,username, picture_url, id_team_fav)VALUES (:title, :alias, :username, :picture,:team_fav_id)";
+					$sql = "INSERT INTO users (title, alias,username, picture_url, id_team_fav)
+							VALUES (:title, :alias, :username, :picture_url,:team_fav_id)";
 					$stm = $this->db->prepare($sql);
 					$result = $stm->execute([
 						":title" => $this->name,
 						":alias" => $this->alias,
 						":username" => $this->username,
+						":picture_url" => $this->picture_url,
 						":team_fav_id" => $this->team_fav_id]);
 					if (!$result)
 						throw new DataBaseInsertException("no se pudo agregar el usuario, username existente");
 				} catch (PDOException $e) {
 					echo $sql . "<br>" . $e->getMessage();
 				}
-				return $this->getId();
+				$userMapper= new UserMapper($this->db);
+				$user = null;
+				try {
+					$user = $userMapper->view($this->username);
+				} catch (ViewEndPointInvalidOptionException $e) {
+					echo $sql . "<br>" . $e->getMessage();
+				}
+				return $user;
 			}
 
 			/**
@@ -99,6 +109,7 @@
 			 */
 			protected function update()
 			{
+
 				$stm = null;
 				if (!isset($this->id))
 					throw new DataBaseUpdateException("no se puede hacer el update sin un ID");
@@ -116,6 +127,7 @@
  								picture_url=:picture_url,
  								approved=:approved,
  								date_approved=:date_approved,
+ 								id_team_fav=:team_fav_id,
  								approver_id=:approver_id
  								WHERE id =:id";
 						$stm = $this->db->prepare($sql);
@@ -125,6 +137,7 @@
 							":picture_url" => $this->picture_url,
 							":approver_id" => $this->approver_id,
 							":date_approved" => $this->date_approved,
+							":team_fav_id" => $this->team_fav_id,
 							":approved" => $this->approved,
 							":id" => $this->id]);
 
@@ -135,7 +148,14 @@
 				} catch (PDOException $e) {
 					echo $sql . "<br>" . $e->getMessage();
 				}
-				return $this->id;
+				$userMapper= new UserMapper($this->db);
+				$user = null;
+				try {
+					$user = $userMapper->view($this->username);
+				} catch (ViewEndPointInvalidOptionException $e) {
+					echo $sql . "<br>" . $e->getMessage();
+				}
+			return $user;
 			}
 		}
 	}

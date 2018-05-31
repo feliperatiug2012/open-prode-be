@@ -13,13 +13,15 @@ SELECT
          upper(ta.short_name),
          '.png')  AS flag_team_a,
   ta.title as name_team_a,
+  ta.short_name as team_a_short_name,
   ta.id as team_id_a,
   g.goals_team_a as goals_team_a,
   concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
          (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
          upper(tb.short_name),
          '.png')  AS flag_team_b,
-    tb.title as name_team_b,
+  tb.title as name_team_b,
+  tb.short_name as team_b_short_name,
   tb.id as team_id_b,
   g.goals_team_b as goals_team_b,
   CASE
@@ -109,6 +111,7 @@ SELECT  U.id as user_id,
         U.approver_id as approver_id,
         GET_USER_TOTAL_POINTS(U.id) AS total_points,
         GET_USER_RANK(GET_USER_TOTAL_POINTS(U.id)) as rank,
+  (select value from configurations c where c.short_name='EVENT-START') AS event_start,
         CASE WHEN U.admin = 1 THEN true
           ELSE false
         END as admin
@@ -126,16 +129,16 @@ SELECT  C.*,
         U.username as username,
         U.title as name,
         U.alias as alias,
-        T.id as team_fav_id,
-        T.title as team_fav_name,
+        t_fav.id as team_fav_id,
+        t_fav.title as team_fav_name,
         concat((SELECT c.value FROM configurations c where c.short_name='BE-ROOT-URL'),
          (SELECT c.value FROM configurations c where c.short_name='TEAM-FLAGS-URL'),
-         upper(T.short_name),
+         upper(t_fav.short_name),
          '.png')  AS team_fav_flag
 FROM V_GAMES_CALENDAR C
 left JOIN bets B ON B.game_id=C.game_id and B.deleted=0
 left JOIN users U on B.user_id = U.id AND U.deleted=0
-left JOIN  teams T on T.id =U.id_team_fav AND T.deleted = 0;
+left JOIN  teams t_fav on t_fav.id =U.id_team_fav AND t_fav.deleted = 0;
 
 #SE CREA VISTA PARA CALCULO DE PTOS DE EQUIPOS
 
