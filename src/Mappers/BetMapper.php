@@ -9,14 +9,15 @@
 
 	class BetMapper extends Mapper
 	{
-		/*
+
+		/**
 		 * @return array|void
 		 * @throws NotImplementedException
 		 */
 		public function list()
 		{
 
-			throw new NotImplementedException();
+			throw new NotImplementedException('not implemented function');
 
 		}
 
@@ -47,9 +48,9 @@
 		}
 
 		/**
+		 * @param $filter
 		 * @param  $id
 		 * @return array | null
-		 * @throws NotImplementedException
 		 */
 		public function view($filter, $id=NULL)
 		{
@@ -73,7 +74,7 @@
 
 		/**
 		 * Función para obtener todas las apuestas de un usuario
-		 * @param id
+		 * @param $id
 		 * @return array | null
 		 *
 		 */
@@ -98,22 +99,22 @@
 				->where(function ($user) use($id){return
 				$user['username']==$id or $user['user_id']==$id;
 				})
-				->distinct(function($user){
-					return $user['username'];
-				})
+//				->distinct(function($user){
+//					return $user['username'];
+//				})
 				->select(function($user) use ($bets) {
 					return [
 					"username"  =>  $user["username"],
 					"user_id"   =>  $user["user_id"],
-					"phases"    =>  from($bets)
-									->select(function($phase) use ($bets){
-										return [
-											"phase_id"=>$phase["phase_id"],
-											"phase_name"=>$phase["phase"],
-											"games" =>  from($bets)
-												->where(function($game) use ($phase){
-													return $game["phase_id"]==$phase["phase_id"];
-												})
+					"games"    =>  from($bets)
+//									->select(function($phase) use ($bets){
+//										return [
+//											"phase_id"=>$phase["phase_id"],
+//											"phase_name"=>$phase["phase"],
+//											"games" =>  from($bets)
+//												->where(function($game) use ($phase){
+//													return $game["phase_id"]==$phase["phase_id"];
+//												})
 												->select(function($game) use ($bets){
 													return [
 														"game_id"=>$game["game_id"],
@@ -127,18 +128,20 @@
 														"team_a"=>  [
 															"id"     => $game['team_id_a'],
 															"name"   => $game['name_team_a'],
+															"short_name"   => $game['team_a_short_name'],
 															"flag"   => $game['flag_team_a'],
 															"goals"  => $game['goals_team_a'],
 														],
 														"team_b"=>  [
 															"id"     => $game['team_id_b'],
 															"name"   => $game['name_team_b'],
+															"short_name"   => $game['team_b_short_name'],
 															"flag"   => $game['flag_team_b'],
 															"goals"  => $game['goals_team_b'],
 														],
 													];})->toList()
-										];})
-									->distinct('$v["phase_id"]')->toList()
+//										];})
+//									->distinct('$v["phase_id"]')->toList()
 				];})
 				->toList();
 			return $mapped_bets[0];
@@ -221,7 +224,7 @@
 					"team_fav_name"     => $user["team_fav_name"],
 					"team_fav_flag"     => $user["team_fav_flag"],
 					"bets"              =>  from($bets)
-						->select(function($game,$k) use ($bets){
+						->select(function($game) use ($bets){
 							return ["game_id"=>$game["game_id"],
 									"date"=>$game["date"],
 									"stadium"=>$game["stadium"],
