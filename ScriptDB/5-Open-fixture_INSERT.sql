@@ -1,4 +1,4 @@
-use `nullpoin_open-fixture`;
+LOCK-BETS-MINSuse `nullpoin_open-fixture`;
 
 
 
@@ -18,16 +18,6 @@ DELETE FROM users;
 COMMIT;
 
 
-################ INSERT DE LA TABLA CONFIGURATIONS DESARROLLO #######################
-/*
-INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (1, 'Team Flags URL', 'TEAM-FLAGS-URL', '/public/assets/images/team-flags/', '2018-05-15 00:53:41', '2018-05-15 00:53:41', 0);
-INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (2, 'Backend Root URL', 'BE-ROOT-URL', 'http://open-fixture-be.nullpointer13.com', '2018-05-15 00:53:42', '2018-05-15 00:53:42', 0);
-INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (3, 'Contribution Per User', 'CONT-PER-USER', '200', '2018-05-15 00:53:43', '2018-05-15 00:53:43', 0);
-INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (4, 'Prize Currency Symbol', 'PRIZE-CURRENCY', '$', '2018-05-15 00:53:44', '2018-05-15 00:53:44', 0);
-INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (5, 'Minutes to close game''s bets', 'LOCK-BETS-MINS', '120', '2018-05-20 14:32:36', '2018-05-20 14:32:36', 0);
-INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (6, 'Event Start Date', 'EVENT-START', '2018-06-14 00:00:00', sysdate(), sysdate(),0);
-COMMIT;
-*/
 
 ################ INSERT DE LA TABLA CONFIGURATIONS PRODUCCION #######################
 
@@ -37,6 +27,11 @@ INSERT INTO configurations (id, title, short_name, value, created, modified, del
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (4, 'Prize Currency Symbol','PRIZE-CURRENCY','$',  sysdate(), sysdate(),0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (5, 'Minutes to close game''s bets', 'LOCK-BETS-MINS', '120', '2018-05-20 14:32:36', '2018-05-20 14:32:36', 0);
 INSERT INTO configurations (id, title, short_name, value, created, modified, deleted) VALUES (6, 'Event Start Date', 'EVENT-START', '2018-06-14 00:00:00', sysdate(), sysdate(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 7,'Points by Team Favarite', 'Pts by Team Fav', '2', now(), now(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 8,'Cat 1 Result Exact', 'Cat Uno', '10', now(), now(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 9,'Cat 2 Win-Goal 1 Team', 'Cat Dos', '6', now(), now(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 10,'Cat 3 Win-Without-Goal', 'Cat Tres', '4', now(), now(),0);
+INSERT INTO configurations (id,title, short_name, value, created, modified,deleted) VALUES ( 11,'Cat 4 Goal-1-team', 'Cat Cuatro', '2', now(), now(),0);
 COMMIT;
 
 ################ INSERT DE LA TABLA STADIUMS #######################

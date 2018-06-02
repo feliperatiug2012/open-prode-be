@@ -80,13 +80,12 @@ CREATE FUNCTION GET_USER_RANK(total_points INTEGER) RETURNS INT
 
 #calcula la posicion en la quiniela de un usuario segun su puntuacion total
 DROP FUNCTION IF EXISTS GET_USER_POINTS_BY_GAME;
-CREATE  FUNCTION GET_USER_POINTS_BY_GAME (p_user_id int, p_game_id INT) RETURNS int(11)
+CREATE FUNCTION `GET_USER_POINTS_BY_GAME`(p_user_id int, p_game_id INT) RETURNS int(11)
 BEGIN
 
      DECLARE vGamesId, vGolBetsA, vGolBetsB, vGolGamesA, 
-            vGolGamesB, vPtos, vIdTeamA, vIdTeamB, vPtosTot INT; 
-	DECLARE vWinGame, vWinBets CHAR(1 );
-       
+            vGolGamesB, vPtos, vIdTeamA, vIdTeamB, vPtosTot, vIdTeamFav INT; 
+	DECLARE vWinGame, vWinBets INT;
         DECLARE done INT DEFAULT 0;
         
          DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
@@ -103,42 +102,61 @@ BEGIN
 		AND b.user_id = p_user_id  AND b.deleted = 0
         AND g.deleted = 0;
          
-         
+        SELECT id_team_fav  INTO vIdTeamFav
+           FROM users 
+        WHERE id = p_user_id;
+        
          IF vGolGamesA > vGolGamesB THEN 
-           SET vWinGame = 'A';
+           SET vWinGame = vIdTeamA;
 		ELSEIF vGolGamesB > vGolGamesA THEN 
-           set vWinGame = 'B';
+           set vWinGame = vIdTeamB;
 		ELSE 
            SET vWinGame = 'E'; 
 		END IF;    
      
-       -- Buscar ganador del Usuario
+        -- Buscar ganador del Usuario
 	    IF vGolBetsA > vGolBetsB THEN 
-			SET vWinBets = 'A';
+			SET vWinBets = vIdTeamA;
 		ELSEIF vGolBetsB > vGolBetsA THEN 
-            SET vWinBets = 'B';
+            SET vWinBets = vIdTeamB;
 		ELSE 
             SET vWinBets = 'E'; 
 		END IF;
-   
-       IF vGolBetsA = vGolGamesA AND vGolBetsB = vGolGamesB THEN
-          SET vPtos = 10;
+        
+	   IF vGolBetsA = vGolGamesA AND vGolBetsB = vGolGamesB THEN
+          select value INTO vPtos
+            from configurations 
+          where short_name = 'Cat Uno';
+          
 	   ELSEIF (vWinGame = vWinBets) AND (vGolGamesA = vGolBetsA OR vGolGamesB = vGolBetsB) THEN
-		  SET vPtos = 6;
+		  select value INTO vPtos
+            from configurations 
+          where short_name = 'Cat Dos';
+          
 	   ELSEIF (vWinGame = vWinBets) AND (vGolGamesA != vGolBetsA OR vGolGamesB != vGolBetsB) THEN
-          set vPtos = 4;
+          select value INTO vPtos
+            from configurations 
+          where short_name = 'Cat Tres';
+          
 	   ELSEIF (vGolGamesA = vGolBetsA) OR (vGolGamesB = vGolBetsB) THEN
-          SET vPtos = 2;
+          select value INTO vPtos
+            from configurations 
+          where short_name = 'Cat Cuatro';
 	   ELSE 
           SET vPtos = 0;
        END IF;
        
        SET vPtosTot = vPtosTot +  vPtos;
-	       
+       
+       IF vIdTeamFav = vWinGame THEN
+		     select value into vptos
+            from configurations 
+            where short_name='Pts by Team Fav';
+		END IF;
+	       SET vPtosTot = vPtosTot +  vPtos;
            
 	RETURN vPtosTot;
 END;
-
 
 #transforma una cantidad entera de minutos en formato '00:00:00'
 DROP FUNCTION IF EXISTS GET_TIME_FORMAT;
@@ -155,3 +173,4 @@ CREATE FUNCTION GET_TIME_FORMAT(MINUTES INTEGER) RETURNS VARCHAR(8)
     set FORMATED_TIME= CONCAT(HOURS,':',MINS,':00');
     RETURN FORMATED_TIME;
   END;
+=======
