@@ -126,22 +126,22 @@ BEGIN
 	   IF vGolBetsA = vGolGamesA AND vGolBetsB = vGolGamesB THEN
           select value INTO vPtos
             from configurations 
-          where short_name = 'Cat Uno';
+          where short_name = 'POINST-CAT-UNO';
           
 	   ELSEIF (vWinGame = vWinBets) AND (vGolGamesA = vGolBetsA OR vGolGamesB = vGolBetsB) THEN
 		  select value INTO vPtos
             from configurations 
-          where short_name = 'Cat Dos';
+          where short_name = 'POINTS-CAT-DOS';
           
 	   ELSEIF (vWinGame = vWinBets) AND (vGolGamesA != vGolBetsA OR vGolGamesB != vGolBetsB) THEN
           select value INTO vPtos
             from configurations 
-          where short_name = 'Cat Tres';
+          where short_name = 'POINTS-CAT-TRES';
           
 	   ELSEIF (vGolGamesA = vGolBetsA) OR (vGolGamesB = vGolBetsB) THEN
           select value INTO vPtos
             from configurations 
-          where short_name = 'Cat Cuatro';
+          where short_name = 'POINTS-CAT-CUATRO';
 	   ELSE 
           SET vPtos = 0;
        END IF;
@@ -151,7 +151,7 @@ BEGIN
        IF vIdTeamFav = vWinGame THEN
 		     select value into vptos
             from configurations 
-            where short_name='Pts by Team Fav';
+            where short_name='POINTS-TEAM-FAV';
 		END IF;
 	       SET vPtosTot = vPtosTot +  vPtos;
            
