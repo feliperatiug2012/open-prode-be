@@ -1,4 +1,4 @@
-LOCK-BETS-MINSuse `nullpoin_open-fixture`;
+use `nullpoin_open-fixture`;
 
 
 
