@@ -206,6 +206,7 @@ SELECT
   sum(dg) as dg,
   SUM(INTERNAL.pg * 3 + INTERNAL.pe) AS pts,
   t.title as title_team,
+  t.short_name as team_short_name,
   CONCAT((SELECT
                         c.value
                     FROM

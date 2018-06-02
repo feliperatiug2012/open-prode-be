@@ -26,19 +26,20 @@ class GroupMapper extends Mapper
 					"teams"         => from ($v_groups_table)
 						->select(function ($team) use ($v_groups_table) {
 							return [
-								"flag_url"  =>  $team['team_flag'],
-								"name"      =>  $team['title_team'],
-								"pg"        =>  $team['pg'],
-								"pe"        =>  $team['pe'],
-								"pp"        =>  $team['pp'],
-								"gf"        =>  $team['gf'],
-								"gc"        =>  $team['gc'],
-								"dg"        =>  $team['dg'],
-								"dg"        =>  $team['dg'],
-								"pj"        =>  $team['pj'],
-								"pts"       =>  $team['pts'],
-								"team_id"   =>  $team['team_id'],
-								"group_id"   =>  $team['group_id']
+								"flag_url"      =>  $team['team_flag'],
+								"name"          =>  $team['title_team'],
+								"short_name"    =>  $team['team_short_name'],
+								"pg"            =>  $team['pg'],
+								"pe"            =>  $team['pe'],
+								"pp"            =>  $team['pp'],
+								"gf"            =>  $team['gf'],
+								"gc"            =>  $team['gc'],
+								"dg"            =>  $team['dg'],
+								"dg"            =>  $team['dg'],
+								"pj"            =>  $team['pj'],
+								"pts"           =>  $team['pts'],
+								"team_id"       =>  $team['team_id'],
+								"group_id"      =>  $team['group_id']
 							];
 						})->where(function($team) use ($group){
 							return $team["group_id"]==$group["group_id"];

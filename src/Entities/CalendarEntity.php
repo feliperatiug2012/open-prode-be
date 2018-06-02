@@ -26,8 +26,8 @@
 				$this->phase = $matches[0]['phase'];
 				foreach ($matches as $k => $v) {
 					//$this->phase=$v['Phase'];
-					$team1 = new Team ($v['flag_team_a'], $v['name_team_a'], $v['goals_team_a']);
-					$team2 = new Team($v['flag_team_b'], $v['name_team_b'], $v['goals_team_b']);
+					$team1 = new Team ($v['flag_team_a'], $v['name_team_a'], $v['goals_team_a'],$v['team_a_short_name']);
+					$team2 = new Team($v['flag_team_b'], $v['name_team_b'], $v['goals_team_b'], $v['team_b_short_name']);
 					$stadium = $v['stadium'];
 
 					$cm = new CalendarMatch($v['game_id'], $v['date'], $team1, $team2, $stadium);
@@ -66,10 +66,11 @@
 			public $name;
 			public $goals;
 
-			public function __construct($teamFlag, $name, $goals)
+			public function __construct($teamFlag, $name, $goals, $short_name)
 			{
 				$this->goals = $goals;
 				$this->name = $name;
+				$this->short_name = $short_name;
 				$this->team_flag = $teamFlag;
 			}
 
